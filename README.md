@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.com/andela/ah-the-answer-frontend.svg?branch=develop)](https://travis-ci.com/andela/ah-the-answer-frontend)
 
-
 *Authors Haven - A Social platform for the creative at heart.*
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
