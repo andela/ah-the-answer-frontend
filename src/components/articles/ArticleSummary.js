@@ -13,6 +13,6 @@ const ArticleSummary = ({ article }) => {
       </div>
     </div>
   );
-}
+};
 
 export default ArticleSummary;
