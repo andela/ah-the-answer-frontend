@@ -18,7 +18,6 @@
   },
   "jest": {
     "coverageReporters": [
-      "lcov",
       "text"
     ],
     "collectCoverageFrom": [
