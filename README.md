@@ -1,5 +1,11 @@
+[![Build Status](https://travis-ci.com/andela/ah-the-answer-frontend.svg?branch=develop)](https://travis-ci.com/andela/ah-the-answer-frontend)
+
 *Authors Haven - A Social platform for the creative at heart.*
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e08ff8fcf544566e3bb8/test_coverage)](https://codeclimate.com/github/andela/ah-the-answer-frontend/test_coverage)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/e08ff8fcf544566e3bb8/maintainability)](https://codeclimate.com/github/andela/ah-the-answer-frontend/maintainability)
 
 ## Available Scripts
 
