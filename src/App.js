@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
-import Home from './components/dashboard/Home';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Login from './views/Login'
+import Home from './views/Home'
+import Navbar from './views/Navbar'
 
 function App() {
   return (
@@ -9,11 +10,11 @@ function App() {
       <div className="App">
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path='/' component={ Home }/>
+          <Route path='/login' component={ Login }/>
         </Switch>
       </div>
     </Router>
-
   );
 }
 
