@@ -3,10 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "coveralls": "^3.0.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "3.0.0"
+    "react-scripts": "3.0.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1"
+  },
+  "jest": {
+    "coverageReporters": [
+      "lcov", "text"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/src/serviceWorker.js"
+    ]
   },
   "scripts": {
     "start": "react-scripts start",
