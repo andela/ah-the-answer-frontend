@@ -1,10 +1,5 @@
-// Define your variable overrides here.
-
-
-
-
-
 // Include Bootstrap and Bootstrap modules here.
 // Ensure that all variable definitions are placed
-// BEFORE the Bootstrap imports.
+// AFTER the Bootstrap imports.
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+// Define your variable overrides here.
