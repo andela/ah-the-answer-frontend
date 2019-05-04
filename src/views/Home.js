@@ -1,11 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
 
-const Home = () => {
-    return (
-        <div>
-            <h1>Home page</h1>
-        </div>
-    );
+
+function Home() {
+  return (
+    <div>
+      <h4 className="center">Home</h4>
+    </div>
+  );
 }
 
-export default Home
+export default connect()(Home);
