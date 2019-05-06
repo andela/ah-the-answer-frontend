@@ -3,3 +3,11 @@
 // AFTER the Bootstrap imports.
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 // Define your variable overrides here.
+
+.social-login {
+	margin: auto;
+}
+
+.button-facebook {
+	border-radius: 5px;
+}
