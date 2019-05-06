@@ -1,4 +1,5 @@
 import React from 'react';
+import './themes/custom.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Login from './views/Login'
 import Home from './views/Home'
