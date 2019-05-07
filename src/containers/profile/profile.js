@@ -1,17 +1,13 @@
 /* eslint-disable react/prefer-stateless-function */
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import * as ProfileActionCreators from '../../actions/profile';
+import { updateFollows } from '../../actions/profileActions';
 import Card from '../../components/Card';
 import ButtonBadge from '../../components/ButtonBadge';
 
 class ProfileView extends Component {
   render() {
-    const { dispatch } = this.props;
     const {profileprops: {profile: { follows }}} = this.props;
-    const updateFollows = bindActionCreators(ProfileActionCreators.updateFollows, dispatch);
-    const updateFollowers = bindActionCreators(ProfileActionCreators.updateFollowers, dispatch);
 
     return (
       <div className="container">
@@ -25,7 +21,7 @@ class ProfileView extends Component {
             <ButtonBadge
               buttonName="Follows"
               badgeNumber={follows}
-              updateFollows={updateFollows}
+              badgeUpdateMethod={this.props.updateFollows}
             />
           </div>
         </div>
@@ -48,4 +44,10 @@ const mapStateToProps = state => (
   }
 );
 
-export default connect(mapStateToProps)(ProfileView);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateFollows: () => dispatch(updateFollows()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);
