@@ -10,15 +10,17 @@ const initialState = {
 export default function Profile(state = initialState, action) {
   switch (action.type) {
     case ProfileAction.UPDATE_FOLLOWS:
-      return { ...state, follows: action.followCount };
+      return {
+        ...state,
+        follows: action.followCount,
+      };
 
     case ProfileAction.UPDATE_FOLLOWERS:
-      return [
+      return {
         ...state,
-        {
-          followers: 0,
-        },
-      ];
+        followers: action.followerCount,
+      };
+
     default:
       return state;
   }
