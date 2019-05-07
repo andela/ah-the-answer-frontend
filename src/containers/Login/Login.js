@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import FbIcon from "../../images/facebook.svg";
-import TwitterIcon from "../../images/twitter.svg";
-import GoogleIcon from "../../images/google.svg";
-
+import GoogleLogin from './google';
+import FacebookLogin from './facebook';
+import TwitterLogin from './twitter';
 class Login extends Component {
   state = {
     email: "",
@@ -35,24 +34,9 @@ class Login extends Component {
                   role="group"
                   aria-label="Basic example"
                 >
-                  <button
-                    type="button"
-                    className="btn btn-primary button-facebook ml-2 col"
-                  >
-                    <img src={FbIcon} />
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-danger button-gmail ml-2 col"
-                  >
-                    <img src={GoogleIcon} />
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-info button-twitter ml-2 mr-2 col"
-                  >
-                    <img src={TwitterIcon} />
-                  </button>
+                  <FacebookLogin/>
+                  <GoogleLogin/>
+                  <TwitterLogin/>
                 </div>
               </div>
               <label htmlFor="emailID" className="required">
