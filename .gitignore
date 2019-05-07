@@ -25,3 +25,5 @@ yarn-error.log*
 # text editor files
 .vs_code/
 .idea/
+.env
+.vscode/
