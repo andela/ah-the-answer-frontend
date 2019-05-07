@@ -4,7 +4,8 @@ import * as ProfileAction from '../../actiontypes/profiles/profileActionTypes';
 const initialState = {
   follows: 0,
   followers: 0,
-  username: 'Kyppy',
+  username: 'Bob',
+  bio: 'Default Story',
 };
 
 export default function Profile(state = initialState, action) {
@@ -21,6 +22,12 @@ export default function Profile(state = initialState, action) {
         followers: action.followerCount,
       };
 
+    case ProfileAction.UPDATE_BIO:
+      return {
+        ...state,
+        bio: action.userBio,
+      };
+  
     default:
       return state;
   }
