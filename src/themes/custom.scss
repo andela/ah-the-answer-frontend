@@ -3,3 +3,27 @@
 // AFTER the Bootstrap imports.
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 // Define your variable overrides here.
+
+// ARTICLES
+.article-list {
+    a {
+        text-decoration: none;
+    }
+
+    .card {
+        height: 25vh;
+    }
+
+    .card-img-left {
+        width: 40%;
+        object-fit: cover;
+    }
+}
+
+.profile-img {
+    border-radius: 50%;
+}
+
+.container-width {
+    width: 80%;
+}
