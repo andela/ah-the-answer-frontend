@@ -49,3 +49,17 @@ export const updateBio = () => {
       });
   };
 };
+
+export const updateName = () => {
+  return (dispatch) => {
+    axios.get(' http://127.0.0.1:8000/api/profiles/Kyppy/')
+      .then((response) => {
+        // handle success
+        dispatch({ type: ProfileAction.UPDATE_BIO, givenName: response.data.profile.name });
+      })
+      .catch((error) => {
+        // handle error
+        console.log('Error fecthing and parsing data', error);
+      });
+  };
+};
