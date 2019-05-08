@@ -1,11 +1,13 @@
 /* eslint-disable react/prefer-stateless-function */
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { updateFollows, updateFollowers, updateBio, updateName } from '../../actions/profileActions';
 import Card from '../../components/Card';
 import ButtonBadge from '../../components/ButtonBadge';
 import BiographyText from '../../components/BiographyText';
 import NameTag from '../../components/NameTag';
+import ProfileUpdate from '../../components/ProfileUpdate';
 
 class ProfileView extends Component {
   render() {
@@ -14,7 +16,6 @@ class ProfileView extends Component {
     const {profileprops: {profile: { bio }}} = this.props;
     const {profileprops: {profile: { userName }}} = this.props;
     const {profileprops: {profile: { givenName }}} = this.props;
-    console.log(userName)
     return (
       <div className="container">
         <div className="row">
@@ -34,6 +35,12 @@ class ProfileView extends Component {
                 text={bio}
                 textUpdateMethod={this.props.updateBio}
               />
+              <BrowserRouter>
+                <div className="ProfileView">
+                  <Link to="/user/editprofile">Edit Bio</Link>
+                  <Route path="/user/editprofile" component={ProfileUpdate} />
+                </div>
+              </BrowserRouter>
             </div>
             <div className="row">
               <div className="col-sm-6">
