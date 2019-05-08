@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RequestPasswordResetForm from'../../components/requestPasswordResetForm'
+import RequestPasswordResetForm from'./requestPasswordResetForm'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import {requestPasswordReset} from '../../store/actions/requestResetPassword'

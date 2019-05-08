@@ -25,4 +25,6 @@ yarn-error.log*
 # text editor files
 .vs_code/
 .idea/
+
+#package-lock.json
 package-lock.json

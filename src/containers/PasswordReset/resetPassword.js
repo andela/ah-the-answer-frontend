@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import {resetPassword} from '../../store/actions/requestResetPassword'
-import ResetPasswordForm from '../../components/resetPasswordForm'
+import ResetPasswordForm from './resetPasswordForm'
 class ResetPassword extends Component {
     state = {
         password: '',
@@ -39,36 +39,29 @@ class ResetPassword extends Component {
             { [e.target.name]: e.target.value})                          
         
     }
-    handleSubmit = (e) => {
-        e.preventDefault();
-        if(this.state.confirmPassword !== this.state.password){
-            console.log('helloo')
-            this.setState({
-                error: "password does not match"
-            })
-        }else{
-            this.setState({
-                error: ''
-            })
-        }
-        const password_data = {
-            password: this.state.password,
-            confirmPassword: this.state.confirmPassword,
-            token: this.state.token,
-            message: this.state.message,
-            error: this.state.error
-        };
-        console.log(password_data)
-        
-        this.props.resetPassword(password_data);
-        console.log(this.state)
-    }
-  render() {
-      let { error} = this.state
-      const {
-          password, confirmPassword, message
-      } = this.state
     
+    handleSubmit = (e, func) => {
+        e.preventDefault();
+        if (this.state.password ===  this.state.confirmPassword){
+            const password_data = {
+                password: this.state.password,
+                confirmPassword: this.state.confirmPassword,
+                token: this.state.token,
+                message: this.state.message,
+                error: this.state.error
+            };
+            this.props.resetPassword(password_data);
+        }else {
+            document.getElementById('confirmPassword').classList.add('is-invalid')
+             }
+        
+    };
+  render() {
+      
+      
+      const {
+          error, password, confirmPassword, message
+      } = this.state
     return (
        <ResetPasswordForm
         confirmPassword = {confirmPassword}

@@ -41,10 +41,15 @@ export const requestPasswordReset = ({ email }) => (dispatch) => {
 export const resetPassword = data => (dispatch) => {
   api.resetPassword(data)
     .then((res) => {
+      console.log(res.data.message);
       dispatch(requestResetPasswordSuccess(res.data.message));
+      // eslint-disable-next-line no-alert
+      alert('Your password has been changed click okay to login')
+      if (res.data.message.match(/successful/)) {
+        window.location.replace('/passwordresetsuccess');
+      }
     })
     .catch((e) => {
-      console.log(e.response.data.errors.password[0]);
       dispatch(requestResetPasswordSuccess(e.response.data.errors.password[0]));
     });
 };
