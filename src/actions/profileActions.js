@@ -3,6 +3,10 @@ import * as ProfileAction from '../actiontypes/profiles/profileActionTypes';
 // export const updateFollows = () => ({
 //   type: ProfileAction.UPDATE_FOLLOWS,
 // });
+const setAxios = require('axios');
+
+const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.GUe99Eg95Wbx3b07v-kiUI1njRPNCIiZEt9cA1tf5U0'
+setAxios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
 
 export const updateFollows = () => {
   return (dispatch) => {
@@ -37,7 +41,7 @@ export const updateBio = () => {
     axios.get(' http://127.0.0.1:8000/api/profiles/Kyppy/')
       .then((response) => {
         // handle success
-        dispatch({ type: ProfileAction.UPDATE_BIO, followerCount: response.data.profile.user_bio });
+        dispatch({ type: ProfileAction.UPDATE_BIO, userBio: response.data.profile.user_bio });
       })
       .catch((error) => {
         // handle error
