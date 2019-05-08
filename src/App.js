@@ -1,18 +1,18 @@
 import React from 'react';
 import './themes/custom.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Login from './views/Login'
-import Home from './views/Home'
-import Navbar from './views/Navbar'
+import InitiatePasswordReset from './containers/PasswordReset/InitiatePasswordReset'
+import ResetPasswordMessage from './components/PasswordResetSuccess'
+import ResetPassword from './containers/PasswordReset/resetPassword'
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
         <Switch>
-          <Route exact path='/' component={ Home }/>
-          <Route path='/login' component={ Login }/>
+          <Route exact path='/passwordreset' component={ InitiatePasswordReset }/>
+          <Route path='/passwordresetsuccess' component={ ResetPasswordMessage }/>
+          <Route path='/passwordreset/:token' component={ ResetPassword }/>
         </Switch>
       </div>
     </Router>
