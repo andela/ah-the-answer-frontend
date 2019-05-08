@@ -55,7 +55,7 @@ export const updateName = () => {
     axios.get(' http://127.0.0.1:8000/api/profiles/Kyppy/')
       .then((response) => {
         // handle success
-        dispatch({ type: ProfileAction.UPDATE_BIO, givenName: response.data.profile.name });
+        dispatch({ type: ProfileAction.UPDATE_NAME, givenName: response.data.profile.name, userName: response.data.profile.username });
       })
       .catch((error) => {
         // handle error
