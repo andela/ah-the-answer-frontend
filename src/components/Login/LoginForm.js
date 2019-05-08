@@ -50,6 +50,7 @@ const LoginForm = (props) => {
           aria-describedby="emailHelp"
           required
           onChange={handleChange}
+          data-set="emailTest"
         />
       </div>
       <div className="form-group mb-5">
@@ -62,11 +63,12 @@ const LoginForm = (props) => {
           id="passwordID"
           required
           onChange={handleChange}
+          data-set="passwordTest"
         />
         <div className="invalid-feedback">{authError}</div>
       </div>
       <div className="form-group col-6 mx-auto">
-        <button type="submit" className="btn btn-primary btn-block" id="signInButton">
+        <button type="submit" className="btn btn-primary btn-block" id="signInButton" data-set="buttonTest">
           Sign In
         </button>
       </div>

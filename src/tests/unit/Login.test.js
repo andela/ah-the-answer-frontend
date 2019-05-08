@@ -2,7 +2,7 @@
 /* eslint-disable import/named */
 /* eslint-disable no-undef */
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Login } from '../../containers/Login/Login';
 import authReducer from '../../store/reducers/authReducer';
@@ -23,12 +23,12 @@ const findByAttribute = (component, attr) => {
   return wrapper;
 };
 
-describe('Login Component', () => {
+describe('Tests Login Component', () => {
   let component;
   beforeEach(() => {
     component = setUp();
   });
-  it('Should render without errors', () => {
+  it('Should render component without errors', () => {
     const wrapper = findByAttribute(component, 'loginTestDiv');
     expect(wrapper.exists()).toBe(true);
   });
@@ -46,20 +46,13 @@ describe('Test reducer', () => {
     expect(newState.authError).toEqual(null);
     expect(newState.errorMessages).toEqual(null);
   });
-
-  // it('Should return new state on receiving type', () => {
-  //   const userResponse = {
-  //     user: {
-  //       email: 'johndoe@gmail.com',
-  //       username: 'johndoe',
-  //     },
-  //   };
-  //   signInUser(userResponse);
-  //   console.log(signUser(userResponse));
-  //   const newState = authReducer(undefined, {
-  //     type: 'USER_SIGN_IN',
-  //     userResponse,
-  //   });
-  //   expect(newState.auth).toEqual(null);
-  // });
+});
+describe('changes state', () => {
+  const expectedState = { email: 'johndoe@test.com', password: 'johndoe123' };
+  const newWrapper = shallow(<Login />);
+  newWrapper.setState({ email: 'johndoe@test.com', password: 'johndoe123' });
+  newWrapper.update();
+  it('should update the state', () => {
+    expect(newWrapper.state()).toEqual(expectedState);
+  });
 });
