@@ -1,63 +1,185 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createArticle } from '../../store/actions/articleActions';
+import { EditorState, convertToRaw } from 'draft-js';
 import { Redirect } from 'react-router-dom';
-import authStatus  from '../../helpers/authStatus';
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
+import { createArticle } from '../../store/actions/articleActions';
+import authStatus from '../../helpers/authStatus';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 class CreateArticle extends Component {
-  state = {
-    title: '',
-    description: '',
-    body: '',
-    is_published: true,
-    tags: [],
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      description: '',
+      body: EditorState.createEmpty(),
+      is_published: true,
+      tags: [],
+      error: {},
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onEditorStateChange = this.onEditorStateChange.bind(this);
   }
 
-  handleChange = (e) => {
+  onEditorStateChange(body) {
     this.setState({
-      [e.target.id]: e.target.value
-    })
+      body,
+    });
   }
-  handleSubmit = (e) => {
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.error !== nextProps.errors) {
+      return {
+        error: nextProps.errors,
+      };
+    }
+    return null;
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.id]: e.target.value,
+    });
+  }
+
+  handleSubmit(e) {
     e.preventDefault();
-    this.props.createArticle(this.state);
+    // check if body is empty and prevent submit
+    const content = convertToRaw(this.state.body.getCurrentContent());
+    const contentTextLength = content.blocks[0].text.length;
+    if (contentTextLength < 10) {
+      return;
+    }
+    const newArticle = {
+      title: this.state.title,
+      description: this.state.description,
+      body: draftToHtml(content),
+      is_published: this.state.is_published,
+      tags: this.state.tags,
+    };
+    this.props.createArticle(newArticle);
   }
 
   render() {
-    if (authStatus() === true) return <Redirect to="/" />
+    if (authStatus() === false) return <Redirect to="/" />;
+    const { body } = this.state;
+    const { message } = this.props;
+    // Redirect the user to the article after it has been created
+    if (message && message.success) {
+      const articleUrl = `/articles/${message.article.slug}`;
+      return <Redirect to={articleUrl} />;
+    }
+
+    const titleError = this.props.titleError;
+    const descriptionError = this.props.descriptionError;
+    let bodyMessage = '';
+
+    const content = convertToRaw(this.state.body.getCurrentContent());
+    const contentTextLength = content.blocks[0].text.length;
+    const minimumLength = 10;
+    if (contentTextLength < minimumLength && contentTextLength > 0) {
+      bodyMessage = `A minimum of ${minimumLength - contentTextLength} characters is required to publish`;
+    }
+    if (contentTextLength >= minimumLength) {
+      bodyMessage = `${contentTextLength} characters`;
+    }
+    if (titleError) {
+      document.getElementById('title').classList.add('is-invalid');
+    }
+    if (descriptionError) {
+      document.getElementById('description').classList.add('is-invalid');
+    }
+    const editorStyle = {
+      padding: '5px',
+      fontSize: '18px',
+      minHeight: '250px',
+      width: '100%',
+    };
+
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="white">
-          <h5 className="text-center mt-3">Create New Article</h5>
+          <h5 className="text-center mt-3">Create Article</h5>
           <div className="form-group">
             <label htmlFor="title">Title</label>
-            <input type="text" id="title" className="form-control" onChange={this.handleChange}/>
+            <input type="text" id="title" autoComplete="off" className="form-control" onChange={this.handleChange} />
+            <div className="invalid-feedback">
+              {titleError}
+            </div>
           </div>
           <div className="form-group">
             <label htmlFor="description">Description</label>
-            <textarea id="description"  onChange={this.handleChange} className="form-control"/>
-          </div>
-          <div className="form-group">
-            <label htmlFor="body">Content</label>
-            <textarea id="body" onChange={this.handleChange} className="form-control" rows="30"/>
+            <input type="text" maxLength="128" id="description" autoComplete="off" onChange={this.handleChange} className="form-control" />
+            <div className="invalid-feedback">
+              {descriptionError}
+            </div>
           </div>
           <div className="form-group">
             <label htmlFor="tags">Tags</label>
-            <input className="form-control" type="text" id="tags" onChange={this.handleChange}/>
-          </div>        
+            <input className="form-control" autoComplete="off" type="text" id="tags" onChange={this.handleChange} />
+          </div>
+          <Editor
+            initialEditorState={body}
+            placeholder="Start inspiring the world with your words..."
+            toolbarClassName="toolbarClassName"
+            wrapperClassName="demo-wrapper"
+            editorClassName="demo-editor"
+            editorStyle={editorStyle}
+            onEditorStateChange={this.onEditorStateChange}
+            hashtag={{
+              separator: ' ',
+              trigger: '#',
+            }}
+            toolbar={{
+              options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'link', 'embedded', 'emoji', 'image', 'remove', 'colorPicker', 'history'],
+              inline: {
+                options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace', 'superscript', 'subscript'],
+              },
+              image: {
+                uploadCallback: this.uploadImageCallBack,
+                previewImage: true,
+                alt: {
+                  present: true,
+                  mandatory: true,
+                },
+              },
+            }}
+          />
+          { contentTextLength < minimumLength && contentTextLength > 0 ? (
+            (
+              <div className="alert alert-dark text-muted">
+                {bodyMessage}
+              </div>
+            )
+          ) : (
+            <span className="badge badge-pill badge-dark">{bodyMessage}</span>
+          )}
           <div className="form-group text-center">
-            <button className="btn btn-secondary mt-3">Create Article</button>
-          </div>         
+            <button type="submit" className="btn btn-secondary mt-3">Publish Article</button>
+          </div>
         </form>
       </div>
-    )
+    );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    articles: state.articles.articles,
+    errors: state.articles.error,
+    titleError: state.articles.titleError,
+    descriptionError: state.articles.descriptionError,
+    message: state.articles.message,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createArticle: (article) => dispatch(createArticle(article))
-  }
-}
+    createArticle: article => dispatch(createArticle(article)),
+  };
+};
 
-export default connect(null, mapDispatchToProps)(CreateArticle);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateArticle);

@@ -4,9 +4,9 @@ import authHeader from '../../helpers/authHeader';
 const configUrls = {
   root: 'http://127.0.0.1:8000/api/articles/',
 };
-const token = '';
+
 const config = {
-  headers: {'Authorization': "Bearer " + token}
+  headers: authHeader(),
 };
 
 export const createArticle = (article) => {
@@ -18,7 +18,7 @@ export const createArticle = (article) => {
         dispatch({ type: 'CREATE_ARTICLE', response });
       })
       .catch((error) => {
-        dispatch({ type: 'CREATE_ARTICLE_ERROR', error });
+        dispatch({ type: 'CREATE_ARTICLE_ERROR', error: error.response.data });
       });
   };
 };
@@ -37,7 +37,7 @@ export const getArticles = () => {
       })
       .catch((error) => {
         if (error.response) {
-          dispatch({ type: 'GET_ARTICLES_ERROR', payload: error.response.data });
+          dispatch({ type: 'GET_ARTICLES_ERROR', error: error.response.data });
         }
       });
   };
@@ -55,9 +55,9 @@ export const getArticle = (slug) => {
             payload: response.data,
           });
         }
-      }).catch((err) => {
-        if (err.response) {
-          dispatch({ type: 'GET_ARTICLE_FAILED', payload: err.response.data });
+      }).catch((error) => {
+        if (error.response) {
+          dispatch({ type: 'GET_ARTICLE_FAILED', error: error.response.data });
         }
       });
   };
@@ -75,9 +75,9 @@ export const deleteArticle = (slug) => {
             payload: response.data,
           });
         }
-      }).catch((err) => {
-        if (err.response) {
-          dispatch({ type: 'DELETE_ARTICLE_FAILED', payload: err.response.data });
+      }).catch((error) => {
+        if (error.response) {
+          dispatch({ type: 'DELETE_ARTICLE_FAILED', error: error.response.data });
         }
       });
   };
@@ -94,7 +94,7 @@ export const updateArticle = (slug, article) => {
         dispatch({ type: 'UPDATE_ARTICLE_SUCCESSFUL', response });
       })
       .catch((error) => {
-        dispatch({ type: 'UPDATE_ARTICLE_FAILED', error });
+        dispatch({ type: 'UPDATE_ARTICLE_FAILED', error: error.response.data });
       });
   };
 };

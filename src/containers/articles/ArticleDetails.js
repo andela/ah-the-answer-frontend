@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import parse from 'html-react-parser';
 import { getArticle } from '../../store/actions/articleActions';
 import Edit from '../../components/Edit';
 
@@ -13,35 +14,49 @@ class ArticleDetails extends Component {
   }
 
   render() {
-    const { article, author } = this.props;
-    return (
-      <div className="container article-details">
-        <div className="row float-right mt-4">
-          <Edit slug={article.slug} />
-        </div>
-        <div className="row">
-          <div className="col-lg-4 mt-4">
-            <div className="row">
-              <div className="col-lg-2">
-                <Link to="/profile" className="btn btn-info profile-img">RW</Link>
-              </div>
-              <div className="col-lg-10">
-                <p className="text-muted">By {author.username}</p>
-                <p className="text-muted">{moment(article.date_created).calendar()}</p>
+    const { article, author, message } = this.props;
+    if (message && message === 'The article requested does not exist') {
+      return <Redirect to="/" />;
+    }
+    if (article && article.body) {
+      return (
+        <div className="container article-details">
+          <div className="row float-right mt-4">
+            <Edit slug={article.slug} />
+          </div>
+          <div className="row">
+            <div className="col-lg-4 mt-4">
+              <div className="row">
+                <div className="col-lg-3">
+                  <Link to="/profile" className="btn btn-info profile-img">RW</Link>
+                </div>
+                <div className="col-lg-9">
+                  <p className="text-muted">By {author.username}</p>
+                  <p className="text-muted">{moment(article.date_created).calendar()}</p>
+                </div>
               </div>
             </div>
+            <div className="col-lg-8">
+              <h1 className="mt-4">{article.title}</h1>
+            </div>
           </div>
-          <div className="col-lg-8">
-            <h1 className="mt-4">{article.title}</h1>
+          <div className="container-fluid text-center">
+            <hr />
+            <img src="https://res.cloudinary.com/dv85uhrw5/image/upload/v1556052045/pocvovruu6lhhic2fhq1.jpg" alt="" className="img-fluid rounded" />
+            <hr />
+          </div>
+          <div className="container-fluid container-width">
+            <div className="lead">{parse(article.body)}</div>
           </div>
         </div>
-        <div className="container-fluid text-center">
-          <hr />
-          <img src="https://res.cloudinary.com/dv85uhrw5/image/upload/v1556052045/pocvovruu6lhhic2fhq1.jpg" alt="" className="img-fluid rounded" />
-          <hr />
-        </div>
-        <div className="container-fluid container-width">
-          <p className="lead">{article.body}</p>
+      );
+    }
+    return (
+      <div className="container">
+        <div className="d-flex justify-content-center">
+          <div className="spinner-grow text-info" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
         </div>
       </div>
     );
@@ -52,16 +67,19 @@ class ArticleDetails extends Component {
 ArticleDetails.propTypes = {
   article: PropTypes.shape({}),
   author: PropTypes.shape({}),
+  message: PropTypes.string,
 };
 ArticleDetails.defaultProps = {
   article: {},
   author: {},
+  message: '',
 };
 
 const mapStateToProps = (state) => {
   return {
     article: state.articles.article,
     author: state.articles.author,
+    message: state.articles.message,
   };
 };
 

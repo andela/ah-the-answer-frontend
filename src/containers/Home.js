@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import ArticleList from './articles/ArticleList';
 import { getArticles } from '../store/actions/articleActions';
 import FeaturedArticleList from './articles/FeaturedArticleList';
@@ -31,13 +30,6 @@ class Home extends Component {
     );
   }
 }
-
-Home.propTypes = {
-  articles: PropTypes.shape({}),
-};
-Home.defaultProps = {
-  articles: {},
-};
 
 const mapStateToProps = (state) => {
   return {

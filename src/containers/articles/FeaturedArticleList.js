@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import FeaturedArticleSummary from './FeaturedArticleSummary';
 
-const NewArticleList = ({ articles }) => {
+const FeaturedArticleList = ({ articles }) => {
   return (
     <div className="article-list section">
       { articles && articles.slice(0, 1).map((article) => {
@@ -14,11 +13,4 @@ const NewArticleList = ({ articles }) => {
   );
 };
 
-NewArticleList.propTypes = {
-  articles: PropTypes.shape({}),
-};
-NewArticleList.defaultProps = {
-  articles: {},
-};
-
-export default NewArticleList;
+export default FeaturedArticleList;
