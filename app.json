@@ -1,0 +1,13 @@
+{
+    "name": "ah-the-answer-frontend",
+    "scripts": {},
+    "env": {},
+    "formation": {},
+    "addons": [],
+    "buildpacks": [
+        {
+        "url": "heroku/nodejs"
+        }
+    ],
+    "stack": "heroku-18"
+}
