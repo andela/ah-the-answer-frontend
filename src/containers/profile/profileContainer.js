@@ -1,16 +1,20 @@
 /* eslint-disable react/prefer-stateless-function */
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { updateFollows, updateFollowers, updateBio } from '../../actions/profileActions';
+import { updateFollows, updateFollowers, updateBio, updateName } from '../../actions/profileActions';
 import Card from '../../components/Card';
 import ButtonBadge from '../../components/ButtonBadge';
 import BiographyText from '../../components/BiographyText';
+import NameTag from '../../components/NameTag';
 
 class ProfileView extends Component {
   render() {
     const {profileprops: {profile: { follows }}} = this.props;
     const {profileprops: {profile: { followers }}} = this.props;
     const {profileprops: {profile: { bio }}} = this.props;
+    const {profileprops: {profile: { userName }}} = this.props;
+    const {profileprops: {profile: { givenName }}} = this.props;
+    console.log(userName)
     return (
       <div className="container">
         <div className="row">
@@ -19,7 +23,11 @@ class ProfileView extends Component {
           </div>
           <div className="col-sm-6">
             <div className="row">
-              <h4> USERNAME </h4>
+              <NameTag
+                firstName={givenName}
+                secondName={userName}
+                textUpdateMethod={this.props.updateName}
+              />
             </div>
             <div className="row">
               <BiographyText
@@ -74,6 +82,7 @@ const mapDispatchToProps = (dispatch) => {
     updateFollows: () => dispatch(updateFollows()),
     updateFollowers: () => dispatch(updateFollowers()),
     updateBio: () => dispatch(updateBio()),
+    updateName: () => dispatch(updateName()),
 
   };
 };
