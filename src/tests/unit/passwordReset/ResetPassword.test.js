@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import expect from 'expect';
 import { mount } from '../../enzyme';
 
+// eslint-disable-next-line import/named
 import { ResetPassword } from '../../../containers/PasswordReset/resetPassword';
 
 const setUp = () => {

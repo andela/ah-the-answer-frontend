@@ -1,15 +1,13 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 
 
 const ResetPasswordForm = ({ ...props }) => {
   const {
-    error,
     message,
-    confirmPassword,
-    password,
     handleChange,
-    handleSubmit
+    handleSubmit,
   } = props;
 
 
@@ -23,7 +21,7 @@ const ResetPasswordForm = ({ ...props }) => {
         >
           <p className="text-center mb-4 text-muted">Please provide a new password</p>
           <div className="form-group">
-          <label htmlFor="passwordID" className="required">Password</label>
+            <label htmlFor="passwordID" className="required">Password</label>
             {
                (message && message.match(/Please ensure/)) ? document.getElementById('password').classList.add('is-invalid') : null
               }
@@ -38,7 +36,7 @@ const ResetPasswordForm = ({ ...props }) => {
           </div>
           <div className="form-group">
             <label htmlFor="confirmpPassword" className="required">Confirm password</label>
-            <input type="confirmpasswordID" className="form-control" id="confirmPassword" name="confirmPassword" required onChange={handleChange} />
+            <input type="password" className="form-control" id="confirmPassword" name="confirmPassword" required onChange={handleChange} />
             <div className="invalid-feedback">
               <p>
                 Password do not match

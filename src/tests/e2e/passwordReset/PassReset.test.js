@@ -1,3 +1,4 @@
+/* eslint-disable import/named */
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import expect from 'expect';
