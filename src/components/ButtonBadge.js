@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 class ButtonBadge extends Component {
   componentDidMount() {
