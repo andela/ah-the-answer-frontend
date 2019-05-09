@@ -5,6 +5,26 @@
 // Define your variable overrides here.
 
 //PASSWORD RESET
+
+// Define your variable overrides here.
+
+// SIGNUP PAGE
 .container {
     height: 100vh;
 }
+
+
+label {
+    font-weight: 600;
+
+    &.required {
+        &::after {
+            content: '*';
+            font-size: 1rem;
+            color:var(--danger);
+            margin-left:1px;
+        }
+    }
+}
+// END OF SIGNUP PAGE
+
