@@ -5,6 +5,7 @@ const initState = {
   descriptionError: null,
   message: '',
   editMessage: '',
+  deleteMessage: '',
 };
 
 const articleReducer = (state = initState, action) => {
@@ -39,7 +40,9 @@ const articleReducer = (state = initState, action) => {
     case 'DELETE_ARTICLE':
       return state;
     case 'DELETE_ARTICLE_SUCCESSFUL':
-      return action.payload;
+      return {
+        deleteMessage: action.payload,
+      };
     case 'DELETE_ARTICLE_FAILED':
       return action.error;
     case 'UPDATE_ARTICLE':

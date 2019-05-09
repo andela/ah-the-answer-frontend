@@ -46,9 +46,7 @@ class EditArticle extends Component {
         is_published: true,
         tags: [],
       });
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 
   onEditorStateChange(body) {
@@ -87,17 +85,15 @@ class EditArticle extends Component {
   }
 
   render() {
-    if (authStatus() === false){
-      this.props.history.push("/");
+    if (authStatus() === false) {
+      this.props.history.push('/');
     }
-    // const slug = this.props.match.params.slug;
+
     const article = this.state;
     const { body } = this.state;
-    const { editMessage } = this.props;
-    const message = this.props.message;
+    const { editMessage, deleteMessage, message } = this.props;
 
-    const titleError = this.props.titleError;
-    const descriptionError = this.props.descriptionError;
+    const { titleError, descriptionError } = this.props;
     let bodyMessage = '';
 
     const content = convertToRaw(this.state.body.getCurrentContent());
@@ -126,12 +122,12 @@ class EditArticle extends Component {
         this.props.history.push(articleUrl);
       }
     }
-    //Delete function message
-    if (message) {
-      this.props.history.push("/");
+    // Function to redirect on deletion
+    if (deleteMessage) {
+      this.props.history.push('/');
     }
-    if (message && message === 'The article requested does not exist'){
-      this.props.history.push("/");
+    if (message && message === 'The article requested does not exist') {
+      this.props.history.push('/');
     }
 
     return (
@@ -157,9 +153,9 @@ class EditArticle extends Component {
                     <button type="button" className="btn btn-danger" onClick={this.handleClick} data-dismiss="modal">Delete</button>
                   </div>
                 </div>
-              </div> 
+              </div>
             </div>
-          </div>          
+          </div>
         </div>
         <form onSubmit={this.handleSubmit} className="white">
           <h5 className="text-center mt-3">Edit Article</h5>
@@ -224,7 +220,7 @@ class EditArticle extends Component {
             )
           }
           <div className="form-group text-center">
-            <button className="btn btn-secondary mt-3">Update Article</button>
+            <button type="submit" className="btn btn-secondary mt-3">Update Article</button>
           </div>
         </form>
       </div>
@@ -247,6 +243,7 @@ const mapStateToProps = (state) => {
     descriptionError: state.articles.descriptionError,
     editMessage: state.articles.editMessage,
     message: state.articles.message,
+    deleteMessage: state.articles.deleteMessage,
   };
 };
 
