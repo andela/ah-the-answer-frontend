@@ -1,4 +1,4 @@
-import * as ProfileAction from '../../actiontypes/profiles/profileActionTypes';
+import * as ProfileAction from '../actionTypes/profileActionTypes';
 
 const initialState = {
   follows: 0,
