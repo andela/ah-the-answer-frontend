@@ -12,7 +12,7 @@ class ProfileUpdate extends Component {
   }
 
   render() {
-    const { profileprops: { profile: { userName } } } = this.props;
+    const { profileprops: { profile: { givenName } } } = this.props;
     const { profileprops: { profile: { bio } } } = this.props;
     return (
       <div className="container">
@@ -27,7 +27,7 @@ class ProfileUpdate extends Component {
           <div className="col-3" />
           <div className="col-4">
             <ProfileUpdateForm
-              name={userName}
+              name={givenName}
               bio={bio}
             />
           </div>
