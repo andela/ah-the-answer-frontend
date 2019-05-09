@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 import * as ProfileAction from '../actiontypes/profiles/profileActionTypes';
 // export const updateFollows = () => ({
 //   type: ProfileAction.UPDATE_FOLLOWS,
