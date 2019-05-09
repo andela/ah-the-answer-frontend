@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
   fetchFollows, fetchFollowers, fetchBio, fetchName,
-} from '../../actions/profileActions';
+} from '../../store/actions/profileActions';
 import ProfileUpdateForm from './components/ProfileUpdateForm';
 
 class ProfileUpdate extends Component {
