@@ -1,13 +1,12 @@
 /* eslint-disable react/prefer-stateless-function */
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { updateFollows, updateFollowers, updateBio, updateName } from '../../actions/profileActions';
 import Card from '../../components/Card';
 import ButtonBadge from '../../components/ButtonBadge';
 import BiographyText from '../../components/BiographyText';
 import NameTag from '../../components/NameTag';
-import ProfileUpdate from '../../components/ProfileUpdate';
 
 class ProfileView extends Component {
   render() {
@@ -79,14 +78,12 @@ const mapStateToProps = state => (
   }
 );
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateFollows: () => dispatch(updateFollows()),
-    updateFollowers: () => dispatch(updateFollowers()),
-    updateBio: () => dispatch(updateBio()),
-    updateName: () => dispatch(updateName()),
+const mapDispatchToProps = dispatch => ({
+  updateFollows: () => dispatch(updateFollows()),
+  updateFollowers: () => dispatch(updateFollowers()),
+  updateBio: () => dispatch(updateBio()),
+  updateName: () => dispatch(updateName()),
 
-  };
-};
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);
