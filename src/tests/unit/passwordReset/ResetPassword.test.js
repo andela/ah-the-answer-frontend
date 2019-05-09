@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import expect from 'expect';
 import { mount } from '../../enzyme';
 
-import { ResetPassword } from '../../../containers/PasswordReset/ResetPassword';
+import { ResetPassword } from '../../../containers/PasswordReset/resetPassword';
 
 const setUp = () => {
   const props = {
