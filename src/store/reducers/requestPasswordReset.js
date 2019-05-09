@@ -1,7 +1,6 @@
 const INITIAL_STATE = {
   error: '',
   message: '',
-  formstate: '',
 };
 
 const RequestPasswordReset = (state = INITIAL_STATE, { type, message, error }) => {
@@ -10,7 +9,6 @@ const RequestPasswordReset = (state = INITIAL_STATE, { type, message, error }) =
       return {
         ...state,
         message,
-        formstate: 'sucess',
 
       };
 
@@ -18,7 +16,7 @@ const RequestPasswordReset = (state = INITIAL_STATE, { type, message, error }) =
       return {
         ...state,
         error,
-        formstate: 'error',
+
       };
     default:
       return state;
