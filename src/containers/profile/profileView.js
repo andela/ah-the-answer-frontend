@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import profileContainer from './profileContainer';
-import ProfileUpdate from '../../components/ProfileUpdate';
+import ProfileUpdate from './ProfileUpdate';
 
 const ViewProfile = () => (
   <BrowserRouter>
