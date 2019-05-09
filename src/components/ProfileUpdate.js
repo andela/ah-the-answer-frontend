@@ -11,6 +11,7 @@ class ProfileUpdate extends Component {
 
   render() {
     const {profileprops: {profile: { userName }}} = this.props;
+    const {profileprops: {profile: { bio }}} = this.props;
     return (
       <div className="container">
         <div className="row">
@@ -23,16 +24,10 @@ class ProfileUpdate extends Component {
         <div className="row">
           <div className="col-3" />
           <div className="col-4">
-            <form>
-              <div className="form-group">
-                <input type="text" className="form-control" id="editNameField" value={userName} />
-                <small id="userNameHelp" className="form-text text-muted"> Edit Your Name</small>
-              </div>
-              <div className="form-group">
-                <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-              </div>
-              <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+            <ProfileUpdateForm
+              name={userName}
+              bio={bio}
+            />
           </div>
           <div className="col-3">
             <img src="..." className="img-fluid" alt="Placholder" />
