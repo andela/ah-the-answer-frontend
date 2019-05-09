@@ -7,6 +7,7 @@ const initialState = {
   givenName: 'Bob',
   userName: 'User',
   bio: 'Default Story',
+  profileImg: '...',
 };
 
 export default function Profile(state = initialState, action) {
@@ -34,6 +35,12 @@ export default function Profile(state = initialState, action) {
         ...state,
         givenName: action.givenName,
         userName: action.userName,
+      };
+
+    case ProfileAction.FETCH_AVATAR:
+      return {
+        ...state,
+        profileImg: action.profilePicture,
       };
 
     default:
