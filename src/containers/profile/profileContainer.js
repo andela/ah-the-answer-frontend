@@ -11,6 +11,13 @@ import BiographyText from '../../components/BiographyText';
 import NameTag from '../../components/NameTag';
 
 class ProfileView extends Component {
+  componentDidMount() {
+    this.props.updateName();
+    this.props.updateBio();
+    this.props.updateFollows();
+    this.props.updateFollowers();
+  }
+
   render() {
     const { profileprops: { profile: { follows } } } = this.props;
     const { profileprops: { profile: { followers } } } = this.props;
