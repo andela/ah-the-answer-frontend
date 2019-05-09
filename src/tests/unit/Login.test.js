@@ -85,7 +85,9 @@ describe('Test form submission', () => {
     preventDefault: () => {},
     target: [{ value: '' }],
   });
+});
 
+describe('test mapStateToProps', () => {
   it('should show initial state values when running mapStateToProps function', () => {
     const initialState = {
       auth: {
