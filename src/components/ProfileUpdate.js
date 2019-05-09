@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { updateFollows, updateFollowers, updateBio, updateName } from '../actions/profileActions';
+import {
+  updateFollows, updateFollowers, updateBio, updateName,
+} from '../actions/profileActions';
 import ProfileUpdateForm from './ProfileUpdateForm';
 
 class ProfileUpdate extends Component {
@@ -10,8 +12,8 @@ class ProfileUpdate extends Component {
   }
 
   render() {
-    const {profileprops: {profile: { userName }}} = this.props;
-    const {profileprops: {profile: { bio }}} = this.props;
+    const { profileprops: { profile: { userName } } } = this.props;
+    const { profileprops: { profile: { bio } } } = this.props;
     return (
       <div className="container">
         <div className="row">
@@ -44,14 +46,12 @@ const mapStateToProps = state => (
   }
 );
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateFollows: () => dispatch(updateFollows()),
-    updateFollowers: () => dispatch(updateFollowers()),
-    updateBio: () => dispatch(updateBio()),
-    updateName: () => dispatch(updateName()),
+const mapDispatchToProps = dispatch => ({
+  updateFollows: () => dispatch(updateFollows()),
+  updateFollowers: () => dispatch(updateFollowers()),
+  updateBio: () => dispatch(updateBio()),
+  updateName: () => dispatch(updateName()),
 
-  };
-};
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileUpdate);
