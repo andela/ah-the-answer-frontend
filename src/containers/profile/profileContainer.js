@@ -35,12 +35,7 @@ class ProfileView extends Component {
                 text={bio}
                 textUpdateMethod={this.props.updateBio}
               />
-              <BrowserRouter>
-                <div className="ProfileView">
-                  <Link to="/user/editprofile">Edit Bio</Link>
-                  <Route path="/user/editprofile" component={ProfileUpdate} />
-                </div>
-              </BrowserRouter>
+              <Link to="/user/editprofile">Edit Bio</Link>
             </div>
             <div className="row">
               <div className="col-sm-6">
