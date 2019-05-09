@@ -50,18 +50,34 @@ class CreateArticle extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // check if body is empty and prevent submit
+    // check if body,title or description are empty and prevent submit
     const content = convertToRaw(this.state.body.getCurrentContent());
     const contentTextLength = content.blocks[0].text.length;
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+    document.getElementById('title').classList.remove('is-invalid');
+    document.getElementById('description').classList.remove('is-invalid');
+
+    if (title.length === 0) {
+      document.getElementById('title').classList.add('is-invalid');
+      document.getElementById('title-text').innerText = 'This field may not be empty.';
+      return;
+    }
+    if (description.length === 0) {
+      document.getElementById('description').classList.add('is-invalid');
+      document.getElementById('description-text').innerText = 'This field may not be empty.';
+      return;
+    }
 
     if (contentTextLength < 10) {
       return;
     }
+
     this.setState(
-      (prevState) => (
-        {...prevState, redirect: !prevState.redirect}
-      )
-    )
+      prevState => (
+        { ...prevState, redirect: !prevState.redirect }
+      ),
+    );
     const newArticle = {
       title: this.state.title,
       description: this.state.description,
@@ -73,22 +89,20 @@ class CreateArticle extends Component {
   }
 
   render() {
-    if (authStatus() === false){
-      this.props.history.push("/");
+    if (authStatus() === false) {
+      this.props.history.push('/');
     }
     const { body } = this.state;
-    let { message } = this.props;
+    const { message } = this.props;
     // Redirect the user to the article after it has been created
-    console.log(this.state.redirect);
     if (this.state.redirect) {
-      if(message && message.success){
+      if (message && message.success) {
         const articleUrl = `/articles/${this.props.message.article.slug}`;
         this.props.history.push(articleUrl);
       }
     }
 
-    const titleError = this.props.titleError;
-    const descriptionError = this.props.descriptionError;
+    const { titleError, descriptionError } = this.props;
     let bodyMessage = '';
 
     const content = convertToRaw(this.state.body.getCurrentContent());
@@ -120,20 +134,20 @@ class CreateArticle extends Component {
           <div className="form-group">
             <label htmlFor="title">Title</label>
             <input type="text" id="title" autoComplete="off" className="form-control" onChange={this.handleChange} />
-            <div className="invalid-feedback">
+            <div className="invalid-feedback" id="title-text">
               {titleError}
             </div>
           </div>
           <div className="form-group">
             <label htmlFor="description">Description</label>
             <input type="text" maxLength="128" id="description" autoComplete="off" onChange={this.handleChange} className="form-control" />
-            <div className="invalid-feedback">
+            <div className="invalid-feedback" id="description-text">
               {descriptionError}
             </div>
           </div>
           <div className="form-group">
             <label htmlFor="tags">Tags</label>
-            <input className="form-control" autoComplete="off" type="text" id="tags" onChange={this.handleChange} />
+            <input className="form-control" autoComplete="off" type="text" id="tags" />
           </div>
           <Editor
             initialEditorState={body}
