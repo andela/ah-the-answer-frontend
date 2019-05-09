@@ -11,25 +11,25 @@ const initialState = {
 
 export default function Profile(state = initialState, action) {
   switch (action.type) {
-    case ProfileAction.UPDATE_FOLLOWS:
+    case ProfileAction.FETCH_FOLLOWS:
       return {
         ...state,
         follows: action.followCount,
       };
 
-    case ProfileAction.UPDATE_FOLLOWERS:
+    case ProfileAction.FETCH_FOLLOWERS:
       return {
         ...state,
         followers: action.followerCount,
       };
 
-    case ProfileAction.UPDATE_BIO:
+    case ProfileAction.FETCH_BIO:
       return {
         ...state,
         bio: action.userBio,
       };
 
-    case ProfileAction.UPDATE_NAME:
+    case ProfileAction.FETCH_NAME:
       return {
         ...state,
         givenName: action.givenName,

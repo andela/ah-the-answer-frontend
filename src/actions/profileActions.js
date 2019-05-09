@@ -13,7 +13,7 @@ export const updateFollows = () => (dispatch) => {
     .then((response) => {
       // handle success
       dispatch({
-        type: ProfileAction.UPDATE_FOLLOWS,
+        type: ProfileAction.FETCH_FOLLOWS,
         followCount: response.data.success[0].follows,
       });
     })
@@ -28,7 +28,7 @@ export const updateFollowers = () => (dispatch) => {
     .then((response) => {
       // handle success
       dispatch({
-        type: ProfileAction.UPDATE_FOLLOWERS,
+        type: ProfileAction.FETCH_FOLLOWERS,
         followerCount: response.data.success[1].followers,
       });
     })
@@ -43,7 +43,7 @@ export const updateBio = () => (dispatch) => {
     .then((response) => {
       // handle success
       dispatch({
-        type: ProfileAction.UPDATE_BIO,
+        type: ProfileAction.FETCH_BIO,
         userBio: response.data.profile.user_bio,
       });
     })
@@ -58,7 +58,7 @@ export const updateName = () => (dispatch) => {
     .then((response) => {
       // handle success
       dispatch({
-        type: ProfileAction.UPDATE_NAME,
+        type: ProfileAction.FETCH_NAME,
         givenName: response.data.profile.name,
         userName: response.data.profile.username,
       });
