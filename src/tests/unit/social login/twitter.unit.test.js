@@ -14,6 +14,6 @@ describe('Twitter component', () => {
   it('loads in the login page', () => {
     const wrapper = mount(<Login/>);
     const login = wrapper.find(TwitterLogin);
-    expect(login).toMatch(TwitterLogin);
+    expect(login.exists()).toEqual(true);
   })
 });

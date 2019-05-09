@@ -12,8 +12,8 @@ describe('Google component', () => {
     expect(button.type()).toEqual('button');
   });
   it('loads in the login page', () => {
-    const wrapper = mount(<Login/>);
+    const wrapper = mount(<Login />);
     const login = wrapper.find(GoogleLogin);
-    expect(login).toMatch(GoogleLogin);
+    expect(login.exists()).toEqual(true);
   })
 });
