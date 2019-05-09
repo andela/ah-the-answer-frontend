@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import {requestPasswordReset} from '../../store/actions/requestResetPassword'
 
-class InitiatePasswordReset extends Component {
+export class InitiatePasswordReset extends Component {
   state = {
       email: '',
       errors: {},
@@ -69,7 +69,7 @@ InitiatePasswordReset.propTypes = {
 }
 
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
     return {
         message: state.resetPassword.message,
         error: state.resetPassword.error,
