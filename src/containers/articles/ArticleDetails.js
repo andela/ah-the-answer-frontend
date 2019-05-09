@@ -31,8 +31,9 @@ class ArticleDetails extends Component {
                   <Link to="/profile" className="btn btn-info profile-img">RW</Link>
                 </div>
                 <div className="col-lg-9">
-                  <p className="text-muted">By {author.username}</p>
-                  <p className="text-muted">{moment(article.date_created).calendar()}</p>
+                  <div className="text-muted">By {author.username}</div>
+                  <div className="text-muted">{moment(article.date_created).calendar()}</div>
+                  <div className="text-info mb-0">{article.read_time} read</div>
                 </div>
               </div>
             </div>

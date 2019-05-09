@@ -17,7 +17,6 @@ class EditArticle extends Component {
       description: '',
       body: EditorState.createEmpty(),
       is_published: true,
-      tags: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,7 +43,6 @@ class EditArticle extends Component {
         description: article.description,
         body,
         is_published: true,
-        tags: [],
       });
     } catch (e) {}
   }
@@ -67,6 +65,8 @@ class EditArticle extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    document.getElementById('title').classList.remove('is-invalid');
+    document.getElementById('description').classList.remove('is-invalid');
     // check if body is empty and prevent submit
     const content = convertToRaw(this.state.body.getCurrentContent());
     const contentTextLength = content.blocks[0].text.length;
@@ -79,7 +79,6 @@ class EditArticle extends Component {
       description: this.state.description,
       body: draftToHtml(convertToRaw(this.state.body.getCurrentContent())),
       is_published: this.state.is_published,
-      tags: this.state.tags,
     };
     this.props.updateArticle(slug, updatedArticle);
   }
@@ -175,7 +174,7 @@ class EditArticle extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="tags">Tags</label>
-            <input className="form-control" autoComplete="off" type="text" id="tags" onChange={this.handleChange} value={article.tags} />
+            <input className="form-control" autoComplete="off" type="text" id="tags" value={article.tags} />
           </div>
           <Editor
             editorState={body}
