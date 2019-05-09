@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import expect from 'expect';
 import RequestPasswordReset from '../../../store/reducers/requestPasswordReset';
 import { requestResetPasswordSuccess } from '../../../store/actions/requestResetPassword';
@@ -8,6 +9,7 @@ const INITIAL_STATE = {
 
 };
 
+// eslint-disable-next-line no-undef
 describe('Test RESETREDUCER', () => {
   it('should return the initial state', () => {
     const state = RequestPasswordReset(INITIAL_STATE, {});
