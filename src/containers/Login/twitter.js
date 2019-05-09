@@ -6,19 +6,7 @@ import TwitterIcon from '../../images/twitter.svg';
 const twitterURL = `${process.env.REACT_APP_API}/api/users/twitter/`;
 
 class TwitterLogin extends Component {
-  componentDidMount() {
-    this.createElements();
-  }
-
-  createElements = () => {
-    const e = document.createElement('script');
-    e.type = 'text/javascript';
-    e.id = 'twitter';
-    e.src = 'https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js';
-    const t = document.getElementsByTagName('script')[0];
-    t.parentNode.insertBefore(e, t);
-  }
-
+ 
   twitterLogin = () => {
     window.OAuth.initialize(process.env.REACT_APP_TWITTER_KEY);
     window.OAuth.popup('twitter').then((twitter) => {

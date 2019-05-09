@@ -6,20 +6,7 @@ import GoogleIcon from '../../images/google.svg';
 const glogin = `${process.env.REACT_APP_API}/api/users/google/`;
 
 class GoogleLogin extends Component {
-  componentDidMount() {
-    this.createElements();
-  }
 
-  createElements = () => {
-    // Create the script tag to import google SDK
-    const e = document.createElement('script');
-    e.type = 'text/javascript';
-    e.id = 'google';
-    e.async = true;
-    e.src = 'https://apis.google.com/js/client:platform.js?onload=gPOnLoad';
-    const t = document.getElementsByTagName('script')[0];
-    t.parentNode.insertBefore(e, t);
-  }
 
   googleLogin = () => {
     window.gapi.auth.signIn({

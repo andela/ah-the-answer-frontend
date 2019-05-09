@@ -6,13 +6,6 @@ const fbLogin = `${process.env.REACT_APP_API}/api/users/facebook/`;
 
 export default class FacebookLogin extends Component {
   componentDidMount() {
-    const t = document.getElementsByTagName('script')[0];
-    if (document.getElementById('facebook')) return;
-    const f = document.createElement('script');
-    f.id = 'facebook';
-    f.src = 'https://connect.facebook.net/en_US/sdk.js';
-    t.parentNode.insertBefore(f, t);
-
     window.fbAsyncInit = () => {
       window.FB.init({
         appId: process.env.REACT_APP_FACEBOOK_KEY,
