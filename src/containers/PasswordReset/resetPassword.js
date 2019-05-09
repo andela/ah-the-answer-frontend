@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import {resetPassword} from '../../store/actions/requestResetPassword'
 import ResetPasswordForm from './resetPasswordForm'
-class ResetPassword extends Component {
+export class ResetPassword extends Component {
     state = {
         password: '',
         confirmPassword: '',

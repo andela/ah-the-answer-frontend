@@ -35,8 +35,8 @@ export const resetPassword = data => (dispatch) => {
       dispatch(requestResetPasswordSuccess(res.data.message));
       // eslint-disable-next-line no-alert
       alert('Your password has been changed click okay to login');
-      if (res.data.message.match(/login/)) {
-        window.location.replace('/passwordresetsuccess');
+      if (res.data.message.match(/success/)) {
+        window.location.replace('/login');
       }
     })
     .catch((e) => {
