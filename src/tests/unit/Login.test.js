@@ -6,9 +6,9 @@ import { mount, shallow } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Login } from '../../containers/Login/Login';
 import authReducer from '../../store/reducers/authReducer';
+import { mapStateToProps, mapDispatchToProps } from '../../containers/Login/Login';
 
 // eslint-disable-next-line no-undef
-
 const setUp = (props = {}) => {
   const component = mount(
     <Router>
@@ -54,5 +54,60 @@ describe('changes state', () => {
   newWrapper.update();
   it('should update the state', () => {
     expect(newWrapper.state()).toEqual(expectedState);
+  });
+});
+
+describe('Test form submission', () => {
+  const props = {
+    signInUser: jest.fn(),
+  };
+  const wrapper = mount(
+    <Router>
+      <Login {...props} />
+    </Router>,
+  );
+  const email = wrapper.find('#emailID');
+  const password = wrapper.find('#passwordID');
+
+  email.simulate('change', {
+    target: {
+      type: 'email',
+      value: 'johndoe@test.com',
+    },
+  });
+  password.simulate('change', {
+    target: {
+      type: 'password',
+      value: 'johndoe123',
+    },
+  });
+  wrapper.find('form').simulate('submit', {
+    preventDefault: () => {},
+    target: [{ value: '' }],
+  });
+
+  it('should show initial state values when running mapStateToProps function', () => {
+    const initialState = {
+      auth: {
+        authError: 'error',
+        errorMessages: 'error message',
+      },
+    };
+
+    // Just call the method directly passing in sample data
+    // to make sure it does what it's supposed to
+    expect(mapStateToProps(initialState).authError).toEqual('error');
+  });
+});
+
+describe('test mapDispatchToProps', () => {
+  it('should roll the dice again when button is clicked', () => {
+    const dispatch = jest.fn();
+    const signInUser = dispatch({ type: 'USER_SIGN_IN' });
+
+    // For the `mapDispatchToProps`, call it directly but pass in
+    // a mock function and check the arguments passed in are as expected
+    mapDispatchToProps(dispatch).signInUser();
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: 'USER_SIGN_IN' });
   });
 });

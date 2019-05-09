@@ -111,13 +111,13 @@ export class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   return {
     authError: state.auth.authError,
     errorMessages: state.auth.errorMessages,
   };
 };
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
   return {
     signInUser: userData => dispatch(signInUser(userData)),
   };
