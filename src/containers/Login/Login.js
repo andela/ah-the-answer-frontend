@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GoogleLogin from './google';
 import FacebookLogin from './facebook';
 import TwitterLogin from './twitter';
+
 class Login extends Component {
   state = {
     email: "",
@@ -34,9 +35,9 @@ class Login extends Component {
                   role="group"
                   aria-label="Basic example"
                 >
-                  <FacebookLogin/>
-                  <GoogleLogin/>
-                  <TwitterLogin/>
+                  <FacebookLogin />
+                  <GoogleLogin />
+                  <TwitterLogin />
                 </div>
               </div>
               <label htmlFor="emailID" className="required">
