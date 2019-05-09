@@ -3,7 +3,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 
 const Navbar = () => (
   <nav className="nav">
-    <div className="container">
+    <div>
       <a href="/" className="brand-logo">Authors Haven</a>
       <ul className="right">
         <li><NavLink to="/">Home</NavLink></li>

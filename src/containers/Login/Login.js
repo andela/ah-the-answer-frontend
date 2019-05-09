@@ -26,7 +26,7 @@ class Login extends Component {
       <div className="container d-flex align-items-center justify-content-center">
         <div className="col-lg-5">
           <h2 className="text-center mb-4 mt-5">Sign In</h2>
-          <form className="form-wrapper p-4 shadow" Validate>
+          <form className="form-wrapper p-4 shadow" validate="true">
             <div className="form-group">
               <div className="social-login">
                 <h5 className="text-center mb-4 mt-5">Sign In with</h5>
