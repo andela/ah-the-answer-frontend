@@ -1,23 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class ButtonBadge extends Component {
-  componentDidMount() {
-    this.props.badgeUpdateMethod();
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <button type="button" className="btn btn-primary">
-          {this.props.buttonName}
-          <span className="badge">
-            {this.props.badgeNumber}
-          </span>
-        </button>
-      </div>
-    );
-  }
-}
-
+const ButtonBadge = ({buttonName, badgeNumber}) => (
+  <div className="container">
+    <button type="button" className="btn btn-primary">
+      {buttonName}
+      <span className="badge">
+        {badgeNumber}
+      </span>
+    </button>
+  </div>
+);
 
 export default ButtonBadge;
