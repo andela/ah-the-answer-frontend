@@ -1,3 +1,7 @@
+// Include Bootstrap and Bootstrap modules here.
+// Ensure that all variable definitions are placed
+// AFTER the Bootstrap imports.
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 // Define your variable overrides here.
 
 // SIGNUP PAGE
@@ -19,3 +23,11 @@ label {
     }
 }
 // END OF SIGNUP PAGE
+
+.social-login {
+	margin: auto;
+}
+
+.button-facebook {
+	border-radius: 5px;
+}
