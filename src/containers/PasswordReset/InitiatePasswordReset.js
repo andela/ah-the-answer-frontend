@@ -39,7 +39,6 @@ export class InitiatePasswordReset extends Component {
         }
 
     this.props.requestPasswordReset({email})
-    console.log(this.props)
   }
 
   render() {
