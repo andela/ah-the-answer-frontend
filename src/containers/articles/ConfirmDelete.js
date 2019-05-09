@@ -11,8 +11,6 @@ class ConfirmDelete extends Component {
   render() {
     const message = this.props.message;
     if (message) {
-      const deleteModal = document.getElementById('deleteModal');
-      deleteModal.style.display = 'none';
       return <Redirect to="/" />
     }
     if (message && message === 'The article requested does not exist'){

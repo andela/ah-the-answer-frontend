@@ -67,12 +67,12 @@ class ArticleDetails extends Component {
 ArticleDetails.propTypes = {
   article: PropTypes.shape({}),
   author: PropTypes.shape({}),
-  message: PropTypes.string,
+  message: PropTypes.shape({}),
 };
 ArticleDetails.defaultProps = {
   article: {},
   author: {},
-  message: '',
+  message: {},
 };
 
 const mapStateToProps = (state) => {
