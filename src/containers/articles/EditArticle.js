@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
-import { Redirect } from 'react-router-dom';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import PropTypes from 'prop-types';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import authStatus from '../../helpers/authStatus';
-import ConfirmDelete from './ConfirmDelete';
-import { updateArticle, getArticle } from '../../store/actions/articleActions';
+import { updateArticle, getArticle, deleteArticle } from '../../store/actions/articleActions';
 
 class EditArticle extends Component {
   constructor(props) {
@@ -59,6 +57,10 @@ class EditArticle extends Component {
     });
   }
 
+  handleClick = () => {
+    this.props.deleteArticle(this.props.match.params.slug);
+  }
+
   handleChange(e) {
     this.setState({
       [e.target.id]: e.target.value,
@@ -85,11 +87,14 @@ class EditArticle extends Component {
   }
 
   render() {
-    if (authStatus() === false) return <Redirect to="/" />;
-    const slug = this.props.match.params.slug;
+    if (authStatus() === false){
+      this.props.history.push("/");
+    }
+    // const slug = this.props.match.params.slug;
     const article = this.state;
     const { body } = this.state;
     const { editMessage } = this.props;
+    const message = this.props.message;
 
     const titleError = this.props.titleError;
     const descriptionError = this.props.descriptionError;
@@ -118,14 +123,43 @@ class EditArticle extends Component {
       const articleUrl = `/articles/${updatedSlug}/edit`;
 
       if (updatedSlug !== urlSlug) {
-        return <Redirect to={articleUrl} />;
+        this.props.history.push(articleUrl);
       }
+    }
+    //Delete function message
+    if (message) {
+      this.props.history.push("/");
+    }
+    if (message && message === 'The article requested does not exist'){
+      this.props.history.push("/");
     }
 
     return (
       <div className="container">
         <div className="row float-right mt-1">
-          <ConfirmDelete slug={slug} />
+          <div>
+            <button type="button" className="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+              <i className="fas fa-trash" />
+            </button>
+            <div className="modal fade" id="deleteModal" tabIndex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="deleteModalLabel">Delete Article</h5>
+                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    Are you sure you want to delete this article?
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-danger" onClick={this.handleClick} data-dismiss="modal">Delete</button>
+                  </div>
+                </div>
+              </div> 
+            </div>
+          </div>          
         </div>
         <form onSubmit={this.handleSubmit} className="white">
           <h5 className="text-center mt-3">Edit Article</h5>
@@ -149,7 +183,6 @@ class EditArticle extends Component {
           </div>
           <Editor
             editorState={body}
-            // editorStyle={editorStyle}
             wrapperClassName="demo-wrapper"
             editorClassName="demo-editor"
             onEditorStateChange={this.onEditorStateChange}
@@ -213,6 +246,7 @@ const mapStateToProps = (state) => {
     titleError: state.articles.titleError,
     descriptionError: state.articles.descriptionError,
     editMessage: state.articles.editMessage,
+    message: state.articles.message,
   };
 };
 
@@ -220,6 +254,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateArticle: (slug, article) => dispatch(updateArticle(slug, article)),
     getArticle: slug => dispatch(getArticle(slug)),
+    deleteArticle: slug => dispatch(deleteArticle(slug)),
   };
 };
 

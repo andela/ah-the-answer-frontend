@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { EditorState, convertToRaw } from 'draft-js';
-import { Redirect } from 'react-router-dom';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import { createArticle } from '../../store/actions/articleActions';
@@ -54,14 +53,15 @@ class CreateArticle extends Component {
     // check if body is empty and prevent submit
     const content = convertToRaw(this.state.body.getCurrentContent());
     const contentTextLength = content.blocks[0].text.length;
+
+    if (contentTextLength < 10) {
+      return;
+    }
     this.setState(
       (prevState) => (
         {...prevState, redirect: !prevState.redirect}
       )
     )
-    if (contentTextLength < 10) {
-      return;
-    }
     const newArticle = {
       title: this.state.title,
       description: this.state.description,
@@ -73,13 +73,18 @@ class CreateArticle extends Component {
   }
 
   render() {
-    if (authStatus() === false) return <Redirect to="/" />;
+    if (authStatus() === false){
+      this.props.history.push("/");
+    }
     const { body } = this.state;
     let { message } = this.props;
     // Redirect the user to the article after it has been created
-    if (this.state.redirect && message) {
-      const articleUrl = `/articles/${this.props.message.article.slug}`;
-      return <Redirect to={articleUrl} />;
+    console.log(this.state.redirect);
+    if (this.state.redirect) {
+      if(message && message.success){
+        const articleUrl = `/articles/${this.props.message.article.slug}`;
+        this.props.history.push(articleUrl);
+      }
     }
 
     const titleError = this.props.titleError;
@@ -165,16 +170,6 @@ class CreateArticle extends Component {
             )
           ) : (
             <span className="badge badge-pill badge-dark">{bodyMessage}</span>
-          )}
-
-          { this.state.redirect ? (
-            (
-              <div className="alert alert-success text-muted mt-3">
-                Your article has been published
-              </div>
-            )
-          ) : (
-            null
           )}
           <div className="form-group text-center">
             <button type="submit" className="btn btn-secondary mt-3">Publish Article</button>
