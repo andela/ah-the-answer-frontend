@@ -12,18 +12,29 @@ export class Login extends Component {
     password: '',
   };
 
+<<<<<<< HEAD
   handleSubmit = (e) => {
+=======
+  handleSubmit = e => {
+>>>>>>> 0e51ae870467773d84c25c97461f3ec2cdad36e8
     e.preventDefault();
     this.props.signInUser(this.state);
   };
 
+<<<<<<< HEAD
   handleChange = (e) => {
+=======
+  handleChange = e => {
+>>>>>>> 0e51ae870467773d84c25c97461f3ec2cdad36e8
     e.preventDefault();
     this.setState({
       [e.target.type]: e.target.value,
     });
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0e51ae870467773d84c25c97461f3ec2cdad36e8
   render() {
     const { authError, errorMessages } = this.props;
     return (
@@ -42,8 +53,13 @@ export class Login extends Component {
             <div className="form-group">
               <div className="social-login">
                 {authError
+<<<<<<< HEAD
                   ? document.getElementById('emailID').classList.add('is-invalid')
                     || document.getElementById('passwordID').classList.add('is-invalid')
+=======
+                  ? document.getElementById('emailID').classList.add('is-invalid') ||
+                    document.getElementById('passwordID').classList.add('is-invalid')
+>>>>>>> 0e51ae870467773d84c25c97461f3ec2cdad36e8
                   : null}
 
                 <h5 className="text-center mb-4 mt-5">Sign In with</h5>
@@ -112,6 +128,7 @@ export class Login extends Component {
   }
 }
 
+<<<<<<< HEAD
 export const mapStateToProps = state => ({
   authError: state.auth.authError,
   errorMessages: state.auth.errorMessages,
@@ -119,6 +136,19 @@ export const mapStateToProps = state => ({
 export const mapDispatchToProps = dispatch => ({
   signInUser: userData => dispatch(signInUser(userData)),
 });
+=======
+export const mapStateToProps = state => {
+  return {
+    authError: state.auth.authError,
+    errorMessages: state.auth.errorMessages,
+  };
+};
+export const mapDispatchToProps = dispatch => {
+  return {
+    signInUser: userData => dispatch(signInUser(userData)),
+  };
+};
+>>>>>>> 0e51ae870467773d84c25c97461f3ec2cdad36e8
 
 export default connect(
   mapStateToProps,
