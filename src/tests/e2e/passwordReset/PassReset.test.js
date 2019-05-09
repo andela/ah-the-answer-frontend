@@ -4,11 +4,13 @@ import expect from 'expect';
 import { mount } from '../../enzyme';
 
 
-import { mapStateToProps, InitiatePasswordReset } from '../../../containers/PasswordReset/InitiatePasswordReset';
+import { InitiatePasswordReset } from '../../../containers/PasswordReset/InitiatePasswordReset';
 
 const setUp = () => {
   const props = {
+    // eslint-disable-next-line no-undef
     handleSubmit: jest.fn(),
+    // eslint-disable-next-line no-undef
     requestPasswordReset: jest.fn(),
   };
   const wrapper = mount(
@@ -39,5 +41,3 @@ describe('Request password reset page rendered ', () => {
     });
   });
 });
-
-// eslint-disable-next-line no-undef
