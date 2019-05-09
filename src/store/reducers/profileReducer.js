@@ -1,4 +1,3 @@
-import axios from 'axios';
 import * as ProfileAction from '../../actiontypes/profiles/profileActionTypes';
 
 const initialState = {
