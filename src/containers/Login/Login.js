@@ -12,17 +12,18 @@ export class Login extends Component {
     password: '',
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.signInUser(this.state);
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     e.preventDefault();
     this.setState({
       [e.target.type]: e.target.value,
     });
   };
+
   render() {
     const { authError, errorMessages } = this.props;
     return (
@@ -41,8 +42,8 @@ export class Login extends Component {
             <div className="form-group">
               <div className="social-login">
                 {authError
-                  ? document.getElementById('emailID').classList.add('is-invalid') ||
-                    document.getElementById('passwordID').classList.add('is-invalid')
+                  ? document.getElementById('emailID').classList.add('is-invalid')
+                    || document.getElementById('passwordID').classList.add('is-invalid')
                   : null}
 
                 <h5 className="text-center mb-4 mt-5">Sign In with</h5>
@@ -111,18 +112,13 @@ export class Login extends Component {
   }
 }
 
-
-export const mapStateToProps = state => {
-  return {
-    authError: state.auth.authError,
-    errorMessages: state.auth.errorMessages,
-  };
-};
-export const mapDispatchToProps = dispatch => {
-  return {
-    signInUser: userData => dispatch(signInUser(userData)),
-  };
-};
+export const mapStateToProps = state => ({
+  authError: state.auth.authError,
+  errorMessages: state.auth.errorMessages,
+});
+export const mapDispatchToProps = dispatch => ({
+  signInUser: userData => dispatch(signInUser(userData)),
+});
 
 export default connect(
   mapStateToProps,

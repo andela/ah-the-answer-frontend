@@ -1,29 +1,29 @@
 // Include Bootstrap and Bootstrap modules here.
 // Ensure that all variable definitions are placed
 // AFTER the Bootstrap imports.
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 // Define your variable overrides here.
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 // SIGNUP PAGE
 label {
-    font-weight: 600;
+  font-weight: 600;
 
-    &.required {
-        &::after {
-            content: '*';
-            font-size: 1rem;
-            color:var(--danger);
-            margin-left:1px;
-        }
+  &.required {
+    &::after {
+      content: "*";
+      font-size: 1rem;
+      color: var(--danger); 
+      margin-left: 1px;
     }
+  }
 }
 // END OF SIGNUP PAGE
 
 .social-login {
-	margin: auto;
+  margin: auto;
 }
 
 hr {
-	background-color: #000;
-	height: 1px;
+  background-color: #000;
+  height: 1px;
 }
