@@ -10,11 +10,11 @@ import NameTag from '../../components/NameTag';
 
 class ProfileView extends Component {
   render() {
-    const {profileprops: {profile: { follows }}} = this.props;
-    const {profileprops: {profile: { followers }}} = this.props;
-    const {profileprops: {profile: { bio }}} = this.props;
-    const {profileprops: {profile: { userName }}} = this.props;
-    const {profileprops: {profile: { givenName }}} = this.props;
+    const { profileprops: { profile: { follows } } } = this.props;
+    const { profileprops: { profile: { followers } } } = this.props;
+    const { profileprops: { profile: { bio } } } = this.props;
+    const { profileprops: { profile: { userName } } } = this.props;
+    const { profileprops: { profile: { givenName } } } = this.props;
     return (
       <div className="container">
         <div className="row">
