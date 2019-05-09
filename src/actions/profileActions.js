@@ -77,3 +77,7 @@ export const fetchAvatar = () => {
       });
   };
 };
+
+export const updateProfile = (profileName, bio) => {
+  axios.post(' http://127.0.0.1:8000/api/profiles/Kyppy/', { name: profileName, user_bio: bio });
+};
