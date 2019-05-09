@@ -2,7 +2,9 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { updateFollows, updateFollowers, updateBio, updateName } from '../../actions/profileActions';
+import {
+  updateFollows, updateFollowers, updateBio, updateName,
+} from '../../actions/profileActions';
 import Card from '../../components/Card';
 import ButtonBadge from '../../components/ButtonBadge';
 import BiographyText from '../../components/BiographyText';
