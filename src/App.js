@@ -5,9 +5,6 @@ import InitiatePasswordReset from './containers/PasswordReset/InitiatePasswordRe
 import ResetPasswordMessage from './containers/PasswordReset/PasswordResetSuccess';
 import ResetPassword from './containers/PasswordReset/resetPassword';
 import './themes/bootstrap-custom.scss';
-import Login from './views/Login'
-import Home from './views/Home'
-import Navbar from './views/Navbar'
 
 
 function App() {

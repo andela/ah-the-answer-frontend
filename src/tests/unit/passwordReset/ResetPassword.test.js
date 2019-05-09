@@ -40,18 +40,3 @@ describe('Test RESETREDUCER', () => {
     expect(state).toEqual(expectedState);
   });
 });
-
-describe('test mapStateToProps', () => {
-  it('should show initial state values when running mapStateToProps function', () => {
-    const initialState = {
-      auth: {
-        authError: 'error',
-        errorMessages: 'error message',
-      },
-    };
-
-    // Just call the method directly passing in sample data
-    // to make sure it does what it's supposed to
-    expect(mapStateToProps(initialState).authError).toEqual('error');
-  });
-});

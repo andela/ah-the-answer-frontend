@@ -32,9 +32,12 @@ describe('Request password reset page rendered ', () => {
       .toBe(true);
   });
 
+  // eslint-disable-next-line no-undef
   it(' test handle onsubmit event', () => {
     wrapper.find('form').simulate('submit', {
       preventDefault: () => {},
     });
   });
 });
+
+// eslint-disable-next-line no-undef
