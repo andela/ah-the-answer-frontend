@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  updateFollows, updateFollowers, updateBio, updateName,
+  fetchFollows, fetchFollowers, fetchBio, fetchName,
 } from '../../actions/profileActions';
 import Card from '../../components/Card';
 import ButtonBadge from '../../components/ButtonBadge';
@@ -12,10 +12,10 @@ import NameTag from '../../components/NameTag';
 
 class ProfileView extends Component {
   componentDidMount() {
-    this.props.updateName();
-    this.props.updateBio();
-    this.props.updateFollows();
-    this.props.updateFollowers();
+    this.props.fetchName();
+    this.props.fetchBio();
+    this.props.fetchFollows();
+    this.props.fetchFollowers();
   }
 
   render() {
@@ -35,13 +35,13 @@ class ProfileView extends Component {
               <NameTag
                 firstName={givenName}
                 secondName={userName}
-                textUpdateMethod={this.props.updateName}
+                textfetchMethod={this.props.fetchName}
               />
             </div>
             <div className="row">
               <BiographyText
                 text={bio}
-                textUpdateMethod={this.props.updateBio}
+                textfetchMethod={this.props.fetchBio}
               />
               <Link to="/user/editprofile">Edit Bio</Link>
             </div>
@@ -50,14 +50,14 @@ class ProfileView extends Component {
                 <ButtonBadge
                   buttonName="Follows"
                   badgeNumber={follows}
-                  badgeUpdateMethod={this.props.updateFollows}
+                  badgefetchMethod={this.props.fetchFollows}
                 />
               </div>
               <div className="col-sm-6">
                 <ButtonBadge
                   buttonName="Followers"
                   badgeNumber={followers}
-                  badgeUpdateMethod={this.props.updateFollowers}
+                  badgefetchMethod={this.props.fetchFollowers}
                 />
               </div>
             </div>
@@ -88,10 +88,10 @@ const mapStateToProps = state => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  updateFollows: () => dispatch(updateFollows()),
-  updateFollowers: () => dispatch(updateFollowers()),
-  updateBio: () => dispatch(updateBio()),
-  updateName: () => dispatch(updateName()),
+  fetchFollows: () => dispatch(fetchFollows()),
+  fetchFollowers: () => dispatch(fetchFollowers()),
+  fetchBio: () => dispatch(fetchBio()),
+  fetchName: () => dispatch(fetchName()),
 
 });
 

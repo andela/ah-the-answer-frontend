@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
-  updateFollows, updateFollowers, updateBio, updateName,
+  fetchFollows, fetchFollowers, fetchBio, fetchName,
 } from '../actions/profileActions';
 import ProfileUpdateForm from './ProfileUpdateForm';
 
 class ProfileUpdate extends Component {
   componentDidMount() {
-    this.props.updateName();
-    this.props.updateBio();
+    this.props.fetchName();
+    this.props.fetchBio();
   }
 
   render() {
@@ -47,10 +47,10 @@ const mapStateToProps = state => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  updateFollows: () => dispatch(updateFollows()),
-  updateFollowers: () => dispatch(updateFollowers()),
-  updateBio: () => dispatch(updateBio()),
-  updateName: () => dispatch(updateName()),
+  fetchFollows: () => dispatch(fetchFollows()),
+  fetchFollowers: () => dispatch(fetchFollowers()),
+  fetchBio: () => dispatch(fetchBio()),
+  fetchName: () => dispatch(fetchName()),
 
 });
 

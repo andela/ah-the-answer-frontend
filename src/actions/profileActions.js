@@ -1,14 +1,12 @@
 import axios from 'axios';
 import * as ProfileAction from '../actiontypes/profiles/profileActionTypes';
-// export const updateFollows = () => ({
-//   type: ProfileAction.UPDATE_FOLLOWS,
-// });
+
 const setAxios = require('axios');
 
 const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.GUe99Eg95Wbx3b07v-kiUI1njRPNCIiZEt9cA1tf5U0';
 setAxios.defaults.headers.common = { Authorization: `Bearer ${token}` };
 
-export const updateFollows = () => (dispatch) => {
+export const fetchFollows = () => (dispatch) => {
   axios.get(' http://127.0.0.1:8000/api/follows/count/Kyppy/')
     .then((response) => {
       // handle success
@@ -23,7 +21,7 @@ export const updateFollows = () => (dispatch) => {
     });
 };
 
-export const updateFollowers = () => (dispatch) => {
+export const fetchFollowers = () => (dispatch) => {
   axios.get(' http://127.0.0.1:8000/api/follows/count/Kyppy/')
     .then((response) => {
       // handle success
@@ -38,7 +36,7 @@ export const updateFollowers = () => (dispatch) => {
     });
 };
 
-export const updateBio = () => (dispatch) => {
+export const fetchBio = () => (dispatch) => {
   axios.get(' http://127.0.0.1:8000/api/profiles/Kyppy/')
     .then((response) => {
       // handle success
@@ -53,7 +51,7 @@ export const updateBio = () => (dispatch) => {
     });
 };
 
-export const updateName = () => (dispatch) => {
+export const fetchName = () => (dispatch) => {
   axios.get(' http://127.0.0.1:8000/api/profiles/Kyppy/')
     .then((response) => {
       // handle success
