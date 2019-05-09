@@ -4,11 +4,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
   fetchFollows, fetchFollowers, fetchBio, fetchName,
-} from '../../actions/profileActions';
-import Card from '../../components/Card';
-import ButtonBadge from '../../components/ButtonBadge';
-import BiographyText from '../../components/BiographyText';
-import NameTag from '../../components/NameTag';
+} from '../../store/actions/profileActions';
+import Card from './components/Card';
+import ButtonBadge from './components/ButtonBadge';
+import BiographyText from './components/BiographyText';
+import NameTag from './components/NameTag';
 
 class ProfileView extends Component {
   componentDidMount() {
