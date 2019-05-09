@@ -1,9 +1,9 @@
 import React from 'react';
 import './themes/bootstrap-custom.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Login from './containers/Login/Login'
-import Home from './containers/Home'
-import Navbar from './containers/Navbar'
+import Login from './containers/Login/Login';
+import Home from './containers/Home';
+import Navbar from './containers/Navbar';
 
 function App() {
   return (
