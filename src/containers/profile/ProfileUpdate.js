@@ -32,7 +32,7 @@ class ProfileUpdate extends Component {
             />
           </div>
           <div className="col-3">
-            <img src="..." className="img-fluid" alt="Placholder" />
+            <img src="https://res.cloudinary.com/apibucket/image/upload/v1554188102/sample.jpg" className="img-fluid" alt="Placholder" />
           </div>
         </div>
       </div>
