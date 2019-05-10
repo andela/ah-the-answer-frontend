@@ -27,7 +27,7 @@ class ProfileView extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-sm-6">
+          <div className="col-4">
             <img src="https://res.cloudinary.com/apibucket/image/upload/v1554188102/sample.jpg" className="img-fluid" alt="Placholder" />
           </div>
           <div className="col-sm-6">
@@ -70,9 +70,11 @@ class ProfileView extends Component {
         </div>
         <div className="row">
           <div className="col-sm-6">
+            <h3 className="text-center"> Favorites </h3>
             <Card />
           </div>
           <div className="col-sm-6">
+            <h3 className="text-center"> Bookmarks </h3>
             <Card />
           </div>
         </div>
