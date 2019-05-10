@@ -12,11 +12,12 @@ label {
     &::after {
       content: "*";
       font-size: 1rem;
-      color: var(--danger); 
+      color: var(--danger);
       margin-left: 1px;
     }
   }
 }
+
 // END OF SIGNUP PAGE
 
 .social-login {
@@ -26,4 +27,16 @@ label {
 hr {
   background-color: #000;
   height: 1px;
+}
+
+.bg-facebook {
+  background: #3b5998;
+}
+
+.bg-google {
+  background: #db4a39;
+}
+
+.bg-twitter {
+  background: #00acee;
 }

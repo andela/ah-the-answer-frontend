@@ -48,13 +48,13 @@ export class Login extends Component {
 
                 <h5 className="text-center mb-4 mt-5">Sign In with</h5>
                 <div className="row mb-5" role="group" aria-label="Basic example">
-                  <button type="button" className="btn btn-primary button-facebook ml-2 col">
+                  <button type="button" className="btn bg-facebook ml-2 col">
                     <img src={FbIcon} alt="facebook icon" />
                   </button>
-                  <button type="button" className="btn btn-danger button-gmail ml-2 col">
+                  <button type="button" className="btn bg-google ml-2 col">
                     <img src={GoogleIcon} alt="google icon" />
                   </button>
-                  <button type="button" className="btn btn-info button-twitter ml-2 mr-2 col">
+                  <button type="button" className="btn bg-twitter ml-2 mr-2 col">
                     <img src={TwitterIcon} alt="twitter icon" id="errorMessages" />
                   </button>
                 </div>
