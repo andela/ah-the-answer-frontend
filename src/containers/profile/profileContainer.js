@@ -6,9 +6,9 @@ import {
   fetchFollows, fetchFollowers, fetchBio, fetchName,
 } from '../../store/actions/profileActions';
 import Card from './components/Card';
-import ButtonBadge from './components/ButtonBadge';
 import BiographyText from './components/BiographyText';
 import NameTag from './components/NameTag';
+import SocialFollowing from './components/SocialFollowing';
 
 class ProfileView extends Component {
   componentDidMount() {
@@ -28,7 +28,7 @@ class ProfileView extends Component {
       <div className="container">
         <div className="row">
           <div className="col-sm-6">
-            <img src="..." className="img-fluid" alt="Placholder" />
+            <img src="https://res.cloudinary.com/apibucket/image/upload/v1554188102/sample.jpg" className="img-fluid" alt="Placholder" />
           </div>
           <div className="col-sm-6">
             <div className="row">
@@ -47,16 +47,16 @@ class ProfileView extends Component {
             </div>
             <div className="row">
               <div className="col-sm-6">
-                <ButtonBadge
-                  buttonName="Follows"
-                  badgeNumber={follows}
+                <SocialFollowing
+                  socialName="Follows"
+                  number={follows}
                   badgefetchMethod={this.props.fetchFollows}
                 />
               </div>
               <div className="col-sm-6">
-                <ButtonBadge
-                  buttonName="Followers"
-                  badgeNumber={followers}
+                <SocialFollowing
+                  socialName="Followers"
+                  number={followers}
                   badgefetchMethod={this.props.fetchFollowers}
                 />
               </div>
