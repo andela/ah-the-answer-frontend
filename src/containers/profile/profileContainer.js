@@ -30,7 +30,7 @@ class ProfileView extends Component {
           <div className="col-4">
             <img src="https://res.cloudinary.com/apibucket/image/upload/v1554188102/sample.jpg" className="img-fluid" alt="Placholder" />
           </div>
-          <div className="col-sm-6">
+          <div className="col-6">
             <div className="row">
               <NameTag
                 firstName={givenName}
@@ -46,14 +46,14 @@ class ProfileView extends Component {
               <Link to="/user/editprofile">Edit Bio</Link>
             </div>
             <div className="row">
-              <div className="col-sm-6">
+              <div className="col-6">
                 <SocialFollowing
                   socialName="Follows"
                   number={follows}
                   badgefetchMethod={this.props.fetchFollows}
                 />
               </div>
-              <div className="col-sm-6">
+              <div className="col-6">
                 <SocialFollowing
                   socialName="Followers"
                   number={followers}
@@ -64,16 +64,16 @@ class ProfileView extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-sm-12">
+          <div className="col-12">
             <hr size="30" />
           </div>
         </div>
         <div className="row">
-          <div className="col-sm-6">
+          <div className="col-6">
             <h3 className="text-center"> Favorites </h3>
             <Card />
           </div>
-          <div className="col-sm-6">
+          <div className="col-6">
             <h3 className="text-center"> Bookmarks </h3>
             <Card />
           </div>
