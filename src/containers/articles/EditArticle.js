@@ -98,6 +98,15 @@ class EditArticle extends Component {
     const content = convertToRaw(this.state.body.getCurrentContent());
     const contentTextLength = content.blocks[0].text.length;
     const minimumLength = 10;
+    const editorStyle = {
+      padding: '5px',
+      fontSize: '18px',
+      minHeight: '250px',
+      width: '100%',
+      borderTop: 'solid 0.5px rgba(0,0,0,0.1)',
+      borderBottom: 'solid 0.5px rgba(0,0,0,0.1)',
+    };
+
     if (contentTextLength < minimumLength) {
       bodyMessage = `A minimum of ${minimumLength - contentTextLength} characters is required to publish`;
     }
@@ -133,8 +142,8 @@ class EditArticle extends Component {
       <div className="container">
         <div className="row float-right mt-1">
           <div>
-            <button type="button" className="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-              <i className="fas fa-trash" />
+            <button type="button" className="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">
+              <i className="fas fa-trash" /> Delete
             </button>
             <div className="modal fade" id="deleteModal" tabIndex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
               <div className="modal-dialog" role="document">
@@ -181,12 +190,13 @@ class EditArticle extends Component {
             wrapperClassName="demo-wrapper"
             editorClassName="demo-editor"
             onEditorStateChange={this.onEditorStateChange}
+            editorStyle={editorStyle}
             hashtag={{
               separator: ' ',
               trigger: '#',
             }}
             toolbar={{
-              options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'link', 'embedded', 'emoji', 'image', 'remove', 'colorPicker', 'history'],
+              options: ['inline', 'blockType', 'list', 'textAlign', 'link', 'embedded', 'image', 'remove', 'colorPicker', 'history'],
               inline: {
                 options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace', 'superscript', 'subscript'],
               },
@@ -219,7 +229,7 @@ class EditArticle extends Component {
             )
           }
           <div className="form-group text-center">
-            <button type="submit" className="btn btn-secondary mt-3">Update Article</button>
+            <button type="submit" className="btn btn-primary mt-3">Update Article</button>
           </div>
         </form>
       </div>

@@ -1,3 +1,6 @@
+h1, h2, h3, h4 {
+    font-family: 'Playfair display';
+}
 // ARTICLES
 .article-list {
     a {
@@ -15,6 +18,8 @@
 }
 
 .profile-img {
+    width:4rem;
+    height:4rem;
     border-radius: 50%;
 }
 

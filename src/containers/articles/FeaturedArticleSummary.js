@@ -20,7 +20,7 @@ const FeaturedArticleSummary = ({ article }) => {
   return (
     <div className="jumbotron-fluid main-jumbotron p-3 p-md-5" style={divStyle}>
       <div className="col-md-12 px-0">
-        <h1 className="display-4 font-italic">{article.title}</h1>
+        <h1 className="display-4 text-bold">{article.title}</h1>
         <p className="lead my-3">{smartTruncate(article.description, 100)}</p>
         <p className="lead mb-0">
           <Link to={`/articles/${article.slug}`} className="text-white font-white-bold">Continue reading...</Link>

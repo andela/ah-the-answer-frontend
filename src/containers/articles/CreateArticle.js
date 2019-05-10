@@ -125,6 +125,8 @@ class CreateArticle extends Component {
       fontSize: '18px',
       minHeight: '250px',
       width: '100%',
+      borderTop: 'solid 0.5px rgba(0,0,0,0.1)',
+      borderBottom: 'solid 0.5px rgba(0,0,0,0.1)',
     };
 
     return (
@@ -162,7 +164,7 @@ class CreateArticle extends Component {
               trigger: '#',
             }}
             toolbar={{
-              options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'link', 'embedded', 'emoji', 'image', 'remove', 'colorPicker', 'history'],
+              options: ['inline', 'blockType', 'list', 'textAlign', 'link', 'embedded', 'image', 'remove', 'colorPicker', 'history'],
               inline: {
                 options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace', 'superscript', 'subscript'],
               },
@@ -186,7 +188,7 @@ class CreateArticle extends Component {
             <span className="badge badge-pill badge-dark">{bodyMessage}</span>
           )}
           <div className="form-group text-center">
-            <button type="submit" className="btn btn-secondary mt-3">Publish Article</button>
+            <button type="submit" className="btn btn-primary mt-3">Publish Article</button>
           </div>
         </form>
       </div>

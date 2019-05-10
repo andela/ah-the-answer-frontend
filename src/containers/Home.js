@@ -18,12 +18,12 @@ class Home extends Component {
         <FeaturedArticleList articles={articles} />
         <div className="container-fluid d-flex px-5 py-3">
           <div className="col-lg-8 col-md-8 col-sm-12 p-0">
-            <h2 className="text-center mb-4">Featured</h2>
+            <h2 className="text-center mb-4 sticky-top bg-white p-2">Featured</h2>
             <ArticleList articles={articles} />
           </div>
           <div className="col-lg-3 offset-1 col-md-4 d-none d-md-block">
-            <h2 className="text-center mb-4">New Articles</h2>
-            <ul className="list-group list-group-flush">
+            <h2 className="text-center mb-4 sticky-top">New Articles</h2>
+            <ul className="list-group list-group-flush sticky-top">
               <NewArticleList articles={articles} />
             </ul>
           </div>

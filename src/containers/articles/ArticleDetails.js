@@ -28,12 +28,12 @@ class ArticleDetails extends Component {
             <div className="col-lg-4 mt-4">
               <div className="row">
                 <div className="col-lg-3">
-                  <Link to="/profile" className="btn btn-info profile-img">RW</Link>
+                  <Link to="/profile" className="btn btn-info profile-img d-flex align-items-center justify-content-center">RW</Link>
                 </div>
                 <div className="col-lg-9">
                   <div className="text-muted">By {author.username}</div>
                   <div className="text-muted">{moment(article.date_created).calendar()}</div>
-                  <div className="text-info mb-0">{article.read_time} read</div>
+                  <div className="text-primary mb-0">{article.read_time} read</div>
                 </div>
               </div>
             </div>
