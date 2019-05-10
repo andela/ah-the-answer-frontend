@@ -11,7 +11,7 @@ const config = {
 
 export const createArticle = (article) => {
   return (dispatch) => {
-    axios.post(configUrls.root,
+    return axios.post(configUrls.root,
       { article },
       config)
       .then((response) => {
@@ -25,8 +25,7 @@ export const createArticle = (article) => {
 
 export const getArticles = () => {
   return (dispatch) => {
-    dispatch({ type: 'GET_ARTICLES' });
-    axios.get(`${configUrls.root}?limit=15`)
+    return axios.get(`${configUrls.root}?limit=15`)
       .then((response) => {
         if (response) {
           dispatch({
@@ -45,9 +44,8 @@ export const getArticles = () => {
 
 export const getArticle = (slug) => {
   return (dispatch) => {
-    dispatch({ type: 'GET_ARTICLE' });
-    const articleUrl = `http://127.0.0.1:8000/api/articles/${slug}/`;
-    axios.get(articleUrl)
+    const articleUrl = `${configUrls.root}${slug}/`;
+    return axios.get(articleUrl)
       .then((response) => {
         if (response) {
           dispatch({
@@ -65,9 +63,8 @@ export const getArticle = (slug) => {
 
 export const deleteArticle = (slug) => {
   return (dispatch) => {
-    dispatch({ type: 'DELETE_ARTICLE' });
-    const articleUrl = `http://127.0.0.1:8000/api/articles/${slug}/`;
-    axios.delete(articleUrl, config)
+    const articleUrl = `${configUrls.root}${slug}/`;
+    return axios.delete(articleUrl, config)
       .then((response) => {
         if (response) {
           dispatch({
@@ -85,9 +82,8 @@ export const deleteArticle = (slug) => {
 
 export const updateArticle = (slug, article) => {
   return (dispatch) => {
-    dispatch({ type: 'UPDATE_ARTICLE' });
-    const articleUrl = `http://127.0.0.1:8000/api/articles/${slug}/`;
-    axios.put(articleUrl,
+    const articleUrl = `${configUrls.root}${slug}/`;
+    return axios.put(articleUrl,
       { article },
       config)
       .then((response) => {

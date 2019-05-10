@@ -21,14 +21,10 @@ const articleReducer = (state = initState, action) => {
         titleError: action.error.errors.title,
         descriptionError: action.error.errors.description,
       };
-    case 'GET_ARTICLES':
-      return state;
     case 'GET_ARTICLES_SUCCESS':
       return action.payload;
     case 'GET_ARTICLES_ERROR':
       return action.error;
-    case 'GET_ARTICLE':
-      return state;
     case 'GET_ARTICLE_SUCCESSFUL':
       return {
         ...state,
@@ -37,16 +33,12 @@ const articleReducer = (state = initState, action) => {
       };
     case 'GET_ARTICLE_FAILED':
       return action.error;
-    case 'DELETE_ARTICLE':
-      return state;
     case 'DELETE_ARTICLE_SUCCESSFUL':
       return {
         deleteMessage: action.payload,
       };
     case 'DELETE_ARTICLE_FAILED':
       return action.error;
-    case 'UPDATE_ARTICLE':
-      return state;
     case 'UPDATE_ARTICLE_SUCCESSFUL':
       return {
         editMessage: action.response.data,
