@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { withRouter } from 'react-router-dom';
 const setAxios = require('axios');
 
 const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.1gC7fqNwCSTYxCQAHvfNmfyb2GhenC6jG0nKLJ-izCM'
@@ -24,6 +24,7 @@ class ProfileUpdateForm extends Component {
     event.preventDefault();
     const { name, bio } = this.state;
     this.updateProfile(name, bio);
+    this.props.history.push('');
   }
 
   handleNameChange = (e) => {
@@ -39,6 +40,7 @@ class ProfileUpdateForm extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <form onSubmit={this.handleOnSubmit}>
         <div className="form-group">
@@ -55,4 +57,4 @@ class ProfileUpdateForm extends Component {
   }
 }
 
-export default ProfileUpdateForm;
+export default withRouter(ProfileUpdateForm);
