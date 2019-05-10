@@ -28,10 +28,16 @@ const setUp = () => {
 describe('Request password reset page rendered ', () => {
   const { wrapper } = setUp();
   // eslint-disable-next-line no-undef
-  it(' render reset password r form ', () => {
+  it(' render reset password  form ', () => {
     const ResetForm = wrapper.find('.form-wrapper');
     expect(ResetForm.exists())
       .toBe(true);
+  });
+
+  // eslint-disable-next-line no-undef
+  it('should contain all the input fields with an ID', () => {
+    expect(wrapper.find('#password').props().id).toBe('password');
+    expect(wrapper.find('#confirmPassword').props().id).toBe('confirmPassword');
   });
 
   // eslint-disable-next-line no-undef

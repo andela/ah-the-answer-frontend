@@ -2,9 +2,9 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import expect from 'expect';
-import { mount } from '../../enzyme';
+import { mount, shallow } from '../../enzyme';
 
-
+import { RequestPasswordResetForm } from '../../../containers/PasswordReset/resetPasswordForm';
 import { InitiatePasswordReset } from '../../../containers/PasswordReset/InitiatePasswordReset';
 
 const setUp = () => {
