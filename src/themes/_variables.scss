@@ -277,7 +277,7 @@ $font-family-custom-alt:      "Playfair Display", serif;
 $font-family-base:            $font-family-custom !default;
 // stylelint-enable value-keyword-case
 
-$font-size-base:              0.85rem !default; // Assumes the browser default, typically `16px`
+$font-size-base:              0.9rem !default; // Assumes the browser default, typically `16px`
 $font-size-lg:                $font-size-base * 1.25 !default;
 $font-size-sm:                $font-size-base * .875 !default;
 

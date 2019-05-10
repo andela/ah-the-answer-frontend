@@ -164,9 +164,12 @@ class CreateArticle extends Component {
               trigger: '#',
             }}
             toolbar={{
-              options: ['inline', 'blockType', 'list', 'textAlign', 'link', 'embedded', 'image', 'remove', 'colorPicker', 'history'],
+              options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'link', 'embedded', 'image', 'remove', 'colorPicker', 'history'],
               inline: {
                 options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace', 'superscript', 'subscript'],
+              },
+              fontSize: {
+                options: [8, 9, 10, 11, 12, 14, 16, 18, 24],
               },
               image: {
                 uploadCallback: this.uploadImageCallBack,
