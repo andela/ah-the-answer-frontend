@@ -7,9 +7,11 @@ const NewArticleList = ({ articles }) => {
     <div className="article-list section">
       { articles && articles.slice(1, 5).map((article) => {
         return (
-          <Link to={`/articles/${article.slug}`} key={article.id}>
-            <NewArticleSummary article={article} />
-          </Link>
+          <li className="list-group-item">
+            <Link to={`/articles/${article.slug}`} key={article.id}>
+              <NewArticleSummary article={article} />
+            </Link>
+          </li>
         );
       }) }
     </div>
