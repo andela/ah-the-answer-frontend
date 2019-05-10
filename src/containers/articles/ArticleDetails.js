@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { getArticle } from '../../store/actions/articleActions';
 import Edit from '../../components/Edit';
@@ -16,7 +16,7 @@ class ArticleDetails extends Component {
   render() {
     const { article, author, message } = this.props;
     if (message && message === 'The article requested does not exist') {
-      return <Redirect to="/" />;
+      this.props.history.push('/');
     }
     if (article && article.body) {
       return (
