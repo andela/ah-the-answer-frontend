@@ -14,16 +14,18 @@ class Home extends Component {
   render() {
     const { articles } = this.props;
     return (
-      <div className="home container">
+      <div className="home container-fluid p-0">
         <FeaturedArticleList articles={articles} />
-        <div className="row">
-          <div className="col s12 m6">
-            <p className="text-center">Featured</p>
+        <div className="container-fluid d-flex px-5 py-3">
+          <div className="col-lg-8 col-md-8 col-sm-12 p-0">
+            <h2 className="text-center mb-4">Featured</h2>
             <ArticleList articles={articles} />
           </div>
-          <div className="s12 m5 offset-m1">
-            <p className="text-center">New Articles</p>
-            <NewArticleList articles={articles} />
+          <div className="col-lg-3 offset-1 col-md-4 d-none d-md-block">
+            <h2 className="text-center mb-4">New Articles</h2>
+            <ul className="list-group list-group-flush">
+              <NewArticleList articles={articles} />
+            </ul>
           </div>
         </div>
       </div>
