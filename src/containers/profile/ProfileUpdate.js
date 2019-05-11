@@ -33,6 +33,12 @@ class ProfileUpdate extends Component {
           </div>
           <div className="col-3">
             <img src="https://res.cloudinary.com/apibucket/image/upload/v1554188102/sample.jpg" className="img-fluid" alt="Placholder" />
+            <form>
+              <div className="form-group">
+                <label htmlFor="exampleFormControlFile1">Change Profile Image</label>
+                <input type="file" className="form-control-file" id="updateImage" />
+              </div>
+            </form>
           </div>
         </div>
       </div>
