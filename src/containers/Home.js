@@ -6,7 +6,7 @@ import FeaturedArticleList from './articles/FeaturedArticleList';
 import NewArticleList from './articles/NewArticleList';
 
 
-class Home extends Component {
+export class Home extends Component {
   componentDidMount() {
     this.props.getArticles();
   }
