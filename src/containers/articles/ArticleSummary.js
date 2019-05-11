@@ -9,9 +9,13 @@ const ArticleSummary = ({ article }) => (
     <div className="card-body d-flex flex-column align-items-start">
       <h5 className="card-title text-primary text-bold">{article.title}</h5>
       <p className="card-text text-muted">{smartTruncate(article.description, 100)}</p>
-      <small className="text-muted">By {article.author.username}</small>
       <small className="text-muted">
-        {moment(article.date_created).fromNow()} - {article.read_time} read
+        <span className="mr-1">By</span>
+        {article.author.username}
+      </small>
+      <small className="text-muted">
+        {moment(article.date_created).fromNow()}
+        <span>{` - ${article.read_time} read`}</span>
       </small>
     </div>
   </div>

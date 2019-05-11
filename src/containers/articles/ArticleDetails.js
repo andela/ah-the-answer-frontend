@@ -35,7 +35,7 @@ class ArticleDetails extends Component {
             <div className="col-lg-4 mt-4">
               <div className="row">
                 <div className="col-lg-3">
-                  <Link to="/profile" className="btn btn-info profile-img d-flex align-items-center justify-content-center">{author.username.slice(0, 2)}</Link>
+                  <Link to={`/profile/${author.username}`} className="btn btn-info profile-img d-flex align-items-center justify-content-center">{author.username.slice(0, 2)}</Link>
                 </div>
                 <div className="col-lg-9">
                   <div className="text-muted">

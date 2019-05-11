@@ -6,8 +6,14 @@ const NewArticleSummary = ({ article }) => {
     <div className="flex-md-row mb-1 box-shadow article-summary">
       <div className="d-flex flex-column align-items-left">
         <h5 className="card-title text-primary">{article.title}</h5>
-        <small className="text-muted">By {article.author.username}</small>
-        <small className="text-muted">{moment(article.date_created).fromNow()} - {article.read_time} read</small>
+        <small className="text-muted">
+          <span className="mr-1">By</span>
+          {article.author.username}
+        </small>
+        <small className="text-muted">
+          {moment(article.date_created).fromNow()}
+          <span>{` - ${article.read_time} read`}</span>
+        </small>
       </div>
     </div>
   );
