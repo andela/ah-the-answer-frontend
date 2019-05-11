@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow, mount } from '../../enzyme';
 import SocialFollowing from '../../../containers/profile/components/SocialFollowing';
 import NameTag from '../../../containers/profile/components/NameTag';
+import BiographyText from '../../../containers/profile/components/BiographyText';
+import Card from '../../../containers/profile/components/Card';
 
 describe('Test SocialFollowing component', () => {
   it('renders', () => {
@@ -40,3 +42,33 @@ describe('Test NameTag component', () => {
     expect(text).toEqual('Name: Name Username: Doe');
   });
 });
+
+describe('Test BioraphyText component', () => {
+  it('renders', () => {
+    const wrapper = shallow(<BiographyText />);
+    expect(wrapper.exists()).toBe(true);
+  });
+
+  it('renders a biography with given text', () => {
+    const wrapper = shallow(<BiographyText text="A short summary about me and my interests." />);
+    const text = wrapper.find('p').text();
+    expect(text).toEqual('A short summary about me and my interests.');
+  });
+});
+
+describe('Test default Card component', () => {
+  it('renders', () => {
+    const wrapper = shallow(<Card />);
+    expect(wrapper.exists()).toBe(true);
+  });
+
+  it('renders a card with default information', () => {
+    const wrapper = shallow(<Card />);
+    const cardTitle = wrapper.find('h4').text();
+    const text = wrapper.find('p').text();
+    expect(cardTitle).toEqual('Article Title');
+    expect(text).toEqual('First 15 Words...');
+  });
+});
+
+
