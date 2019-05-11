@@ -35,12 +35,18 @@ class ArticleDetails extends Component {
             <div className="col-lg-4 mt-4">
               <div className="row">
                 <div className="col-lg-3">
-                  <Link to="/profile" className="btn btn-info profile-img d-flex align-items-center justify-content-center">RW</Link>
+                  <Link to="/profile" className="btn btn-info profile-img d-flex align-items-center justify-content-center">{author.username.slice(0, 2)}</Link>
                 </div>
                 <div className="col-lg-9">
-                  <div className="text-muted">By {author.username}</div>
+                  <div className="text-muted">
+                    <span className="mr-1">By</span>
+                    {author.username}
+                  </div>
                   <div className="text-muted">{moment(article.date_created).calendar()}</div>
-                  <div className="text-primary mb-0">{article.read_time} read</div>
+                  <div className="text-primary mb-0">
+                    {article.read_time}
+                    <span className="ml-1">read</span>
+                  </div>
                 </div>
               </div>
             </div>

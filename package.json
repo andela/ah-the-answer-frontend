@@ -10,6 +10,7 @@
     "draftjs-to-html": "^0.8.4",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
+    "file-loader": "^3.0.1",
     "html-react-parser": "^0.7.0",
     "html-to-draftjs": "^1.4.0",
     "immutable": "^4.0.0-rc.12",
@@ -27,7 +28,8 @@
     "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^7.1.0",
-    "smart-truncate": "^1.0.1"
+    "smart-truncate": "^1.0.1",
+    "url-loader": "^1.1.2"
   },
   "jest": {
     "coverageReporters": [
