@@ -4,7 +4,7 @@ import ArticleSummary from './ArticleSummary';
 
 const ArticleList = ({ articles }) => {
   return (
-    <div className="article-list section">
+    <div className="article-list section" data-test="articleList">
       { articles && articles.slice(5).map((article) => {
         return (
           <Link to={`/articles/${article.slug}`} key={article.id}>

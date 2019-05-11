@@ -7,7 +7,7 @@ import { createArticle } from '../../store/actions/articleActions';
 import authStatus from '../../helpers/authStatus';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-class CreateArticle extends Component {
+export class CreateArticle extends Component {
   state = {
     title: '',
     description: '',

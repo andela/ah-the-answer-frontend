@@ -18,7 +18,7 @@ const divStyle = {
 
 const FeaturedArticleSummary = ({ article }) => {
   return (
-    <div className="jumbotron-fluid main-jumbotron p-3 p-md-5" style={divStyle}>
+    <div className="jumbotron-fluid main-jumbotron p-3 p-md-5" style={divStyle} data-test="featuredArticle">
       <div className="col-md-12 px-0">
         <h1 className="display-4 text-bold">{article.title}</h1>
         <p className="lead my-3">{smartTruncate(article.description, 100)}</p>

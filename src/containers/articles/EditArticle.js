@@ -9,7 +9,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import authStatus from '../../helpers/authStatus';
 import { updateArticle, getArticle, deleteArticle } from '../../store/actions/articleActions';
 
-class EditArticle extends Component {
+export class EditArticle extends Component {
   constructor(props) {
     super(props);
     this.state = {
