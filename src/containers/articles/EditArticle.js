@@ -7,6 +7,7 @@ import htmlToDraft from 'html-to-draftjs';
 import PropTypes from 'prop-types';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import authStatus from '../../helpers/authStatus';
+import isOwner from '../../helpers/isOwner';
 import { updateArticle, getArticle, deleteArticle } from '../../store/actions/articleActions';
 
 export class EditArticle extends Component {
@@ -87,6 +88,14 @@ export class EditArticle extends Component {
     if (authStatus() === false) {
       this.props.history.push('/');
     }
+    const author = this.props.article.author;
+    if (author && author.username) {
+      if (isOwner(author.username) === false) {
+        const urlSlug = this.props.match.params.slug;
+        const articleUrl = `/articles/${urlSlug}`;
+        this.props.history.push(articleUrl);
+      }
+    }
 
     const article = this.state;
     const { body } = this.state;
@@ -143,7 +152,8 @@ export class EditArticle extends Component {
         <div className="row float-right mt-1">
           <div>
             <button type="button" className="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">
-              <i className="fas fa-trash" /> Delete
+              <i className="fas fa-trash" />
+              <span className="ml-1">Delete</span>
             </button>
             <div className="modal fade" id="deleteModal" tabIndex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
               <div className="modal-dialog" role="document">

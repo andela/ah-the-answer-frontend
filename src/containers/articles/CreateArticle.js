@@ -16,7 +16,7 @@ export class CreateArticle extends Component {
     tags: [],
     error: '',
     message: {},
-    redirect: false
+    redirect: false,
   };
 
 
