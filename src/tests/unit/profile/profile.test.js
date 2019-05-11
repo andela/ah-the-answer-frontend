@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import * as ProfileAction from '../../../store/actionTypes/profileActionTypes';
 import { shallow, mount } from '../../enzyme';
 import SocialFollowing from '../../../containers/profile/components/SocialFollowing';
 import NameTag from '../../../containers/profile/components/NameTag';
@@ -8,6 +9,16 @@ import Card from '../../../containers/profile/components/Card';
 import ProfileUpdateForm from '../../../containers/profile/components/ProfileUpdateForm';
 import { ProfileUpdate } from '../../../containers/profile/ProfileUpdate';
 import { ProfileView } from '../../../containers/profile/profileContainer';
+import Profile from '../../../store/reducers/profileReducer';
+
+const initialState = {
+  follows: 0,
+  followers: 0,
+  givenName: 'Bob',
+  userName: 'User',
+  bio: 'Default Story',
+  profileImg: '...',
+};
 
 describe('Test SocialFollowing component', () => {
   it('renders', () => {
@@ -129,6 +140,14 @@ describe('Test ProfileView container', () => {
       </BrowserRouter>,
     );
     expect(wrapper.exists()).toBe(true);
+  });
+});
+
+describe('Test "fetchFellows" reducer', () => {
+  it('renders', () => {
+    const action = { type: ProfileAction.FETCH_BIO, userBio: 'Biography Update' };
+    const response = Profile(initialState, action);
+    expect(response.bio).toEqual('Biography Update');
   });
 });
 
