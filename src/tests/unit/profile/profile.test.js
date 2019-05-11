@@ -1,9 +1,12 @@
 import React from 'react';
+//import { BrowserRouter } from 'react-router-dom';
 import { shallow, mount } from '../../enzyme';
 import SocialFollowing from '../../../containers/profile/components/SocialFollowing';
 import NameTag from '../../../containers/profile/components/NameTag';
 import BiographyText from '../../../containers/profile/components/BiographyText';
 import Card from '../../../containers/profile/components/Card';
+import  ProfileUpdateForm from '../../../containers/profile/components/ProfileUpdateForm';
+
 
 describe('Test SocialFollowing component', () => {
   it('renders', () => {
@@ -69,6 +72,25 @@ describe('Test default Card component', () => {
     expect(cardTitle).toEqual('Article Title');
     expect(text).toEqual('First 15 Words...');
   });
+});
+
+describe('Test ProfileUpdateForm component', () => {
+  it('renders', () => {
+    const wrapper = mount(<ProfileUpdateForm />);
+    expect(wrapper.exists()).toBe(true);
+  });
+
+  it('displays props as default field values', () => {
+    const wrapper = mount(<ProfileUpdateForm name="Billy" bio="Short Summary" />);
+    wrapper.setProps({ name: 'Billy' });
+    wrapper.setProps({ bio: 'Short Summary' });
+    const username = wrapper.find('#editName');
+    const bioText = wrapper.find('#editBio');
+    expect(username.props().defaultValue).toEqual('Billy');
+    expect(bioText.props().defaultValue).toEqual('Short Summary');
+  });
+
+  
 });
 
 
