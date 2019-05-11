@@ -1,7 +1,10 @@
+import authUser from './authUser';
+
 const authHeader = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = authUser();
+
   if (user && user.token) {
-    return { 'Authorization': `Bearer ${user.token}` };
+    return { Authorization: `Bearer ${user.token}` };
   }
   return {};
 };

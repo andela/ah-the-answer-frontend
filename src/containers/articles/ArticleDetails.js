@@ -4,6 +4,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
+import isOwner from '../../helpers/isOwner';
 import { getArticle } from '../../store/actions/articleActions';
 import Edit from '../../components/Edit';
 
@@ -22,7 +23,13 @@ class ArticleDetails extends Component {
       return (
         <div className="container article-details">
           <div className="row float-right mt-4">
-            <Edit slug={article.slug} />
+            {
+              isOwner(author.username) ? (
+                <Edit slug={article.slug} />
+              ) : (
+                null
+              )
+            }
           </div>
           <div className="row">
             <div className="col-lg-4 mt-4">
@@ -67,13 +74,11 @@ class ArticleDetails extends Component {
 // Prevents Cannot read property “propertyname” of undefined
 ArticleDetails.propTypes = {
   article: PropTypes.shape({}),
-  author: PropTypes.shape({}),
-  message: PropTypes.shape({}),
+  author: PropTypes.shape(''),
 };
 ArticleDetails.defaultProps = {
   article: {},
   author: {},
-  message: {},
 };
 
 const mapStateToProps = (state) => {
