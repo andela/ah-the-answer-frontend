@@ -5,7 +5,8 @@ import SocialFollowing from '../../../containers/profile/components/SocialFollow
 import NameTag from '../../../containers/profile/components/NameTag';
 import BiographyText from '../../../containers/profile/components/BiographyText';
 import Card from '../../../containers/profile/components/Card';
-import  ProfileUpdateForm from '../../../containers/profile/components/ProfileUpdateForm';
+import ProfileUpdateForm from '../../../containers/profile/components/ProfileUpdateForm';
+import { ProfileUpdate } from '../../../containers/profile/ProfileUpdate';
 
 
 describe('Test SocialFollowing component', () => {
@@ -97,8 +98,19 @@ describe('Test ProfileUpdateForm component', () => {
     expect(username.props().defaultValue).toEqual('Billy');
     expect(bioText.props().defaultValue).toEqual('Short Summary');
   });
-
-  
 });
+
+describe('Test ProfileUpdate container', () => {
+  it('renders', () => {
+    const mockFtn = jest.fn();
+    const wrapper = mount(
+      <BrowserRouter>
+        <ProfileUpdate fetchBio={mockFtn} fetchName={mockFtn} profileprops={{ givenName: 'Bob', bio: 'Default Story' }} />
+      </BrowserRouter>,
+    );
+    expect(wrapper.exists()).toBe(true);
+  });
+});
+
 
 
