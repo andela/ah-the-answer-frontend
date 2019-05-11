@@ -150,8 +150,3 @@ describe('Test "fetchFellows" reducer', () => {
     expect(response.bio).toEqual('Biography Update');
   });
 });
-
-
-
-
-
