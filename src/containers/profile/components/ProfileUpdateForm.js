@@ -16,15 +16,16 @@ class ProfileUpdateForm extends Component {
     this.setState({ name: nextProps.name, bio: nextProps.bio });
   }
 
-  updateProfile = (profileName, bio) => {
-    axios.put(' http://127.0.0.1:8000/api/profile/Kyppy/edit/', { profile: { name: profileName, user_bio: bio } });
+  updateProfile = async (profileName, bio) => {
+    const data = await axios.put(' http://127.0.0.1:8000/api/profile/Kyppy/edit/', { profile: { name: profileName, user_bio: bio } });
+    return data;
   }
 
   handleOnSubmit = (event) => {
     event.preventDefault();
     const { name, bio } = this.state;
-    this.updateProfile(name, bio);
-    this.props.history.push('');
+    this.updateProfile(name, bio).then((data) => { console.log(data); });
+    //this.props.history.push('');
   }
 
   handleNameChange = (e) => {
@@ -40,7 +41,6 @@ class ProfileUpdateForm extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <form onSubmit={this.handleOnSubmit}>
         <div className="form-group">
