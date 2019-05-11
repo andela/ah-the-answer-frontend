@@ -1,5 +1,5 @@
 import React from 'react';
-//import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { shallow, mount } from '../../enzyme';
 import SocialFollowing from '../../../containers/profile/components/SocialFollowing';
 import NameTag from '../../../containers/profile/components/NameTag';
@@ -76,12 +76,20 @@ describe('Test default Card component', () => {
 
 describe('Test ProfileUpdateForm component', () => {
   it('renders', () => {
-    const wrapper = mount(<ProfileUpdateForm />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <ProfileUpdateForm />
+      </BrowserRouter>,
+    );
     expect(wrapper.exists()).toBe(true);
   });
 
   it('displays props as default field values', () => {
-    const wrapper = mount(<ProfileUpdateForm name="Billy" bio="Short Summary" />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <ProfileUpdateForm name="Billy" bio="Short Summary" />
+      </BrowserRouter>,
+    );
     wrapper.setProps({ name: 'Billy' });
     wrapper.setProps({ bio: 'Short Summary' });
     const username = wrapper.find('#editName');
