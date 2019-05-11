@@ -5,15 +5,15 @@ import {
 } from '../../store/actions/profileActions';
 import ProfileUpdateForm from './components/ProfileUpdateForm';
 
-class ProfileUpdate extends Component {
+export class ProfileUpdate extends Component {
   componentDidMount() {
     this.props.fetchName();
     this.props.fetchBio();
   }
 
   render() {
-    const { profileprops: { profile: { givenName } } } = this.props;
-    const { profileprops: { profile: { bio } } } = this.props;
+    const { profileprops: { givenName } } = this.props;
+    const { profileprops: { bio } } = this.props;
     return (
       <div className="container">
         <div className="row">
@@ -48,16 +48,13 @@ class ProfileUpdate extends Component {
 
 const mapStateToProps = state => (
   {
-    profileprops: state,
+    profileprops: state.profile,
   }
 );
 
 const mapDispatchToProps = dispatch => ({
-  fetchFollows: () => dispatch(fetchFollows()),
-  fetchFollowers: () => dispatch(fetchFollowers()),
   fetchBio: () => dispatch(fetchBio()),
   fetchName: () => dispatch(fetchName()),
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileUpdate);
