@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import * as ProfileAction from '../../../store/actionTypes/profileActionTypes';
 import { shallow, mount } from '../../enzyme';
 import SocialFollowing from '../../../containers/profile/components/SocialFollowing';
@@ -10,6 +11,8 @@ import ProfileUpdateForm from '../../../containers/profile/components/ProfileUpd
 import { ProfileUpdate } from '../../../containers/profile/ProfileUpdate';
 import { ProfileView } from '../../../containers/profile/profileContainer';
 import Profile from '../../../store/reducers/profileReducer';
+import ViewProfile from '../../../containers/profile/profileView';
+import store from '../../../store/store';
 
 const initialState = {
   follows: 0,
@@ -148,5 +151,16 @@ describe('Test "fetchFellows" reducer', () => {
     const action = { type: ProfileAction.FETCH_BIO, userBio: 'Biography Update' };
     const response = Profile(initialState, action);
     expect(response.bio).toEqual('Biography Update');
+  });
+});
+
+describe('Test viewProfile', () => {
+  it('renders', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <ViewProfile />
+      </Provider>,
+    );
+    expect(wrapper.exists()).toBe(true);
   });
 });
