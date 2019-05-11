@@ -7,7 +7,7 @@ import BiographyText from '../../../containers/profile/components/BiographyText'
 import Card from '../../../containers/profile/components/Card';
 import ProfileUpdateForm from '../../../containers/profile/components/ProfileUpdateForm';
 import { ProfileUpdate } from '../../../containers/profile/ProfileUpdate';
-
+import { ProfileView } from '../../../containers/profile/profileContainer';
 
 describe('Test SocialFollowing component', () => {
   it('renders', () => {
@@ -111,6 +111,28 @@ describe('Test ProfileUpdate container', () => {
     expect(wrapper.exists()).toBe(true);
   });
 });
+
+describe('Test ProfileView container', () => {
+  it('renders', () => {
+    const mockFtn = jest.fn();
+    const wrapper = mount(
+      <BrowserRouter>
+        <ProfileView
+          fetchBio={mockFtn}
+          fetchName={mockFtn}
+          fetchFollows={mockFtn}
+          fetchFollowers={mockFtn}
+          profileprops={{
+            givenName: 'Bob', userName: 'User', bio: 'Default Story', follows: 0, followers: 0, profileImg: '...',
+          }}
+        />
+      </BrowserRouter>,
+    );
+    expect(wrapper.exists()).toBe(true);
+  });
+});
+
+
 
 
 
