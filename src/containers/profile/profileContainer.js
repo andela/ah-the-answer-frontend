@@ -19,11 +19,11 @@ class ProfileView extends Component {
   }
 
   render() {
-    const { profileprops: { profile: { follows } } } = this.props;
-    const { profileprops: { profile: { followers } } } = this.props;
-    const { profileprops: { profile: { bio } } } = this.props;
-    const { profileprops: { profile: { userName } } } = this.props;
-    const { profileprops: { profile: { givenName } } } = this.props;
+    const { profileprops: { follows } } = this.props;
+    const { profileprops: { followers } } = this.props;
+    const { profileprops: { bio } } = this.props;
+    const { profileprops: { userName } } = this.props;
+    const { profileprops: { givenName } } = this.props;
     return (
       <div className="container">
         <div className="row">
@@ -85,7 +85,7 @@ class ProfileView extends Component {
 
 const mapStateToProps = state => (
   {
-    profileprops: state,
+    profileprops: state.profile,
   }
 );
 
