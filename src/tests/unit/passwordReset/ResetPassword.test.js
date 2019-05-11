@@ -39,11 +39,4 @@ describe('Request password reset page rendered ', () => {
     expect(wrapper.find('#password').props().id).toBe('password');
     expect(wrapper.find('#confirmPassword').props().id).toBe('confirmPassword');
   });
-
-  // eslint-disable-next-line no-undef
-  it(' test handle onsubmit event', () => {
-    wrapper.find('form').simulate('submit', {
-      preventDefault: () => {},
-    });
-  });
 });

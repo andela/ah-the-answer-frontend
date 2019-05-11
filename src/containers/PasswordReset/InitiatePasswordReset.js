@@ -31,6 +31,12 @@ export class InitiatePasswordReset extends Component {
           {email: e.target.value}
       )
       
+      if(document.getElementsByClassName('is-invalid').length !== 0){
+         const ellement = document.getElementById('email')
+         ellement.classList.remove('is-invalid')
+    
+      }
+      
   }
   handleSubmit = (e) =>{
       e.preventDefault() 

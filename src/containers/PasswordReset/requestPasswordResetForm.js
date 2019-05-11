@@ -19,9 +19,7 @@ const RequestPasswordResetForm = ({ ...props }) => {
 
             <p className="text-center mb-4"> Please enter the Email you signed up with. A reset link will be sent to this email</p>
             <label htmlFor="usernameID" className="required"><h6> Signup Email</h6></label>
-            {
-                  (message && message.match(/sent/) === null) ? document.getElementById('email').classList.add('is-invalid') : null
-              }
+
             <input type="email" value={email} className="form-control" id="email" aria-describedby="usernameHelp" onChange={handleChange} required />
             <div className="invalid-feedback">
 

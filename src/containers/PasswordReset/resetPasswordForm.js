@@ -5,12 +5,13 @@ import React from 'react';
 
 const ResetPasswordForm = ({ ...props }) => {
   const {
-    message,
     handleChange,
     handleSubmit,
   } = props;
 
+  // handleClick = () => {
 
+  // }
   return (
     <div className="container d-flex align-items-center justify-content-center">
       <div className="col-lg-5">
@@ -22,12 +23,8 @@ const ResetPasswordForm = ({ ...props }) => {
           <p className="text-center mb-4 text-muted">Please provide a new password</p>
           <div className="form-group">
             <label htmlFor="passwordID" className="required">Password</label>
-            {
-               (message && message.match(/Please ensure/)) ? document.getElementById('password').classList.add('is-invalid') : null
-              }
             <input type="password" className="form-control" id="password" name="password" required onChange={handleChange} />
             <div className="invalid-feedback">
-
               <p>
                 Please ensure your password is at least 8
                 characters long and contains at least one letter and one numeral

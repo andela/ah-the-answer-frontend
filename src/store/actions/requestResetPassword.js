@@ -22,9 +22,13 @@ export const requestPasswordReset = ({ email }) => (dispatch) => {
       if (res.data.message.match(/sent/)) {
         window.location.replace('/passwordresetsuccess');
       }
+      if (res.data.message.match(/24hours/)) {
+        document.getElementById('email').classList.add('is-invalid');
+      }
     })
     .catch((e) => {
       dispatch(requestResetPasswordSuccess(e.response.data.detail));
+      document.getElementById('email').classList.add('is-invalid');
     });
 };
 

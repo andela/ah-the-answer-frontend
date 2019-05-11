@@ -36,13 +36,16 @@ export class ResetPassword extends Component {
 
     handleChange = (e) => {
         this.setState(
-            { [e.target.name]: e.target.value})                          
+            { [e.target.name]: e.target.value})
+            document.getElementById('confirmPassword').classList.remove('is-invalid')
+            document.getElementById('password').classList.remove('is-invalid')                        
         
     }
     
     handleSubmit = (e, func) => {
         e.preventDefault();
-        if (this.state.password ===  this.state.confirmPassword){
+
+        if (this.state.password ===  this.state.confirmPassword && this.state.password.match(/^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,}$/)){
             const password_data = {
                 password: this.state.password,
                 confirmPassword: this.state.confirmPassword,
@@ -51,8 +54,10 @@ export class ResetPassword extends Component {
                 error: this.state.error
             };
             this.props.resetPassword(password_data);
-        }else {
+        }else if(this.state.password !==  this.state.confirmPassword){
             document.getElementById('confirmPassword').classList.add('is-invalid')
+             }else{
+                document.getElementById('password').classList.add('is-invalid')
              }
         
     };
@@ -89,9 +94,6 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    {resetPassword})
-    (ResetPassword)
-
+    {resetPassword})(ResetPassword)
 
 export const _ResetPassword = ResetPassword
-
