@@ -10,7 +10,7 @@ import BiographyText from './components/BiographyText';
 import NameTag from './components/NameTag';
 import SocialFollowing from './components/SocialFollowing';
 
-class ProfileView extends Component {
+export class ProfileView extends Component {
   componentDidMount() {
     this.props.fetchName();
     this.props.fetchBio();
