@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 
-
 export default class SignUp extends Component {
   state = {
     username: '',

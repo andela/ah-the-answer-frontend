@@ -6,9 +6,8 @@ import { shallow } from '../enzyme';
 import Signup from '../../containers/signup/Signup';
 
 describe('Signup', () => {
-  const wrapper = shallow(<Signup />);
-
   it('should highlight fields with errors', () => {
+    const wrapper = shallow(<Signup />);
     const password = wrapper.find('input#passwordID');
     const confirmPassword = wrapper.find('input#confirmpasswordID');
 
@@ -82,6 +81,39 @@ describe('Signup', () => {
       expect(username).toMatch(/is-invalid/);
       expect(email).toMatch(/is-invalid/);
       expect(password).toMatch(/is-invalid/);
+    });
+  });
+  describe('should render errors from API', () => {
+    const wrapper = shallow(<Signup />);
+    const spy = jest.spyOn(Signup.prototype, 'handleSubmit');
+    const mockSuccessResponse = {
+      user: {
+        email: 'tester@mail.com',
+        username: 'tester',
+      },
+    };
+
+    beforeEach(() => {
+      const mock = new MockAdapter(Axios);
+      mock
+        .onPost('https://ah-the-answer-backend-staging.herokuapp.com/api/users/')
+        .reply(200, mockSuccessResponse);
+
+      wrapper.find('form').simulate('submit', {
+        preventDefault: () => {},
+        target: [{ value: '' }],
+      });
+    });
+
+    it('should call handleSubmit', () => {
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should update the state with a false error state', () => {
+      const { state } = wrapper.instance();
+      expect(state.errors.username.error).toBe(false);
+      expect(state.errors.email.error).toBe(false);
+      expect(state.errors.password.error).toBe(false);
     });
   });
 });
