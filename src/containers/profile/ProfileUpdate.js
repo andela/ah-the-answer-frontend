@@ -32,7 +32,7 @@ export class ProfileUpdate extends Component {
               bio={bio}
               updateMessage={updateMessage}
               updateProfile={this.props.updateProfile}
-              resetUpdate={this.props.resetProfileUpdate}
+              resetProfileUpdate={this.props.resetProfileUpdate}
             />
           </div>
           <div className="col-3">
