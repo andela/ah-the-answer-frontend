@@ -112,6 +112,25 @@ describe('Test ProfileUpdateForm component', () => {
     expect(username.props().defaultValue).toEqual('Billy');
     expect(bioText.props().defaultValue).toEqual('Short Summary');
   });
+
+  it('Should capture username and bio correctly onChange', () => {
+    const wrapper = mount(
+      <BrowserRouter>
+        <ProfileUpdateForm name="Billy" bio="Short Summary" />
+      </BrowserRouter>,
+    );
+    wrapper.setProps({ name: 'Billy' });
+    wrapper.setProps({ bio: 'Short Summary' });
+    const username = wrapper.find('#editName');
+    const bioText = wrapper.find('#editBio');
+    username.instance().Value = 'Sherlock';
+    username.simulate('change');
+    bioText.instance().Value = 'Long Summary';
+    bioText.simulate('change');
+    expect(username.instance().Value).toEqual('Sherlock');
+    expect(bioText.instance().Value).toEqual('Long Summary');
+  });
+  
 });
 
 describe('Test ProfileUpdate container', () => {
