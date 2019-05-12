@@ -67,21 +67,6 @@ export const fetchName = () => (dispatch) => {
     });
 };
 
-export const fetchAvatar = () => (dispatch) => {
-  axios.get(' http://127.0.0.1:8000/api/profiles/Kyppy/')
-    .then((response) => {
-      // handle success
-      dispatch({
-        type: ProfileAction.FETCH_AVATAR,
-        profilePicture: response.data.profile.avatar_url,
-      });
-    })
-    .catch((error) => {
-      // handle error
-      console.log('Error fecthing and parsing data', error);
-    });
-};
-
 export const updateProfile = (name, bio) => (dispatch) => {
   axios.put('http://127.0.0.1:8000/api/profile/Kyppy/edit/', { profile: { name: name, user_bio: bio } })
     .then((response) => {
