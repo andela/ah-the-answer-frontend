@@ -15,5 +15,5 @@ describe('Google component', () => {
     const wrapper = mount(<Login />);
     const login = wrapper.find(GoogleLogin);
     expect(login.exists()).toEqual(true);
-  })
+  });
 });

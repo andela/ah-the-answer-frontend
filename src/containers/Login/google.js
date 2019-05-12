@@ -18,7 +18,7 @@ class GoogleLogin extends Component {
       requestvisibleactions: 'http://schema.org/AddAction',
       scope: 'https://www.googleapis.com/auth/plus.login email',
     });
-  }
+  };
 
   googleSignInCallback = (e) => {
     if (e.status.signed_in) {
@@ -34,7 +34,7 @@ class GoogleLogin extends Component {
       // eslint-disable-next-line no-console
       console.log('Oops... Error service might be unavailable');
     }
-  }
+  };
 
   getUserDetails = (idToken) => {
     axios.post(glogin, {
@@ -48,7 +48,7 @@ class GoogleLogin extends Component {
           }
         },
       );
-  }
+  };
 
   render() {
     return (

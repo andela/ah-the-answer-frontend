@@ -52,11 +52,11 @@ export default class FacebookLogin extends Component {
           console.log(error);
         },
       );
-  }
+  };
 
   render() {
     return (
-      <button type="button" onClick={this.facebookLogin} className="btn btn-primary button-facebook ml-2 col">
+      <button id="fb" type="button" onClick={this.facebookLogin} className="btn btn-primary button-facebook ml-2 col">
         <img src={facebookIcon} alt="facebook" />
       </button>
     );
