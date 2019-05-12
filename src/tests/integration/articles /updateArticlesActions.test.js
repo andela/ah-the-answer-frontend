@@ -24,27 +24,4 @@ describe('Test the updating of an article action', () => {
       expect(store.getActions()).toEqual(expectedAction);
     });
   });
-//   it('tests update error message', async () => {
-//     const testStore = configureMockStore([thunk]);
-//     let store = testStore({});
-//     mockAxios.put.mockImplementationOnce(() => 
-//       Promise.reject({
-//         error: {
-//           response: {
-//             data: "error while updating"
-//           },
-//         }, 
-//       })
-//     );
-//     try {
-//       await store.dispatch(updateArticle());
-//     } catch {
-//       const actions = store.getActions();
-//       console.log(actions)
-//     //   expect.assertions(3);
-//       expect(actions[0].type).toEqual("UPDATE_ARTICLE_SUCCESSFUL");
-//       expect(actions[1].type).toEqual("UPDATE_ARTICLE_FAILED");
-//       expect(actions[1].payload.error).toEqual("error while updating");
-//     }
-//   });
 });

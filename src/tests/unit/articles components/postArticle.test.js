@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import { CreateArticle } from '../../../containers/articles/CreateArticle';
 
-describe('components', () => {
+describe('Create Article component', () => {
   it('should render self and child components', () => {
     const testStore = configureMockStore([thunk]);
     let store = testStore({});
