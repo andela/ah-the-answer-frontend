@@ -90,10 +90,11 @@ describe('Test default Card component', () => {
 });
 
 describe('Test ProfileUpdateForm component', () => {
+  const mockFtn = jest.fn();
   it('renders', () => {
     const wrapper = mount(
       <BrowserRouter>
-        <ProfileUpdateForm />
+        <ProfileUpdateForm updateMessage={false} resetProfileUpdate={mockFtn} />
       </BrowserRouter>,
     );
     expect(wrapper.exists()).toBe(true);
@@ -102,7 +103,7 @@ describe('Test ProfileUpdateForm component', () => {
   it('displays props as default field values', () => {
     const wrapper = mount(
       <BrowserRouter>
-        <ProfileUpdateForm name="Billy" bio="Short Summary" />
+        <ProfileUpdateForm name="Billy" bio="Short Summary" updateMessage={false} resetProfileUpdate={mockFtn} />
       </BrowserRouter>,
     );
     wrapper.setProps({ name: 'Billy' });
@@ -112,33 +113,21 @@ describe('Test ProfileUpdateForm component', () => {
     expect(username.props().defaultValue).toEqual('Billy');
     expect(bioText.props().defaultValue).toEqual('Short Summary');
   });
-
-  it('Should capture username and bio correctly onChange', () => {
-    const wrapper = mount(
-      <BrowserRouter>
-        <ProfileUpdateForm name="Billy" bio="Short Summary" />
-      </BrowserRouter>,
-    );
-    wrapper.setProps({ name: 'Billy' });
-    wrapper.setProps({ bio: 'Short Summary' });
-    const username = wrapper.find('#editName');
-    const bioText = wrapper.find('#editBio');
-    username.instance().Value = 'Sherlock';
-    username.simulate('change');
-    bioText.instance().Value = 'Long Summary';
-    bioText.simulate('change');
-    expect(username.instance().Value).toEqual('Sherlock');
-    expect(bioText.instance().Value).toEqual('Long Summary');
-  });
-  
 });
 
 describe('Test ProfileUpdate container', () => {
   it('renders', () => {
     const mockFtn = jest.fn();
-    const wrapper = mount(
+    const wrapper = shallow(
       <BrowserRouter>
-        <ProfileUpdate fetchBio={mockFtn} fetchName={mockFtn} profileprops={{ givenName: 'Bob', bio: 'Default Story' }} />
+        <ProfileUpdate
+          fetchBio={mockFtn}
+          fetchName={mockFtn}
+          resetProfileUpdate={mockFtn}
+          updateProfile={mockFtn}
+          updateMessage={false}
+          profileprops={{ givenName: 'Bob', bio: 'Default Story' }} 
+        />
       </BrowserRouter>,
     );
     expect(wrapper.exists()).toBe(true);
