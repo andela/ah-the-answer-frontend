@@ -1,11 +1,11 @@
 const initState = {
   articles: [],
-  error: [],
+  error: {},
   titleError: null,
   descriptionError: null,
-  message: '',
-  editMessage: '',
-  deleteMessage: '',
+  message: {},
+  editMessage: {},
+  deleteMessage: {},
 };
 
 const articleReducer = (state = initState, action) => {
@@ -41,14 +41,13 @@ const articleReducer = (state = initState, action) => {
       return action.error;
     case 'UPDATE_ARTICLE_SUCCESSFUL':
       return {
+        article: action.response.data.article,
         editMessage: action.response.data,
       };
     case 'UPDATE_ARTICLE_FAILED':
       return {
         ...state,
         error: action.error,
-        titleError: action.error.errors.title,
-        descriptionError: action.error.errors.description,
       };
     default:
       return state;
