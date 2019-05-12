@@ -3,7 +3,7 @@ import * as ProfileAction from '../actionTypes/profileActionTypes';
 
 const setAxios = require('axios');
 
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.GUe99Eg95Wbx3b07v-kiUI1njRPNCIiZEt9cA1tf5U0';
+const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.1gC7fqNwCSTYxCQAHvfNmfyb2GhenC6jG0nKLJ-izCM';
 setAxios.defaults.headers.common = { Authorization: `Bearer ${token}` };
 
 export const fetchFollows = () => (dispatch) => {
@@ -80,4 +80,26 @@ export const fetchAvatar = () => (dispatch) => {
       // handle error
       console.log('Error fecthing and parsing data', error);
     });
+};
+
+export const updateProfile = (name, bio) => (dispatch) => {
+  axios.put('http://127.0.0.1:8000/api/profile/Kyppy/edit/', { profile: { name: name, user_bio: bio } })
+    .then((response) => {
+      // handle success
+      dispatch({
+        type: ProfileAction.UPDATE_PROFILE,
+        updateMessage: response.data.success,
+      });
+    })
+    .catch((error) => {
+      // handle error
+      console.log('Error fecthing and parsing data', error);
+    });
+};
+
+export const resetProfileUpdate = () => (dispatch) => {
+  dispatch({
+    type: ProfileAction.RESET_UPDATE_MESSAGE,
+    resetUpdateMessage: false,
+  });
 };
