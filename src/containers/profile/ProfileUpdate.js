@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
-  fetchFollows, fetchFollowers, fetchBio, fetchName,
+  fetchBio, fetchName, updateProfile, resetProfileUpdate,
 } from '../../store/actions/profileActions';
 import ProfileUpdateForm from './components/ProfileUpdateForm';
 
@@ -14,6 +14,7 @@ export class ProfileUpdate extends Component {
   render() {
     const { profileprops: { givenName } } = this.props;
     const { profileprops: { bio } } = this.props;
+    const { profileprops: { updateMessage } } = this.props;
     return (
       <div className="container">
         <div className="row">
@@ -29,6 +30,9 @@ export class ProfileUpdate extends Component {
             <ProfileUpdateForm
               name={givenName}
               bio={bio}
+              updateMessage={updateMessage}
+              updateProfile={this.props.updateProfile}
+              resetUpdate={this.props.resetProfileUpdate}
             />
           </div>
           <div className="col-3">
@@ -55,6 +59,8 @@ const mapStateToProps = state => (
 const mapDispatchToProps = dispatch => ({
   fetchBio: () => dispatch(fetchBio()),
   fetchName: () => dispatch(fetchName()),
+  updateProfile: (name, bio) => dispatch(updateProfile(name, bio)),
+  resetProfileUpdate: () => dispatch(resetProfileUpdate()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileUpdate);
