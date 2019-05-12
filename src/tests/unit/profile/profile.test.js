@@ -102,7 +102,7 @@ describe('Test ProfileUpdateForm component', () => {
 
   it('displays props as default field values', () => {
     const wrapper = mount(
-        <ProfileUpdateForm name="Billy" bio="Short Summary" updateMessage={false} resetProfileUpdate={mockFtn} />
+        <ProfileUpdateForm name="Billy" bio="Short Summary" updateMessage={false} resetProfileUpdate={mockFtn} />,
     );
     wrapper.setProps({ name: 'Billy' });
     wrapper.setProps({ bio: 'Short Summary' });
@@ -114,7 +114,7 @@ describe('Test ProfileUpdateForm component', () => {
 
   it('Should capture name and bio correctly onChange ', () => {
     const wrapper = mount(
-        <ProfileUpdateForm name="Billy" bio="Short Summary" updateMessage={false} resetProfileUpdate={mockFtn} />
+      <ProfileUpdateForm name="Billy" bio="Short Summary" updateMessage={false} resetProfileUpdate={mockFtn} />,
     );
     wrapper.setProps({ name: 'Billy' });
     wrapper.setProps({ bio: 'Short Summary' });
@@ -128,7 +128,7 @@ describe('Test ProfileUpdateForm component', () => {
     expect(bioText.instance().value).toEqual('Long Story');
   });
 
-  it('displays props as default field values', () => {
+  it('tests function fire', () => {
     const wrapper = mount(
       <ProfileUpdateForm name="Billy" bio="Short Summary" updateMessage={false} resetProfileUpdate={mockFtn} updateProfile={mockFtn} />,
     );
