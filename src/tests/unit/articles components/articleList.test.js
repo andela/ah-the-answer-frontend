@@ -32,11 +32,6 @@ describe('render article list', () => {
           description: 'description',
           body: 'content',
         },
-        // {
-        //   title: 'test',
-        //   description: 'description',
-        //   body: 'content',
-        // },
       ],
     };
     wrapper = mount(<ArticleList {...props} />);

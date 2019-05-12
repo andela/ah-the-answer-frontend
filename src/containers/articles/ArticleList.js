@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ArticleSummary from './ArticleSummary';
 
 const ArticleList = ({ articles }) => {
-  if (articles.length < 6) {
+  if (articles && articles.length < 6) {
     return (
       <div className="container" data-test="articleListNone">
         <div className="d-flex justify-content-center">

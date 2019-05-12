@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import NewArticleSummary from './NewArticleSummary';
 
 const NewArticleList = ({ articles }) => {
-  if (articles.length < 2) {
+  if (articles && articles.length < 2) {
     return (
       <div className="container" data-test="newArticleListNone">
         <div className="d-flex justify-content-center">
