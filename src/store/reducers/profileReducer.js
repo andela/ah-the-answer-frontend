@@ -7,6 +7,7 @@ const initialState = {
   userName: 'User',
   bio: 'Default Story',
   profileImg: '...',
+  updateMessage: false,
 };
 
 export default function Profile(state = initialState, action) {
@@ -40,6 +41,18 @@ export default function Profile(state = initialState, action) {
       return {
         ...state,
         profileImg: action.profilePicture,
+      };
+
+    case ProfileAction.UPDATE_PROFILE:
+      return {
+        ...state,
+        updateMessage: action.updateMessage,
+      };
+
+    case ProfileAction.RESET_UPDATE_MESSAGE:
+      return {
+        ...state,
+        updateMessage: false,
       };
 
     default:
