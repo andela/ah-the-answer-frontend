@@ -187,7 +187,7 @@ describe('Test "fetchAvatar" reducer', () => {
   });
 });
 
-describe('Test viewProfile', () => {
+describe('Test viewProfile function that routes the profile containers', () => {
   it('renders', () => {
     const wrapper = mount(
       <Provider store={store}>
