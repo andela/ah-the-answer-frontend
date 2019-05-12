@@ -34,11 +34,15 @@ class ProfileUpdateForm extends Component {
     });
   }
 
+  resetUpdate = () => {
+    this.props.resetProfileUpdate();
+    this.props.history.push('');
+  }
+
   render() {
     const { updateMessage } = this.props;
     if (updateMessage !== false) {
-      this.props.resetUpdate();
-      this.props.history.push('');
+      this.resetUpdate();
     }
 
     return (
