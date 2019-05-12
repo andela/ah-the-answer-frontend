@@ -7,7 +7,7 @@ import SocialFollowing from '../../../containers/profile/components/SocialFollow
 import NameTag from '../../../containers/profile/components/NameTag';
 import BiographyText from '../../../containers/profile/components/BiographyText';
 import Card from '../../../containers/profile/components/Card';
-import ProfileUpdateForm from '../../../containers/profile/components/ProfileUpdateForm';
+import { ProfileUpdateForm } from '../../../containers/profile/components/ProfileUpdateForm';
 import { ProfileUpdate } from '../../../containers/profile/ProfileUpdate';
 import { ProfileView } from '../../../containers/profile/profileContainer';
 import Profile from '../../../store/reducers/profileReducer';
@@ -102,9 +102,7 @@ describe('Test ProfileUpdateForm component', () => {
 
   it('displays props as default field values', () => {
     const wrapper = mount(
-      <BrowserRouter>
         <ProfileUpdateForm name="Billy" bio="Short Summary" updateMessage={false} resetProfileUpdate={mockFtn} />
-      </BrowserRouter>,
     );
     wrapper.setProps({ name: 'Billy' });
     wrapper.setProps({ bio: 'Short Summary' });
@@ -112,6 +110,30 @@ describe('Test ProfileUpdateForm component', () => {
     const bioText = wrapper.find('#editBio');
     expect(username.props().defaultValue).toEqual('Billy');
     expect(bioText.props().defaultValue).toEqual('Short Summary');
+  });
+
+  it('Should capture name and bio correctly onChange ', () => {
+    const wrapper = mount(
+        <ProfileUpdateForm name="Billy" bio="Short Summary" updateMessage={false} resetProfileUpdate={mockFtn} />
+    );
+    wrapper.setProps({ name: 'Billy' });
+    wrapper.setProps({ bio: 'Short Summary' });
+    const username = wrapper.find('#editName');
+    const bioText = wrapper.find('#editBio');
+    username.instance().value = 'Batman';
+    username.simulate('change');
+    bioText.instance().value = 'Long Story';
+    bioText.simulate('change');
+    expect(username.instance().value).toEqual('Batman');
+    expect(bioText.instance().value).toEqual('Long Story');
+  });
+
+  it('displays props as default field values', () => {
+    const wrapper = mount(
+      <ProfileUpdateForm name="Billy" bio="Short Summary" updateMessage={false} resetProfileUpdate={mockFtn} updateProfile={mockFtn} />,
+    );
+    const spy = jest.spyOn(wrapper.instance(), 'handleOnSubmit');
+    wrapper.find('form').simulate('submit');
   });
 });
 
