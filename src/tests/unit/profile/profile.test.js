@@ -118,15 +118,14 @@ describe('Test ProfileUpdateForm component', () => {
 describe('Test ProfileUpdate container', () => {
   it('renders', () => {
     const mockFtn = jest.fn();
-    const wrapper = shallow(
+    const wrapper = mount(
       <BrowserRouter>
         <ProfileUpdate
           fetchBio={mockFtn}
           fetchName={mockFtn}
           resetProfileUpdate={mockFtn}
           updateProfile={mockFtn}
-          updateMessage={false}
-          profileprops={{ givenName: 'Bob', bio: 'Default Story' }} 
+          profileprops={{ givenName: 'Bob', bio: 'Default Story', updateMessage: false }}
         />
       </BrowserRouter>,
     );
