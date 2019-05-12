@@ -27,22 +27,12 @@ describe('render article list', () => {
           description: 'description',
           body: 'content',
         },
-        {
-          title: 'test',
-          description: 'description',
-          body: 'content',
-        },
-        // {
-        //   title: 'test',
-        //   description: 'description',
-        //   body: 'content',
-        // },
       ],
     };
     wrapper = mount(<ArticleList {...props} />);
   });
-  it('should render article list', () => {
-    const response = wrapper.find('[data-test="articleListNone"]');
+  it('should render loader', () => {
+    const response = wrapper.find(`[data-test="articleListNone"]`);
     expect(response.length).toBe(1);
   });
 });

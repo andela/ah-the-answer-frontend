@@ -5,7 +5,7 @@ import ArticleSummary from './ArticleSummary';
 const ArticleList = ({ articles }) => {
   if (articles.length < 6) {
     return (
-      <div className="container">
+      <div className="container" data-test="articleListNone">
         <div className="d-flex justify-content-center">
           <div className="spinner-grow text-info" role="status">
             <span className="sr-only">Loading...</span>
