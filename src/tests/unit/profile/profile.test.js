@@ -146,11 +146,44 @@ describe('Test ProfileView container', () => {
   });
 });
 
-describe('Test "fetchFellows" reducer', () => {
+describe('Test "fetchBio" reducer', () => {
   it('renders', () => {
     const action = { type: ProfileAction.FETCH_BIO, userBio: 'Biography Update' };
     const response = Profile(initialState, action);
     expect(response.bio).toEqual('Biography Update');
+  });
+});
+
+describe('Test "fetchFollows" reducer', () => {
+  it('renders', () => {
+    const action = { type: ProfileAction.FETCH_FOLLOWS, followCount: 5 };
+    const response = Profile(initialState, action);
+    expect(response.follows).toEqual(5);
+  });
+});
+
+describe('Test "fetchFollowers" reducer', () => {
+  it('renders', () => {
+    const action = { type: ProfileAction.FETCH_FOLLOWERS, followerCount: 10 };
+    const response = Profile(initialState, action);
+    expect(response.followers).toEqual(10);
+  });
+});
+
+describe('Test "fetchName" reducer', () => {
+  it('renders', () => {
+    const action = { type: ProfileAction.FETCH_NAME, givenName: 'Grace', userName: 'Athena' };
+    const response = Profile(initialState, action);
+    expect(response.givenName).toEqual('Grace');
+    expect(response.userName).toEqual('Athena');
+  });
+});
+
+describe('Test "fetchAvatar" reducer', () => {
+  it('renders', () => {
+    const action = { type: ProfileAction.FETCH_AVATAR, profilePicture: '...' };
+    const response = Profile(initialState, action);
+    expect(response.profileImg).toEqual('...');
   });
 });
 
