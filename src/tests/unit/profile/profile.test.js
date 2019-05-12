@@ -216,6 +216,22 @@ describe('Test "fetchAvatar" reducer', () => {
   });
 });
 
+describe('Test "updateProfile" reducer', () => {
+  it('renders', () => {
+    const action = { type: ProfileAction.UPDATE_PROFILE, updateMessage: 'Message Updated' };
+    const response = Profile(initialState, action);
+    expect(response.updateMessage).toEqual('Message Updated');
+  });
+});
+
+describe('Test "updateProfile" reducer', () => {
+  it('renders', () => {
+    const action = { type: ProfileAction.RESET_UPDATE_MESSAGE, updateMessage: false };
+    const response = Profile(initialState, action);
+    expect(response.updateMessage).toEqual(false);
+  });
+});
+
 describe('Test viewProfile function that routes the profile containers', () => {
   it('renders', () => {
     const wrapper = mount(
