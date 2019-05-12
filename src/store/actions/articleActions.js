@@ -2,7 +2,7 @@ import axios from 'axios';
 import authHeader from '../../helpers/authHeader';
 
 const configUrls = {
-  root: 'http://127.0.0.1:8000/api/articles/',
+  root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
 };
 
 const config = {
