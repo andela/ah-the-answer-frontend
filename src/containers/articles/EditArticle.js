@@ -68,8 +68,9 @@ export class EditArticle extends Component {
     e.preventDefault();
     document.getElementById('title').classList.remove('is-invalid');
     document.getElementById('description').classList.remove('is-invalid');
+    const { body } = this.state;
     // check if body is empty and prevent submit
-    const content = convertToRaw(this.state.body.getCurrentContent());
+    const content = convertToRaw(body.getCurrentContent());
     const contentTextLength = content.blocks[0].text.length;
     if (contentTextLength < 10) {
       document.getElementById('body-text').innerText = 'Start inspiring the world with your words...';
@@ -79,7 +80,7 @@ export class EditArticle extends Component {
     const updatedArticle = {
       title: this.state.title,
       description: this.state.description,
-      body: draftToHtml(convertToRaw(this.state.body.getCurrentContent())),
+      body: draftToHtml(content),
       is_published: this.state.is_published,
     };
     this.props.updateArticle(slug, updatedArticle);
@@ -101,7 +102,7 @@ export class EditArticle extends Component {
     const { errors } = this.props;
     let bodyMessage = '';
 
-    const content = convertToRaw(this.state.body.getCurrentContent());
+    const content = convertToRaw(body.getCurrentContent());
     const contentTextLength = content.blocks[0].text.length;
     const minimumLength = 10;
     const editorStyle = {

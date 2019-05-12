@@ -10,7 +10,7 @@ import Edit from '../../components/Edit';
 
 class ArticleDetails extends Component {
   componentDidMount() {
-    const slug = this.props.match.params.slug;
+    const { slug } = this.props.match.params;
     this.props.getArticle(slug);
   }
 
@@ -80,11 +80,13 @@ class ArticleDetails extends Component {
 // Prevents Cannot read property “propertyname” of undefined
 ArticleDetails.propTypes = {
   article: PropTypes.shape({}),
-  author: PropTypes.shape(''),
+  author: PropTypes.shape({}),
+  slug: PropTypes.shape({}),
 };
 ArticleDetails.defaultProps = {
   article: {},
   author: {},
+  slug: {},
 };
 
 const mapStateToProps = (state) => {

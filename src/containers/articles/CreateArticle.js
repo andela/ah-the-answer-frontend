@@ -47,17 +47,18 @@ export class CreateArticle extends Component {
     this.setState({
       [e.target.id]: e.target.value,
     });
+    document.getElementById('title').classList.remove('is-invalid');
+    document.getElementById('description').classList.remove('is-invalid');
   }
 
   handleSubmit(e) {
     e.preventDefault();
     // check if body,title or description are empty and prevent submit
-    const content = convertToRaw(this.state.body.getCurrentContent());
+    const { body } = this.state;
+    const content = convertToRaw(body.getCurrentContent());
     const contentTextLength = content.blocks[0].text.length;
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
-    document.getElementById('title').classList.remove('is-invalid');
-    document.getElementById('description').classList.remove('is-invalid');
 
     if (title.length === 0) {
       document.getElementById('title').classList.add('is-invalid');
@@ -104,7 +105,7 @@ export class CreateArticle extends Component {
 
     let bodyMessage = '';
 
-    const content = convertToRaw(this.state.body.getCurrentContent());
+    const content = convertToRaw(body.getCurrentContent());
     const contentTextLength = content.blocks[0].text.length;
     const minimumLength = 10;
     if (contentTextLength < minimumLength && contentTextLength > 0) {
