@@ -1,8 +1,6 @@
 const initState = {
   articles: [],
   error: {},
-  titleError: null,
-  descriptionError: null,
   message: {},
   editMessage: {},
   deleteMessage: {},
@@ -18,8 +16,6 @@ const articleReducer = (state = initState, action) => {
       return {
         ...state,
         error: action.error,
-        titleError: action.error.errors.title,
-        descriptionError: action.error.errors.description,
       };
     case 'GET_ARTICLES_SUCCESS':
       return action.payload;

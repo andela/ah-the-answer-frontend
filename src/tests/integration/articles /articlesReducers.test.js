@@ -5,8 +5,6 @@ describe('articles reducer', () => {
     expect(articleReducer(undefined, {})).toEqual({
       articles: [],
       error: {},
-      titleError: null,
-      descriptionError: null,
       message: {},
       editMessage: {},
       deleteMessage: {},

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
+import PropTypes from 'prop-types';
 import { createArticle } from '../../store/actions/articleActions';
 import authStatus from '../../helpers/authStatus';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -14,7 +15,7 @@ export class CreateArticle extends Component {
     body: EditorState.createEmpty(),
     is_published: true,
     tags: [],
-    error: '',
+    error: {},
     message: {},
     redirect: false,
   };
@@ -92,17 +93,15 @@ export class CreateArticle extends Component {
     if (authStatus() === false) {
       this.props.history.push('/');
     }
-    const { body } = this.state;
+    const { body, redirect } = this.state;
     const { message } = this.props;
+
     // Redirect the user to the article after it has been created
-    if (this.state.redirect) {
-      if (message && message.success) {
-        const articleUrl = `/articles/${this.props.message.article.slug}`;
-        this.props.history.push(articleUrl);
-      }
+    if (redirect && message && message.success) {
+      const articleUrl = `/articles/${this.props.message.article.slug}`;
+      this.props.history.push(articleUrl);
     }
 
-    const { titleError, descriptionError } = this.props;
     let bodyMessage = '';
 
     const content = convertToRaw(this.state.body.getCurrentContent());
@@ -114,12 +113,7 @@ export class CreateArticle extends Component {
     if (contentTextLength >= minimumLength) {
       bodyMessage = `${contentTextLength} characters`;
     }
-    if (titleError) {
-      document.getElementById('title').classList.add('is-invalid');
-    }
-    if (descriptionError) {
-      document.getElementById('description').classList.add('is-invalid');
-    }
+
     const editorStyle = {
       padding: '5px',
       fontSize: '18px',
@@ -136,16 +130,12 @@ export class CreateArticle extends Component {
           <div className="form-group">
             <label htmlFor="title">Title</label>
             <input type="text" id="title" autoComplete="off" className="form-control" onChange={this.handleChange} />
-            <div className="invalid-feedback" id="title-text">
-              {titleError}
-            </div>
+            <div className="invalid-feedback" id="title-text" />
           </div>
           <div className="form-group">
             <label htmlFor="description">Description</label>
             <input type="text" maxLength="128" id="description" autoComplete="off" onChange={this.handleChange} className="form-control" />
-            <div className="invalid-feedback" id="description-text">
-              {descriptionError}
-            </div>
+            <div className="invalid-feedback" id="description-text" />
           </div>
           <div className="form-group">
             <label htmlFor="tags">Tags</label>
@@ -199,12 +189,19 @@ export class CreateArticle extends Component {
   }
 }
 
+CreateArticle.propTypes = {
+  errors: PropTypes.shape({}),
+  message: PropTypes.shape({}),
+};
+CreateArticle.defaultProps = {
+  errors: {},
+  message: {},
+};
+
 const mapStateToProps = (state) => {
   return {
     articles: state.articles.articles,
     errors: state.articles.error,
-    titleError: state.articles.titleError,
-    descriptionError: state.articles.descriptionError,
     message: state.articles.message,
   };
 };
