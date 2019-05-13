@@ -5,6 +5,7 @@ import { mount } from '../../enzyme';
 
 // eslint-disable-next-line import/named
 import { ResetPassword, mapStateToProps } from '../../../containers/PasswordReset/resetPassword';
+import ResetPasswordMessage from '../../../containers/PasswordReset/PasswordResetSuccess';
 
 const setUp = () => {
   const props = {
@@ -51,3 +52,16 @@ it('should return an object when mapStateToProps is called', () => {
   expect(mappedState).toEqual(state.resetPassword);
 });
 
+describe(' password reset success page rendered ', () => {
+  const wrapper  = mount(
+    <Router>
+      <ResetPasswordMessage />
+    </Router>,
+  );
+  // eslint-disable-next-line no-undef
+  it(' password reset success page rendered after request ', () => {
+    const ResetForm = wrapper.find('.container');
+    expect(ResetForm.exists())
+      .toBe(true);
+  });
+});
