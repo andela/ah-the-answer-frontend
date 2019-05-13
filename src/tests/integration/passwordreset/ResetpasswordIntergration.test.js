@@ -47,8 +47,6 @@ describe('Test request reset password updates store', () => {
 });
 
 describe('Test request reset password success', () => {
-
-
   // eslint-disable-next-line no-undef
   it('store is updated successfuly on password reset', () => {
     const State = mainStore.getState()

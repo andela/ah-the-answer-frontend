@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import {resetPassword} from '../../store/actions/requestResetPassword'
-import ResetPasswordForm from './resetPasswordForm'
 export class ResetPassword extends Component {
     state = {
         password: '',
@@ -63,19 +62,43 @@ export class ResetPassword extends Component {
     };
   render() {
       
-      
-      const {
-          error, password, confirmPassword, message
-      } = this.state
-    return (
-       <ResetPasswordForm
-        confirmPassword = {confirmPassword}
-        password = {password}
-        message = {message}
-        error={error}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}/>
-    )
+      return (
+        <div className="container d-flex align-items-center justify-content-center">
+          <div className="col-lg-5">
+            <h2 className="text-center mb-4">Password Reset</h2>
+            <form
+              className="form-wrapper p-4 shadow"
+              onSubmit={this.handleSubmit}
+            >
+              <p className="text-center mb-4 text-muted">Please provide a new password</p>
+              <div className="form-group">
+                <label htmlFor="passwordID" className="required">Password</label>
+                <input type="password" className="form-control" id="password" name="password" required onChange={this.handleChange} />
+                <div className="invalid-feedback">
+                  <p>
+                    Please ensure your password is at least 8
+                    characters long and contains at least one letter and one numeral
+                  </p>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="confirmpPassword" className="required">Confirm password</label>
+                <input type="password" className="form-control" id="confirmPassword" name="confirmPassword" required onChange={this.handleChange} />
+                <div className="invalid-feedback">
+                  <p>
+                    Password do not match
+                  </p>
+                </div>
+              </div>
+              <div className="form-group col-6 mx-auto">
+                <button type="submit" className="btn btn-primary btn-block">
+                    Confirm
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      );
   }
 }
 
@@ -84,6 +107,10 @@ ResetPassword.propTypes = {
     error: PropTypes.string,
     resetPassword: PropTypes.func.isRequired
 };
+
+export const mapDispatchToProps = dispatch => ({
+  resetPassword: userData => dispatch(resetPassword(userData)),
+});
 
 export const mapStateToProps = (state) => {
     return {

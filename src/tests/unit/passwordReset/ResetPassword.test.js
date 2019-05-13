@@ -52,8 +52,9 @@ it('should return an object when mapStateToProps is called', () => {
   expect(mappedState).toEqual(state.resetPassword);
 });
 
+// eslint-disable-next-line no-undef
 describe(' password reset success page rendered ', () => {
-  const wrapper  = mount(
+  const wrapper = mount(
     <Router>
       <ResetPasswordMessage />
     </Router>,
