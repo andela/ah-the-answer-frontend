@@ -1,7 +1,6 @@
 /* eslint-disable import/no-named-as-default-member */
 // eslint-disable-next-line import/no-named-as-default
 import React from 'react';
-import './themes/custom.scss';
 import './themes/bootstrap-custom.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import InitiatePasswordReset from './containers/PasswordReset/InitiatePasswordReset';
