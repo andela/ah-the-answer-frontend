@@ -43,7 +43,7 @@ export class ProfileView extends Component {
                 text={bio}
                 textfetchMethod={this.props.fetchBio}
               />
-              <Link to="/user/editprofile">Edit Bio</Link>
+              <Link to="/user/editprofile">Edit Profile</Link>
             </div>
             <div className="row">
               <div className="col-6">
