@@ -4,7 +4,7 @@ import expect from 'expect';
 import { mount } from '../../enzyme';
 
 // eslint-disable-next-line import/named
-import { ResetPassword } from '../../../containers/PasswordReset/resetPassword';
+import { ResetPassword, mapStateToProps } from '../../../containers/PasswordReset/resetPassword';
 
 const setUp = () => {
   const props = {
@@ -40,3 +40,14 @@ describe('Request password reset page rendered ', () => {
     expect(wrapper.find('#confirmPassword').props().id).toBe('confirmPassword');
   });
 });
+
+// eslint-disable-next-line no-undef
+it('should return an object when mapStateToProps is called', () => {
+  const state = {
+    resetPassword: { error: '', message: 'hello' },
+  };
+
+  const mappedState = mapStateToProps(state);
+  expect(mappedState).toEqual(state.resetPassword);
+});
+

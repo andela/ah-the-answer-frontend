@@ -85,7 +85,7 @@ ResetPassword.propTypes = {
     resetPassword: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
     return {
         message: state.resetPassword.message,
         error: state.resetPassword.error
