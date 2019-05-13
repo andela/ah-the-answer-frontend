@@ -36,7 +36,7 @@ export class ProfileUpdateForm extends Component {
 
   resetUpdate = () => {
     this.props.resetProfileUpdate();
-    this.props.history.push('');
+    this.props.history.push('/profile');
   }
 
   render() {
