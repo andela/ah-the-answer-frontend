@@ -24,7 +24,13 @@ yarn-error.log*
 
 # text editor files
 .vs_code/
+.vscode/
 .idea/
 
 # generated report
 report.20190512.171927.40337.001.json
+package-lock.json
+.vscode/
+
+# test snapshots
+__snapshots__/

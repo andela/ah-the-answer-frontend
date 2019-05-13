@@ -8,7 +8,7 @@ const SignedOutLinks = () => (
         <NavLink className="nav-link" to="/">Home</NavLink>
       </li>
       <li className="nav-item">
-        <NavLink className="nav-link" to="/signin">Sign In</NavLink>
+        <NavLink className="nav-link" to="/login">Sign In</NavLink>
       </li>
       <li className="nav-item">
         <NavLink className="nav-link" to="/signup">Sign Up</NavLink>

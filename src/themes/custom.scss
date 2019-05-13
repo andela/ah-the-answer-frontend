@@ -29,16 +29,39 @@ h1, h2, h3, h4 {
 
 // SIGNUP PAGE
 
-label {
-    font-weight: 600;
 
-    &.required {
-        &::after {
-            content: '*';
-            font-size: 1rem;
-            color:var(--danger);
-            margin-left:1px;
-        }
-    }
+// SIGNUP PAGE
+.full-height {
+    min-height: 100vh;
 }
+
+label {
+  font-weight: 600;
+
+  &.required {
+    &::after {
+      content: "*";
+      font-size: 1rem;
+      color: var(--danger);
+      margin-left: 1px;
+    }
+  }
+}
+
 // END OF SIGNUP PAGE
+
+.social-login {
+  margin: auto;
+}
+
+.bg-facebook {
+  background: #3b5998;
+}
+
+.bg-google {
+  background: #db4a39;
+}
+
+.bg-twitter {
+  background: #00acee;
+}
