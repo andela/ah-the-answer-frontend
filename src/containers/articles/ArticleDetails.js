@@ -89,18 +89,14 @@ ArticleDetails.defaultProps = {
   slug: {},
 };
 
-const mapStateToProps = (state) => {
-  return {
-    article: state.articles.article,
-    author: state.articles.author,
-    message: state.articles.message,
-  };
-};
+const mapStateToProps = state => ({
+  article: state.articles.article,
+  author: state.articles.author,
+  message: state.articles.message,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getArticle: slug => dispatch(getArticle(slug)),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  getArticle: slug => dispatch(getArticle(slug)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleDetails);
