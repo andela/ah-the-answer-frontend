@@ -46,8 +46,6 @@ describe(' password reset page rendered ', () => {
   });
 });
 
-
-// // New tests _________________________
 // eslint-disable-next-line no-undef
 const NewsetUp = (props = {}) => {
   const component = mount(
