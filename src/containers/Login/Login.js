@@ -10,7 +10,6 @@ export class Login extends Component {
   state = {
     email: '',
     password: '',
-    loading: false,
   };
 
   handleSubmit = (e) => {
