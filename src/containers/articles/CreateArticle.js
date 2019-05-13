@@ -126,7 +126,7 @@ export class CreateArticle extends Component {
 
     return (
       <div className="container">
-        <form onSubmit={this.handleSubmit} className="white">
+        <form id="articleForm" onSubmit={this.handleSubmit} className="white">
           <h5 className="text-center mt-3">Create Article</h5>
           <div className="form-group">
             <label htmlFor="title">Title</label>
@@ -193,24 +193,21 @@ export class CreateArticle extends Component {
 CreateArticle.propTypes = {
   errors: PropTypes.shape({}),
   message: PropTypes.shape({}),
+  createArticle: PropTypes.func,
 };
 CreateArticle.defaultProps = {
   errors: {},
   message: {},
 };
 
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = state => ({
     articles: state.articles.articles,
     errors: state.articles.error,
     message: state.articles.message,
-  };
-};
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    createArticle: article => dispatch(createArticle(article)),
-  };
-};
+// const mapDispatchToProps = dispatch => ({
+//     createArticle: article => dispatch(createArticle(article)),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateArticle);
+export default connect(mapStateToProps, {createArticle})(CreateArticle);
