@@ -9,22 +9,42 @@
 // Define your variable overrides here.
 
 // SIGNUP PAGE
-.container {
-    height: 100vh;
+.full-height {
+    min-height: 100vh;
 }
-
 
 label {
-    font-weight: 600;
+  font-weight: 600;
 
-    &.required {
-        &::after {
-            content: '*';
-            font-size: 1rem;
-            color:var(--danger);
-            margin-left:1px;
-        }
+  &.required {
+    &::after {
+      content: "*";
+      font-size: 1rem;
+      color: var(--danger);
+      margin-left: 1px;
     }
+  }
 }
+
 // END OF SIGNUP PAGE
 
+.social-login {
+  margin: auto;
+}
+
+hr {
+  background-color: #000;
+  height: 1px;
+}
+
+.bg-facebook {
+  background: #3b5998;
+}
+
+.bg-google {
+  background: #db4a39;
+}
+
+.bg-twitter {
+  background: #00acee;
+}
