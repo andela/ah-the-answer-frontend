@@ -6,7 +6,7 @@ import ProfileUpdate from './ProfileUpdate';
 const ViewProfile = () => (
   <BrowserRouter>
     <div className="ViewProfile">
-      <Route exact path="" component={profileContainer} />
+      <Route exact path="/profile" component={profileContainer} />
       <Route path="/user/editprofile" component={ProfileUpdate} />
     </div>
   </BrowserRouter>
