@@ -27,3 +27,7 @@ yarn-error.log*
 .vscode/
 .idea/
 package-lock.json
+.vscode/
+
+# test snapshots
+__snapshots__/

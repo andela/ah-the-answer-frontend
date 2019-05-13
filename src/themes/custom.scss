@@ -5,6 +5,10 @@
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 // SIGNUP PAGE
+.full-height {
+    min-height: 100vh;
+}
+
 label {
   font-weight: 600;
 
