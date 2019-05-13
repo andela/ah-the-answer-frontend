@@ -12,7 +12,7 @@ const NameTag = ({firstName, secondName}) => (
       </h5>
     </div>
     <div className="ml-auto">
-      <a className="btn btn-outline-primary" href="/user/editprofile">Edit Profile</a>
+      <a className="btn btn-outline-primary" href="/editprofile">Edit Profile</a>
     </div>
   </div>
 );
