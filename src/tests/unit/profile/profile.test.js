@@ -50,14 +50,14 @@ describe('Test NameTag component', () => {
 
   it('renders a given first name', () => {
     const wrapper = shallow(<NameTag firstName="John" />);
-    const text = wrapper.find('h5').text();
-    expect(text).toEqual('Name: John Username: Username');
+    const text = wrapper.find('h3').text();
+    expect(text).toEqual('John');
   });
 
   it('renders a given second name', () => {
     const wrapper = shallow(<NameTag secondName="Doe" />);
     const text = wrapper.find('h5').text();
-    expect(text).toEqual('Name: Name Username: Doe');
+    expect(text).toEqual('@Doe');
   });
 });
 
