@@ -10,6 +10,7 @@ export class Login extends Component {
   state = {
     email: '',
     password: '',
+    loading: false,
   };
 
   handleSubmit = (e) => {
@@ -83,12 +84,17 @@ export class Login extends Component {
               </label>
               <input
                 type="password"
-                className="form-control"
+                className="form-control mb-1"
                 id="passwordID"
                 required
                 onChange={this.handleChange}
                 data-set="passwordTest"
               />
+              <small>
+                Forgot Password?
+                {' '}
+                <Link to="/passwordreset"> Reset Password</Link>
+              </small>
               <div className="invalid-feedback">{authError}</div>
             </div>
             <div className="form-group col-6 mx-auto">
@@ -98,13 +104,13 @@ export class Login extends Component {
                 id="signInButton"
                 data-set="buttonTest"
               >
-                Sign In
+                <span>Sign In</span>
               </button>
             </div>
           </form>
           <p className="text-center mt-4">
-            Forgot Password?
-            <Link to="/passwordreset"> Reset Password</Link>
+            Don't have an account?
+            <Link to="/signup"> Sign Up</Link>
           </p>
         </div>
       </div>
