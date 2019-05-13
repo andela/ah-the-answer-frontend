@@ -277,7 +277,7 @@ $font-family-custom-alt:      "Playfair Display", serif;
 $font-family-base:            $font-family-custom !default;
 // stylelint-enable value-keyword-case
 
-$font-size-base:              0.85rem !default; // Assumes the browser default, typically `16px`
+$font-size-base:              0.9rem !default; // Assumes the browser default, typically `16px`
 $font-size-lg:                $font-size-base * 1.25 !default;
 $font-size-sm:                $font-size-base * .875 !default;
 
@@ -308,13 +308,13 @@ $display2-size:               5.5rem !default;
 $display3-size:               4.5rem !default;
 $display4-size:               3.5rem !default;
 
-$display1-weight:             300 !default;
-$display2-weight:             300 !default;
-$display3-weight:             300 !default;
-$display4-weight:             300 !default;
+$display1-weight:             700 !default;
+$display2-weight:             700 !default;
+$display3-weight:             700 !default;
+$display4-weight:             700 !default;
 $display-line-height:         $headings-line-height !default;
 
-$lead-font-size:              $font-size-base * 1.25 !default;
+$lead-font-size:              $font-size-base * 1.05 !default;
 $lead-font-weight:            300 !default;
 
 $small-font-size:             80% !default;

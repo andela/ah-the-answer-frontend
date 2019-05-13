@@ -26,6 +26,9 @@ yarn-error.log*
 .vs_code/
 .vscode/
 .idea/
+
+# generated report
+report.20190512.171927.40337.001.json
 package-lock.json
 .vscode/
 
