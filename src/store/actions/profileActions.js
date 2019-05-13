@@ -6,23 +6,26 @@ const setAxios = require('axios');
 const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.1gC7fqNwCSTYxCQAHvfNmfyb2GhenC6jG0nKLJ-izCM';
 setAxios.defaults.headers.common = { Authorization: `Bearer ${token}` };
 
-export const fetchFollows = () => (dispatch) => {
-  axios.get(' http://127.0.0.1:8000/api/follows/count/Kyppy/')
-    .then((response) => {
-      // handle success
-      dispatch({
-        type: ProfileAction.FETCH_FOLLOWS,
-        followCount: response.data.success[0].follows,
-      });
-    })
-    .catch((error) => {
+export const fetchFollows = () => {
+  return (dispatch) => {
+    return axios.get(' http://127.0.0.1:8000/api/follows/count/Kyppy/')
+      .then((response) => {
+        console.log('AXIOS RESPONSE: ', response);
+        // handle success
+        dispatch({
+          type: 'profile/FETCH_FOLLOWS',
+          followCount: response.data.success[0].follows,
+        });
+      })
+      .catch((error) => {
       // handle error
-      console.log('Error fecthing and parsing data', error);
-    });
+        console.log('Error fecthing and parsing data', error);
+      });
+  };
 };
 
 export const fetchFollowers = () => (dispatch) => {
-  axios.get(' http://127.0.0.1:8000/api/follows/count/Kyppy/')
+  return axios.get(' http://127.0.0.1:8000/api/follows/count/Kyppy/')
     .then((response) => {
       // handle success
       dispatch({
@@ -37,7 +40,7 @@ export const fetchFollowers = () => (dispatch) => {
 };
 
 export const fetchBio = () => (dispatch) => {
-  axios.get(' http://127.0.0.1:8000/api/profiles/Kyppy/')
+  return axios.get(' http://127.0.0.1:8000/api/profiles/Kyppy/')
     .then((response) => {
       // handle success
       dispatch({
@@ -52,7 +55,7 @@ export const fetchBio = () => (dispatch) => {
 };
 
 export const fetchName = () => (dispatch) => {
-  axios.get(' http://127.0.0.1:8000/api/profiles/Kyppy/')
+  return axios.get(' http://127.0.0.1:8000/api/profiles/Kyppy/')
     .then((response) => {
       // handle success
       dispatch({
@@ -68,7 +71,7 @@ export const fetchName = () => (dispatch) => {
 };
 
 export const updateProfile = (name, bio) => (dispatch) => {
-  axios.put('http://127.0.0.1:8000/api/profile/Kyppy/edit/', { profile: { name: name, user_bio: bio } })
+  return axios.put('http://127.0.0.1:8000/api/profile/Kyppy/edit/', { profile: { name: name, user_bio: bio } })
     .then((response) => {
       // handle success
       dispatch({
