@@ -20,6 +20,8 @@
     "redux": "^4.0.1",
     "eslint-plugin-react": "^7.13.0",
     "redux-thunk": "^2.3.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
     "sass-loader": "^7.1.0"
   },
   "jest": {
@@ -37,7 +39,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "coverage": "react-scripts test -u --env=jsdom --coverage --coveragePathIgnorePatterns=src/index.js --coveragePathIgnorePatterns=src/store/index.js --coveragePathIgnorePatterns=src/serviceWorker.js",
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
   },
   "eslintConfig": {
     "extends": "react-app"
