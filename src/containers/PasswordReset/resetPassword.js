@@ -1,67 +1,68 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+/* eslint-disable react/destructuring-assignment */
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {resetPassword} from '../../store/actions/requestResetPassword'
+import { resetPassword } from '../../store/actions/requestResetPassword';
+
 export class ResetPassword extends Component {
     state = {
-        password: '',
-        confirmPassword: '',
-        token: '',
-        error: '',
-        message: '',
-        formstate: ''
+      password: '',
+      confirmPassword: '',
+      token: '',
+      error: '',
+      message: '',
+      formstate: '',
     }
 
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if(prevState.error !== nextProps.message
+      if (prevState.error !== nextProps.message
            || prevState.message !== nextProps.message
            || prevState.formstate !== nextProps.fromstate
-           || prevState.confirmPassword!== nextProps.confirmPassword
-           || prevState.password!== nextProps.password){
-               return {
-                error: nextProps.error,
-                message: nextProps.message,
-                formstate: nextProps.formstate
+           || prevState.confirmPassword !== nextProps.confirmPassword
+           || prevState.password !== nextProps.password) {
+        return {
+          error: nextProps.error,
+          message: nextProps.message,
+          formstate: nextProps.formstate,
 
-               }
-           }
-           return null
+        };
+      }
+      return null;
     }
 
     async componentDidMount() {
-        this.setState({token: this.props.match.params.token})
+      this.setState({ token: this.props.match.params.token });
     }
 
     handleChange = (e) => {
-        this.setState(
-            { [e.target.name]: e.target.value})
-            document.getElementById('confirmPassword').classList.remove('is-invalid')
-            document.getElementById('password').classList.remove('is-invalid')                        
-        
+      this.setState(
+        { [e.target.name]: e.target.value },
+      );
+      document.getElementById('confirmPassword').classList.remove('is-invalid');
+      document.getElementById('password').classList.remove('is-invalid');
     }
-    
-    handleSubmit = (e, func) => {
-        e.preventDefault();
 
-        if (this.state.password ===  this.state.confirmPassword && this.state.password.match(/^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,}$/)){
-            const password_data = {
-                password: this.state.password,
-                confirmPassword: this.state.confirmPassword,
-                token: this.state.token,
-                message: this.state.message,
-                error: this.state.error
-            };
-            this.props.resetPassword(password_data);
-        }else if(this.state.password !==  this.state.confirmPassword){
-            document.getElementById('confirmPassword').classList.add('is-invalid')
-             }else{
-                document.getElementById('password').classList.add('is-invalid')
-             }
-        
+    handleSubmit = (e) => {
+      e.preventDefault();
+
+      if (this.state.password === this.state.confirmPassword && this.state.password.match(/^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,}$/)) {
+        const passwordData = {
+          password: this.state.password,
+          confirmPassword: this.state.confirmPassword,
+          token: this.state.token,
+          message: this.state.message,
+          error: this.state.error,
+        };
+        this.props.resetPassword(passwordData);
+      } else if (this.state.password !== this.state.confirmPassword) {
+        document.getElementById('confirmPassword').classList.add('is-invalid');
+      } else {
+        document.getElementById('password').classList.add('is-invalid');
+      }
     };
-  render() {
-      
+
+    render() {
       return (
         <div className="container d-flex align-items-center justify-content-center">
           <div className="col-lg-5">
@@ -99,28 +100,28 @@ export class ResetPassword extends Component {
           </div>
         </div>
       );
-  }
+    }
 }
 
 ResetPassword.propTypes = {
-    message: PropTypes.string,
-    error: PropTypes.string,
-    resetPassword: PropTypes.func.isRequired
+  message: PropTypes.string,
+  error: PropTypes.string,
+  resetPassword: PropTypes.func.isRequired,
 };
 
 export const mapDispatchToProps = dispatch => ({
   resetPassword: userData => dispatch(resetPassword(userData)),
 });
 
-export const mapStateToProps = (state) => {
-    return {
-        message: state.resetPassword.message,
-        error: state.resetPassword.error
-   } 
-};
+export const mapStateToProps = state => ({
+  message: state.resetPassword.message,
+  error: state.resetPassword.error,
+});
 
 export default connect(
-    mapStateToProps,
-    {resetPassword})(ResetPassword)
+  mapStateToProps,
+  { resetPassword },
+)(ResetPassword);
 
-export const _ResetPassword = ResetPassword
+// eslint-disable-next-line no-underscore-dangle
+export const _ResetPassword = ResetPassword;
