@@ -25,10 +25,10 @@ export class ProfileView extends Component {
     const { profileprops: { userName } } = this.props;
     const { profileprops: { givenName } } = this.props;
     return (
-      <div className="container">
+      <div className="container py-2">
         <div className="row">
           <div className="col-4">
-            <img src="https://res.cloudinary.com/apibucket/image/upload/v1554188102/sample.jpg" className="img-fluid" alt="Placholder" />
+            <img src="https://res.cloudinary.com/apibucket/image/upload/v1554188102/sample.jpg" className="img-fluid" alt="Placholder" id="profileImageID" />
           </div>
           <div className="col-6">
             <div className="row">
@@ -43,7 +43,6 @@ export class ProfileView extends Component {
                 text={bio}
                 textfetchMethod={this.props.fetchBio}
               />
-              <Link to="/user/editprofile">Edit Profile</Link>
             </div>
             <div className="row">
               <div className="col-6">

@@ -1,11 +1,5 @@
 // Define your variable overrides here.
 
-// SIGNUP PAGE
-.container {
-    height: 100vh;
-}
-
-
 label {
     font-weight: 600;
 
@@ -19,3 +13,9 @@ label {
     }
 }
 // END OF SIGNUP PAGE
+
+#profileImageID {
+    object-fit: cover;
+    height:100%;
+    width: 100%;
+}
