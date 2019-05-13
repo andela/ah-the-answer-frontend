@@ -1,23 +1,18 @@
 /* eslint-disable import/no-named-as-default-member */
+// eslint-disable-next-line import/no-named-as-default
 import React from 'react';
 import './themes/custom.scss';
 import './themes/bootstrap-custom.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './themes/custom.scss';
-// eslint-disable-next-line import/no-named-as-default
 import InitiatePasswordReset from './containers/PasswordReset/InitiatePasswordReset';
 import ResetPasswordMessage from './containers/PasswordReset/PasswordResetSuccess';
-// eslint-disable-next-line import/no-named-as-default
 import ResetPassword from './containers/PasswordReset/resetPassword';
-
 import Login from './containers/Login/Login';
 import Home from './containers/Home';
 import Navbar from './components/Navbar';
 import CreateArticle from './containers/articles/CreateArticle';
 import ArticleDetails from './containers/articles/ArticleDetails';
 import EditArticle from './containers/articles/EditArticle';
-import './themes/bootstrap-custom.scss';
-
 import Signup from './containers/signup/Signup';
 import SignupSuccess from './containers/signup/SignupSuccess';
 import profileContainer from './containers/profile/profileContainer';
