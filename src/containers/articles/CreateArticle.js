@@ -193,7 +193,7 @@ export class CreateArticle extends Component {
 CreateArticle.propTypes = {
   errors: PropTypes.shape({}),
   message: PropTypes.shape({}),
-  createArticle: PropTypes.func,
+  createArticle: PropTypes.func.isRequired,
 };
 CreateArticle.defaultProps = {
   errors: {},
@@ -201,13 +201,9 @@ CreateArticle.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    articles: state.articles.articles,
-    errors: state.articles.error,
-    message: state.articles.message,
+  articles: state.articles.articles,
+  errors: state.articles.error,
+  message: state.articles.message,
 });
 
-// const mapDispatchToProps = dispatch => ({
-//     createArticle: article => dispatch(createArticle(article)),
-// });
-
-export default connect(mapStateToProps, {createArticle})(CreateArticle);
+export default connect(mapStateToProps, { createArticle })(CreateArticle);

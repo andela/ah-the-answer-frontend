@@ -275,17 +275,17 @@ EditArticle.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    article: state.articles.article,
-    errors: state.articles.error,
-    editMessage: state.articles.editMessage,
-    message: state.articles.message,
-    deleteMessage: state.articles.deleteMessage,
+  article: state.articles.article,
+  errors: state.articles.error,
+  editMessage: state.articles.editMessage,
+  message: state.articles.message,
+  deleteMessage: state.articles.deleteMessage,
 });
 
 const mapDispatchToProps = dispatch => ({
-    updateArticle: (slug, article) => dispatch(updateArticle(slug, article)),
-    getArticle: slug => dispatch(getArticle(slug)),
-    deleteArticle: slug => dispatch(deleteArticle(slug)),
+  updateArticle: (slug, article) => dispatch(updateArticle(slug, article)),
+  getArticle: slug => dispatch(getArticle(slug)),
+  deleteArticle: slug => dispatch(deleteArticle(slug)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditArticle);
