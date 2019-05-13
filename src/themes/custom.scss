@@ -1,6 +1,6 @@
 // SIGNUP PAGE
-.container {
-    height: 100vh;
+.full-height {
+    min-height: 100vh;
 }
 
 
@@ -18,11 +18,23 @@ label {
 }
 // END OF SIGNUP PAGE
 
-
 .social-login {
-	margin: auto;
+  margin: auto;
 }
 
-.button-facebook {
-	border-radius: 5px;
+hr {
+  background-color: #000;
+  height: 1px;
+}
+
+.bg-facebook {
+  background: #3b5998;
+}
+
+.bg-google {
+  background: #db4a39;
+}
+
+.bg-twitter {
+  background: #00acee;
 }

@@ -24,6 +24,11 @@ yarn-error.log*
 
 # text editor files
 .vs_code/
-.idea/
-.env
 .vscode/
+.idea/
+package-lock.json
+.vscode/
+
+# test snapshots
+__snapshots__/
+.env
