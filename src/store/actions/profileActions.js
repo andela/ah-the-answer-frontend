@@ -10,7 +10,6 @@ export const fetchFollows = () => {
   return (dispatch) => {
     return axios.get(' http://127.0.0.1:8000/api/follows/count/Kyppy/')
       .then((response) => {
-        console.log('AXIOS RESPONSE: ', response);
         // handle success
         dispatch({
           type: 'profile/FETCH_FOLLOWS',
