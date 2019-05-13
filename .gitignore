@@ -23,5 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # text editor files
-.vs_code/
+.vscode/
 .idea/
+
+# test snapshots
+__snapshots__/
