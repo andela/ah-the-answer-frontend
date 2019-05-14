@@ -13,14 +13,16 @@ import ReviewArticle from './ReviewArticle';
 
 class ArticleDetails extends Component {
   componentDidMount() {
+    const userData = authUser();
     const { slug } = this.props.match.params;
     this.props.getArticle(slug);
     this.props.getRating(slug);
-    const userData = authUser();
+    this.props.checkReviewed(userData.username, slug);
   }
 
   render() {
-    const { article, author, message, rating } = this.props;
+    const userData = authUser();
+    const { article, author, message, rating, userReview, isReviewed } = this.props;
     if (message && message === 'The article requested does not exist') {
       this.props.history.push('/');
     }
@@ -67,7 +69,15 @@ class ArticleDetails extends Component {
           <div className="container-fluid container-width">
             <div className="lead">{parse(article.body)}</div>
           </div>
-          <RatingDisplay number={rating} />
+          <RatingDisplay
+            number={rating}
+          />
+          <ReviewArticle
+            review={userReview}
+            slug={article.slug}
+            userName={userData.username}
+            isReviewed={isReviewed}
+          />
         </div>
       );
     }
@@ -100,6 +110,8 @@ const mapStateToProps = state => ({
   author: state.articles.author,
   message: state.articles.message,
   rating: state.articles.rating,
+  userReview: state.articles.userReview,
+  isReviewed: state.articles.isReviewed,
 });
 
 const mapDispatchToProps = dispatch => ({
