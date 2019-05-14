@@ -50,7 +50,7 @@ export const fetchFollowers = () => (dispatch) => {
 };
 
 export const fetchBio = () => (dispatch) => {
-  return axios.get(`${configUrls.root}profiles/Kyppy/`)
+  return axios.get(`${configUrls.root}profiles/Kyppy/`, config)
     .then((response) => {
       // handle success
       dispatch({
