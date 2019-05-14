@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 import isOwner from '../../helpers/isOwner';
 import { getArticle, checkReviewed, getRating } from '../../store/actions/articleActions';
+import authUser from '../../helpers/authUser';
 import Edit from '../../components/Edit';
 import RatingDisplay from './RatingDisplay';
 import ReviewArticle from './ReviewArticle';
@@ -14,10 +15,12 @@ class ArticleDetails extends Component {
   componentDidMount() {
     const { slug } = this.props.match.params;
     this.props.getArticle(slug);
+    this.props.getRating(slug);
+    const userData = authUser();
   }
 
   render() {
-    const { article, author, message } = this.props;
+    const { article, author, message, rating } = this.props;
     if (message && message === 'The article requested does not exist') {
       this.props.history.push('/');
     }
@@ -64,6 +67,7 @@ class ArticleDetails extends Component {
           <div className="container-fluid container-width">
             <div className="lead">{parse(article.body)}</div>
           </div>
+          <RatingDisplay number={rating} />
         </div>
       );
     }
@@ -95,12 +99,13 @@ const mapStateToProps = state => ({
   article: state.articles.article,
   author: state.articles.author,
   message: state.articles.message,
+  rating: state.articles.rating,
 });
 
 const mapDispatchToProps = dispatch => ({
   getArticle: slug => dispatch(getArticle(slug)),
-  getRating: () => dispatch(getRating()),
-  checkReviewed: username => dispatch(checkReviewed(username)),
+  getRating: slug => dispatch(getRating(slug)),
+  checkReviewed: (username, slug) => dispatch(checkReviewed(username, slug)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleDetails);
