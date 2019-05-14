@@ -47,6 +47,11 @@ label {
 
 // END OF SIGNUP PAGE
 
+#profileImageID {
+    object-fit: cover;
+    height:100%;
+    width: 100%;
+}
 .social-login {
   margin: auto;
 }
