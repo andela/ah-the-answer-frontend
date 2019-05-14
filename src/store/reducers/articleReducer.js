@@ -4,6 +4,7 @@ const initState = {
   message: {},
   editMessage: {},
   deleteMessage: {},
+  rating: 0,
   userReview: '',
   isReviewed: false,
 
