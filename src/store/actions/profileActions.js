@@ -4,9 +4,6 @@ import authHeader from '../../helpers/authHeader';
 
 const setAxios = require('axios');
 
-// const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.1gC7fqNwCSTYxCQAHvfNmfyb2GhenC6jG0nKLJ-izCM';
-// setAxios.defaults.headers.common = { Authorization: `Bearer ${token}` };
-
 // const configUrls = {
 //   root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
 // };
@@ -22,7 +19,7 @@ const config = {
 
 export const fetchFollows = () => {
   return (dispatch) => {
-    return axios.get(`${configUrls.root}follows/count/Kyppy/`)
+    return axios.get(`${configUrls.root}follows/count/Kyppy/`, config)
       .then((response) => {
         // handle success
         dispatch({
@@ -68,7 +65,7 @@ export const fetchBio = () => (dispatch) => {
 };
 
 export const fetchName = () => (dispatch) => {
-  return axios.get(`${configUrls.root}profiles/Kyppy/`)
+  return axios.get(`${configUrls.root}profiles/Kyppy/`, config)
     .then((response) => {
       // handle success
       dispatch({
@@ -84,7 +81,7 @@ export const fetchName = () => (dispatch) => {
 };
 
 export const updateProfile = (name, bio) => (dispatch) => {
-  return axios.put(`${configUrls.root}profile/Kyppy/edit/`, { profile: { name: name, user_bio: bio } })
+  return axios.put(`${configUrls.root}profile/Kyppy/edit/`, { profile: { name: name, user_bio: bio } }, config)
     .then((response) => {
       // handle success
       dispatch({
