@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 import isOwner from '../../helpers/isOwner';
-import { getArticle } from '../../store/actions/articleActions';
+import { getArticle, checkReviewed, getRating } from '../../store/actions/articleActions';
 import Edit from '../../components/Edit';
+import RatingDisplay from './RatingDisplay';
+import ReviewArticle from './ReviewArticle';
 
 class ArticleDetails extends Component {
   componentDidMount() {
@@ -97,6 +99,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getArticle: slug => dispatch(getArticle(slug)),
+  getRating: () => dispatch(getRating()),
+  checkReviewed: username => dispatch(checkReviewed(username)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleDetails);
