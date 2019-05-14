@@ -4,6 +4,9 @@ const initState = {
   message: {},
   editMessage: {},
   deleteMessage: {},
+  userReview: '',
+  isReviewed: false,
+
 };
 
 const articleReducer = (state = initState, action) => {
@@ -45,6 +48,20 @@ const articleReducer = (state = initState, action) => {
         ...state,
         error: action.error,
       };
+
+    case 'GET_RATING':
+      return {
+        ...state,
+        rating: action.articleRating,
+      };
+
+    case 'REVIEW_STATUS':
+      return {
+        ...state,
+        isReviewed: action.isReviewed,
+        userReview: action.userReview,
+      };
+
     default:
       return state;
   }
