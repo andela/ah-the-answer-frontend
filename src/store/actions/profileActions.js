@@ -1,14 +1,28 @@
 import axios from 'axios';
 import * as ProfileAction from '../actionTypes/profileActionTypes';
+import authHeader from '../../helpers/authHeader';
 
 const setAxios = require('axios');
 
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.1gC7fqNwCSTYxCQAHvfNmfyb2GhenC6jG0nKLJ-izCM';
-setAxios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+// const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.1gC7fqNwCSTYxCQAHvfNmfyb2GhenC6jG0nKLJ-izCM';
+// setAxios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+
+// const configUrls = {
+//   root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
+// };
+
+const configUrls = {
+  root: 'http://127.0.0.1:8000/api/',
+};
+
+
+const config = {
+  headers: authHeader(),
+};
 
 export const fetchFollows = () => {
   return (dispatch) => {
-    return axios.get(' http://127.0.0.1:8000/api/follows/count/Kyppy/')
+    return axios.get(`${configUrls.root}follows/count/Kyppy/`)
       .then((response) => {
         // handle success
         dispatch({
@@ -24,7 +38,7 @@ export const fetchFollows = () => {
 };
 
 export const fetchFollowers = () => (dispatch) => {
-  return axios.get(' http://127.0.0.1:8000/api/follows/count/Kyppy/')
+  return axios.get(`${configUrls.root}follows/count/Kyppy/`)
     .then((response) => {
       // handle success
       dispatch({
@@ -39,7 +53,7 @@ export const fetchFollowers = () => (dispatch) => {
 };
 
 export const fetchBio = () => (dispatch) => {
-  return axios.get(' http://127.0.0.1:8000/api/profiles/Kyppy/')
+  return axios.get(`${configUrls.root}profiles/Kyppy/`)
     .then((response) => {
       // handle success
       dispatch({
@@ -54,7 +68,7 @@ export const fetchBio = () => (dispatch) => {
 };
 
 export const fetchName = () => (dispatch) => {
-  return axios.get(' http://127.0.0.1:8000/api/profiles/Kyppy/')
+  return axios.get(`${configUrls.root}profiles/Kyppy/`)
     .then((response) => {
       // handle success
       dispatch({
@@ -70,7 +84,7 @@ export const fetchName = () => (dispatch) => {
 };
 
 export const updateProfile = (name, bio) => (dispatch) => {
-  return axios.put('http://127.0.0.1:8000/api/profile/Kyppy/edit/', { profile: { name: name, user_bio: bio } })
+  return axios.put(`${configUrls.root}profile/Kyppy/edit/`, { profile: { name: name, user_bio: bio } })
     .then((response) => {
       // handle success
       dispatch({
