@@ -100,8 +100,8 @@ export const updateArticle = (slug, article) => {
   };
 };
 
-export const getRating = () => (dispatch) => {
-  return axios.get('http://127.0.0.1:8000/api/articles/fallout-weekly-a835e186fdfa/reviews/')
+export const getRating = slug => (dispatch) => {
+  return axios.get(`http://127.0.0.1:8000/api/articles/${slug}/reviews/`)
     .then((response) => {
       // handle success
       dispatch({
@@ -115,8 +115,8 @@ export const getRating = () => (dispatch) => {
     });
 };
 
-export const checkReviewed = username => (dispatch) => {
-  return axios.get('http://127.0.0.1:8000/api/articles/fallout-weekly-a835e186fdfa/reviews/')
+export const checkReviewed = (username, slug) => (dispatch) => {
+  return axios.get(`http://127.0.0.1:8000/api/articles/${slug}/reviews/`)
     .then((response) => {
       // handle success
       const reviewer = response.data.reviews.find((element) => {
