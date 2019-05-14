@@ -7,6 +7,8 @@ import parse from 'html-react-parser';
 import isOwner from '../../helpers/isOwner';
 import { getArticle } from '../../store/actions/articleActions';
 import Edit from '../../components/Edit';
+import CreateComment from '../comments/CreateComments';
+import CommentList from '../comments/CommentList';
 
 class ArticleDetails extends Component {
   componentDidMount() {
@@ -62,6 +64,8 @@ class ArticleDetails extends Component {
           <div className="container-fluid container-width">
             <div className="lead">{parse(article.body)}</div>
           </div>
+          <CommentList slug={this.props.match.params.slug} />
+          <CreateComment slug={this.props.match.params.slug} />
         </div>
       );
     }
