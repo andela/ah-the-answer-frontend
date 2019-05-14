@@ -132,7 +132,7 @@ export const checkReviewed = username => (dispatch) => {
       } else {
         console.log(reviewer);
         dispatch({
-          type: ProfileAction.REVIEW_STATUS,
+          type: 'REVIEW_STATUS',
           isReviewed: true,
           userReview: reviewer.review_body,
         });
