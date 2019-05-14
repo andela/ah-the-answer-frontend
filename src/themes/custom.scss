@@ -91,3 +91,17 @@ label {
     overflow: scroll;
   }
 }
+
+// CARD
+.card-search {
+  &-img {
+    background: var(--primary);
+    height:3rem;
+    width: 3rem;
+  }
+} 
+
+// UTILS
+.display-5 {
+  font-size: 2rem;
+}
