@@ -94,3 +94,47 @@ export const updateArticle = (slug, article) => {
       });
   };
 };
+
+export const getRating = () => (dispatch) => {
+  return axios.get('http://127.0.0.1:8000/api/articles/fallout-weekly-a835e186fdfa/reviews/')
+    .then((response) => {
+      // handle success
+      dispatch({
+        type: 'GET_RATING',
+        articleRating: response.data['Average Rating'],
+      });
+    })
+    .catch((error) => {
+      // handle error
+      console.log('Error fecthing and parsing data', error);
+    });
+};
+
+export const checkReviewed = username => (dispatch) => {
+  return axios.get('http://127.0.0.1:8000/api/articles/fallout-weekly-a835e186fdfa/reviews/')
+    .then((response) => {
+      // handle success
+      const reviewer = response.data.reviews.find((element) => {
+        return element.reviewer_username === username;
+      });
+      //console.log(reviewer);
+      if (reviewer === undefined) {
+        dispatch({
+          type: 'REVIEW_STATUS',
+          isReviewed: false,
+          userReview: '',
+        });
+      } else {
+        console.log(reviewer);
+        dispatch({
+          type: ProfileAction.REVIEW_STATUS,
+          isReviewed: true,
+          userReview: reviewer.review_body,
+        });
+      }
+    })
+    .catch((error) => {
+      // handle error
+      console.log('Error fecthing and parsing data', error);
+    });
+};
