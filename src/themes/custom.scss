@@ -1,5 +1,5 @@
 h1, h2, h3, h4 {
-  font-family: 'Playfair display';
+  font-family: "Playfair display", sans-serif;
 }
 // ARTICLES
 .article-list {
@@ -96,7 +96,7 @@ label {
 .card-search {
   &-img {
     background: var(--primary);
-    height:3rem;
+    height: 3rem;
     width: 3rem;
   }
 }

@@ -3,6 +3,12 @@ import Axios from 'axios';
 import Modal from './SearchModal';
 
 export default class Search extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.sendRequest = this.sendRequest.bind(this);
+  }
+
   state = {
     results: {
       query: 'Enter a string to begin searching',
@@ -10,12 +16,6 @@ export default class Search extends Component {
       data: [],
       loading: false,
     },
-  }
-
-  constructor(props) {
-    super(props);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.sendRequest = this.sendRequest.bind(this);
   }
 
   sendRequest = (url, queryEntered) => {
