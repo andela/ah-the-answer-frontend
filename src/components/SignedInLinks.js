@@ -9,7 +9,7 @@ class SignedInLinks extends Component {
 
   render() {
     return (
-      <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
+      <ul className="navbar-nav ml-auto mt-2 mt-lg-0" data-test="signedInLink">
         <li className="nav-item">
           <NavLink className="nav-link" to="/">
             Home
