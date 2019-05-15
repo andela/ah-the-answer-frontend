@@ -7,6 +7,8 @@ import parse from 'html-react-parser';
 import isOwner from '../../helpers/isOwner';
 import { getArticle } from '../../store/actions/articleActions';
 import Edit from '../../components/Edit';
+import ArticleFooter from './ArticleFooter';
+import authStatus from '../../helpers/authStatus';
 
 class ArticleDetails extends Component {
   componentDidMount() {
@@ -62,6 +64,13 @@ class ArticleDetails extends Component {
           <div className="container-fluid container-width">
             <div className="lead">{parse(article.body)}</div>
           </div>
+          {
+            authStatus() ? (
+              <ArticleFooter id={article.id} />
+            ) : (
+              null
+            )
+          }
         </div>
       );
     }

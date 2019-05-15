@@ -9,6 +9,7 @@ import Card from './components/Card';
 import BiographyText from './components/BiographyText';
 import NameTag from './components/NameTag';
 import SocialFollowing from './components/SocialFollowing';
+import Bookmarks from '../../containers/bookmarks/Bookmarks';
 
 export class ProfileView extends Component {
   componentDidMount() {
@@ -74,7 +75,8 @@ export class ProfileView extends Component {
           </div>
           <div className="col-6">
             <h3 className="text-center"> Bookmarks </h3>
-            <Card />
+            {/* <Card /> */}
+            <Bookmarks />
           </div>
         </div>
       </div>

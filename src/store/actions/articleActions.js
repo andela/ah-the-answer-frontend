@@ -2,7 +2,8 @@ import axios from 'axios';
 import authHeader from '../../helpers/authHeader';
 
 const configUrls = {
-  root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
+  // root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
+  root: 'http://127.0.0.1:8000/api/articles/',
 };
 
 const config = {
@@ -91,6 +92,39 @@ export const updateArticle = (slug, article) => {
       })
       .catch((error) => {
         dispatch({ type: 'UPDATE_ARTICLE_FAILED', error: error.response.data });
+      });
+  };
+};
+
+export const bookmarkArticle = (id) => {
+  return (dispatch) => {
+    const articleUrl = `http://127.0.0.1:8000/api/bookmark/${id}/`;
+    return axios.post(articleUrl, {}, config)
+      .then((response) => {
+        dispatch({ type: 'BOOKMARK_ARTICLE_SUCCESSFUL', response });
+      })
+      .catch((error) => {
+        dispatch({ type: 'BOOKMARK_ARTICLE_FAILED', error: error.response.data });
+      });
+  };
+};
+
+export const getBookmarks = () => {
+  return (dispatch) => {
+    const articleUrl = 'http://127.0.0.1:8000/api/bookmarks/';
+    return axios.get(articleUrl, {}, config)
+      .then((response) => {
+        if (response) {
+          dispatch({
+            type: 'GET_BOOKMARKS_SUCCESS',
+            payload: response.data.success,
+          });
+        }
+      })
+      .catch((error) => {
+        if (error.response) {
+          dispatch({ type: 'GET_BOOKMARKS_ERROR', error: error.response.data });
+        }
       });
   };
 };
