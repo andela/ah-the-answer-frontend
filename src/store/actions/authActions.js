@@ -8,7 +8,7 @@ export const signInUser = userData => async (dispatch) => {
     },
   };
   await axios
-    .post('https://ah-the-answer-backend-staging.herokuapp.com/api/users/login/', data)
+    .post('http://127.0.0.1:8000/api/users/login/', data)
     .then((response) => {
       dispatch({ type: 'USER_SIGN_IN', response });
       window.location.replace('/');
