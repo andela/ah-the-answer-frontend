@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactStars from 'react-stars';
 import axios from 'axios';
 import authHeader from '../../helpers/authHeader';
 
@@ -16,11 +17,11 @@ class RatingBar extends Component {
     this.setState({ userRating: nextProps.ratingValue });
   }
 
-  handleOnClick = (e) => {
+  handleOnChange = (newRating) => {
     this.setState({
-      userRating: e.target.value,
+      userRating: newRating,
     });
-    const userRating = e.target.value;
+    const userRating = newRating;
     const { review } = this.state;
     const { userName } = this.props;
     const { slug } = this.props;
@@ -32,19 +33,15 @@ class RatingBar extends Component {
   }
 
   render() {
-    const { userRating } = this.state;
-    const fill = "btn btn-secondary"
-    const unfill = "btn btn-warning-secondary"
     return (
-      <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-        <div className="btn-group mr-2" role="group" aria-label="First group">
-          <button type="button" className={(userRating >= 1) ? (fill) : (unfill)} onClick={this.handleOnClick} value={1}>1</button>
-          <button type="button" className={(userRating >= 2) ? (fill) : (unfill)} onClick={this.handleOnClick} value={2}>2</button>
-          <button type="button" className={(userRating >= 3) ? (fill) : (unfill)} onClick={this.handleOnClick} value={3}>3</button>
-          <button type="button" className={(userRating >= 4) ? (fill) : (unfill)} onClick={this.handleOnClick} value={4}>4</button>
-          <button type="button" className={(userRating >= 5) ? (fill) : (unfill)} onClick={this.handleOnClick} value={5}>5</button>
-        </div>
-      </div>
+      <ReactStars
+        onChange={this.handleOnChange}
+        size={24}
+        color1="#f1f1f1"
+        color2="#ffd700"
+        half={false}
+        value={this.state.userRating || 0}
+      />
     );
   }
 }
