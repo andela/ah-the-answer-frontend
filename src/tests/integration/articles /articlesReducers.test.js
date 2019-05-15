@@ -8,6 +8,10 @@ describe('articles reducer', () => {
       message: {},
       editMessage: {},
       deleteMessage: {},
+      rating: 0,
+      ratingValue: 0,
+      userReview: '',
+      isReviewed: false,
     });
   });
   it('should handle GET_ARTICLE', () => {
@@ -186,6 +190,87 @@ describe('articles reducer', () => {
       message: {},
       editMessage: {},
       deleteMessage: {},  
+    });
+  });
+
+  it('should handle GET_RATING', () => {
+    expect(articleReducer({
+      article: {},
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      rating: 0,
+    }, {
+      type: 'GET_RATING',
+      articleRating: 5,
+    })).toEqual({
+      article: {},
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      rating: 5,
+    });
+  });
+
+  it('should handle REVIEW_STATUS for an unreviewed article', () => {
+    expect(articleReducer({
+      article: {},
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      ratingValue: 0,
+      userReview: '',
+      isReviewed: false,
+    }, {
+      type: 'REVIEW_STATUS',
+      isReviewed: false,
+      userReview: '',
+      ratingValue: 0,
+    })).toEqual({
+      article: {},
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      ratingValue: 0,
+      userReview: '',
+      isReviewed: false,
+    });
+  });
+
+  it('should handle REVIEW_STATUS for a reviewed article', () => {
+    expect(articleReducer({
+      article: {},
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      ratingValue: 0,
+      userReview: '',
+      isReviewed: false,
+    }, {
+      type: 'REVIEW_STATUS',
+      isReviewed: true,
+      userReview: 'Reviewed',
+      ratingValue: 5,
+    })).toEqual({
+      article: {},
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      isReviewed: true,
+      userReview: 'Reviewed',
+      ratingValue: 5,
     });
   });
 
