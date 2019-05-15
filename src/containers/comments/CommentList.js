@@ -18,7 +18,7 @@ class CommentList extends Component {
         </div>
       ))
     ) : (
-      <p>No Comments</p>
+      <div />
     );
   }
 }

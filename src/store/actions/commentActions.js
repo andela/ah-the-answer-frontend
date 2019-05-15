@@ -4,7 +4,7 @@ import axios from 'axios';
 import authHeader from '../../helpers/authHeader';
 import store from '../store';
 
-const root = 'http://127.0.0.1:8000/api/articles/';
+const root = 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/';
 
 const config = {
   headers: authHeader(),
