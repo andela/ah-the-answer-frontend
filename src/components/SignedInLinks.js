@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
+import NotificationIcon from '../containers/notifications/NotificationIcon'
 const SignedInLinks = () => (
   <div data-test="signedInLink">
     <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
@@ -14,7 +14,9 @@ const SignedInLinks = () => (
         <NavLink className="nav-link text-danger" to="/">Sign Out</NavLink>
       </li>
       <li className="nav-item">
-        <NavLink className="nav-link text-danger" to="/notifications">Notifications</NavLink>
+        <NavLink className="nav-link text-danger" to="/notifications">
+          <NotificationIcon />
+        </NavLink>
       </li>
     </ul>
   </div>

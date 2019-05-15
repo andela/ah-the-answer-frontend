@@ -6,6 +6,7 @@ import NotificationSummary from './NotificationSummary';
 
 
 const url = 'https://ah-the-answer-backend-staging.herokuapp.com/api/notifications/';
+const readUrl = 'https://ah-the-answer-backend-staging.herokuapp.com/api/notifications/read-all';
 const config = {
   headers: authHeader(),
 
@@ -20,9 +21,12 @@ class NotificationList extends Component {
       axios.get(url, config)
         .then((res) => {
           const { notifications } = res.data;
-          console.log(notifications);
+          //console.log(notifications);
 
           this.setState({ notifications });
+        });
+      axios.put(readUrl, {}, config)
+        .then(() => {
         });
     }
 
