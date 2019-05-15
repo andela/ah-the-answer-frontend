@@ -29,7 +29,7 @@ class CreateComment extends Component {
         <form onSubmit={this.handleSubmit} className="mb-5 comment">
           <div className="form-group">
             <label className="form-label">Comment</label>
-            <textarea onChange={this.handleChange} name="body" className="form-control" />
+            <textarea rows="5" onChange={this.handleChange} name="body" className="form-control" />
           </div>
           <div className="form-group text-center">
             <button type="submit" className="btn btn-primary mt-3">
@@ -44,13 +44,17 @@ class CreateComment extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+export const mapStateToProps = state => ({
+  comments: state.comments,
+});
+
+export const mapDispatchToProps = dispatch => ({
   createComment: (slug, comment) => {
     dispatch(createComment(slug, comment));
   },
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(CreateComment);

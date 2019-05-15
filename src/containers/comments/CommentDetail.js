@@ -1,8 +1,8 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteComment, editComment } from '../../store/actions/commentActions';
 import moment from 'moment';
+import { deleteComment, editComment } from '../../store/actions/commentActions';
 
 class CommentDetail extends React.Component {
   state = {
@@ -38,13 +38,16 @@ class CommentDetail extends React.Component {
   render() {
     const userObject = JSON.parse(localStorage.getItem('user'));
     return (
-      <div className="card mb-3 mx-auto">
+      <div className="card mb-3 mt-3 mx-auto">
         <div className="card-body">
           <p className="card-text">
             <div>
               {this.state.isHidden ? (
                 <div>
                   <p className="card-text">{this.props.item.body}</p>
+                  <small className="text-muted mr-auto">
+                    {moment(this.props.item.createdAt).fromNow()}
+                  </small>
                   {userObject && userObject.username !== this.props.item.author.username ? (
                     <div />
                   ) : !userObject ? (
@@ -69,9 +72,7 @@ class CommentDetail extends React.Component {
                           Delete
                         </button>
                       </div>
-                      <p className="card-text">
-                        <small className="text-muted">{moment(this.props.item.createdAt).fromNow()}</small>
-                      </p>
+                    
                     </div>
                   )}
                 </div>
