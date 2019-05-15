@@ -122,19 +122,19 @@ export const checkReviewed = (username, slug) => (dispatch) => {
       const reviewer = response.data.reviews.find((element) => {
         return element.reviewer_username === username;
       });
-      //console.log(reviewer);
       if (reviewer === undefined) {
         dispatch({
           type: 'REVIEW_STATUS',
           isReviewed: false,
           userReview: '',
+          ratingValue: 0,
         });
       } else {
-        console.log(reviewer);
         dispatch({
           type: 'REVIEW_STATUS',
           isReviewed: true,
           userReview: reviewer.review_body,
+          ratingValue: reviewer.rating_value,
         });
       }
     })
