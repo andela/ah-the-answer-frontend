@@ -8,6 +8,7 @@ describe('articles reducer', () => {
       message: {},
       editMessage: {},
       deleteMessage: {},
+      bookmarkMessage: {},
     });
   });
   it('should handle GET_ARTICLE', () => {

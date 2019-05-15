@@ -159,17 +159,19 @@ describe('Test ProfileView container', () => {
   it('renders', () => {
     const mockFtn = jest.fn();
     const wrapper = mount(
-      <BrowserRouter>
-        <ProfileView
-          fetchBio={mockFtn}
-          fetchName={mockFtn}
-          fetchFollows={mockFtn}
-          fetchFollowers={mockFtn}
-          profileprops={{
-            givenName: 'Bob', userName: 'User', bio: 'Default Story', follows: 0, followers: 0, profileImg: '...',
-          }}
-        />
-      </BrowserRouter>,
+      <Provider store={store}>
+        <BrowserRouter>
+          <ProfileView
+            fetchBio={mockFtn}
+            fetchName={mockFtn}
+            fetchFollows={mockFtn}
+            fetchFollowers={mockFtn}
+            profileprops={{
+              givenName: 'Bob', userName: 'User', bio: 'Default Story', follows: 0, followers: 0, profileImg: '...',
+            }}
+          />
+        </BrowserRouter>
+      </Provider>,
     );
     expect(wrapper.exists()).toBe(true);
   });
