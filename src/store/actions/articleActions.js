@@ -2,8 +2,7 @@ import axios from 'axios';
 import authHeader from '../../helpers/authHeader';
 
 const configUrls = {
-  // root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
-  root: 'http://127.0.0.1:8000/api/articles/',
+  root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
 };
 
 const config = {
@@ -98,7 +97,7 @@ export const updateArticle = (slug, article) => {
 
 export const bookmarkArticle = (id) => {
   return (dispatch) => {
-    const articleUrl = `http://127.0.0.1:8000/api/bookmark/${id}/`;
+    const articleUrl = `https://ah-the-answer-backend-staging.herokuapp.com/api/bookmark/${id}/`;
     return axios.post(articleUrl, {}, config)
       .then((response) => {
         dispatch({ type: 'BOOKMARK_ARTICLE_SUCCESSFUL', response });
@@ -111,8 +110,8 @@ export const bookmarkArticle = (id) => {
 
 export const getBookmarks = () => {
   return (dispatch) => {
-    const articleUrl = 'http://127.0.0.1:8000/api/bookmarks/';
-    return axios.get(articleUrl, {}, config)
+    const articleUrl = 'https://ah-the-answer-backend-staging.herokuapp.com/api/bookmarks/';
+    return axios.get(articleUrl, config)
       .then((response) => {
         if (response) {
           dispatch({
