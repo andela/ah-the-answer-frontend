@@ -13,6 +13,9 @@ const SignedInLinks = () => (
       <li className="nav-item">
         <NavLink className="nav-link text-danger" to="/">Sign Out</NavLink>
       </li>
+      <li className="nav-item">
+        <NavLink className="nav-link text-danger" to="/notifications">Notifications</NavLink>
+      </li>
     </ul>
   </div>
 );
