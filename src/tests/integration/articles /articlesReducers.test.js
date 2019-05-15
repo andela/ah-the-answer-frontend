@@ -225,6 +225,49 @@ describe('articles reducer', () => {
       deleteMessage: {},
       bookmarkMessage: {}, 
     });
-  }); 
+  });
+  it('should handle GET_BOOKMARKS_SUCCESS', () => {
+    expect(articleReducer({
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      bookmarkMessage: {},
+      bookmarks: {},
+    }, {
+      type: 'GET_BOOKMARKS_SUCCESS',
+      payload: {},
+    })).toEqual({
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      bookmarkMessage: {},
+      bookmarks: {},
+    });
+  });
+  it('should handle GET_BOOKMARKS_ERROR', () => {
+    expect(articleReducer({
+      articles: [],
+      error: {},
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      bookmarkMessage: {},
+    }, {
+      type: 'GET_BOOKMARKS_ERROR',
+      error: {},
+    }
+    )).toEqual({
+      articles: [],
+      error: {},
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      bookmarkMessage: {},      
+    });
+  });
 
 });
