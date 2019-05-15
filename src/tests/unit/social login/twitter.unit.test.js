@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { mount, shallow } from '../../enzyme';
 import TwitterLogin from '../../../containers/Login/twitter';
 import { Login } from "../../../containers/Login/Login";
-
+import './windowActions';
 
 describe('Twitter component', () => {
   it('it renders the button', () => {
@@ -34,5 +34,15 @@ describe('Twitter component', () => {
     );
     const login = wrapper.find(TwitterLogin);
     expect(login.exists()).toEqual(true);
+  });
+  it('calls oauth', async ()=> {
+    const wrapper = shallow(<TwitterLogin />);
+    await wrapper.instance().twitterLogin();
+    expect(window.OAuth.initialize).toBeCalled();
+  });
+  it('calls popup', async ()=> {
+    const wrapper = shallow(<TwitterLogin />);
+    await wrapper.instance().twitterLogin();
+    expect(window.OAuth.popup).toBeCalled();
   });
 });

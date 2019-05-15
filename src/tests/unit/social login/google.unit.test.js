@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { mount, shallow } from '../../enzyme';
 import GoogleLogin from '../../../containers/Login/google';
 import { Login } from '../../../containers/Login/Login';
-
+import './windowActions';
 
 describe('Google component', () => {
   it('it renders the button', () => {
@@ -35,4 +35,9 @@ describe('Google component', () => {
       const login = wrapper.find(GoogleLogin);
       expect(login.exists()).toEqual(true);
     });
+  it('calls gapi', ()=> {
+    const wrapper = shallow(<GoogleLogin />);
+    wrapper.instance().googleLogin();
+    expect(window.gapi.auth.signIn).toBeCalled();
+  });
 });

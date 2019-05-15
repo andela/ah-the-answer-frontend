@@ -6,8 +6,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { mount, shallow } from '../../enzyme';
 import FacebookLogin from '../../../containers/Login/facebook';
 import { Login } from '../../../containers/Login/Login';
-import { CreateArticle } from "../../../containers/articles/CreateArticle";
-import   ReactDOM from 'react-dom';
+import './windowActions';
 
 describe('Facebook component', () => {
   it('it renders the button', () => {
@@ -40,5 +39,14 @@ describe('Facebook component', () => {
     jest.spyOn(FacebookLogin.prototype, 'componentDidMount');
     mount(<FacebookLogin />);
     expect(FacebookLogin.prototype.componentDidMount.mock.calls.length).toBe(1);
+  });
+  it('calls FB login', () => {
+    const wrapper = mount(<FacebookLogin />);
+    wrapper.instance().facebookLogin();
+    expect(window.FB.login).toBeCalled();
+  });
+  it('calls FB init', () => {
+    const wrapper = mount(<FacebookLogin /> );
+    expect(window.fbAsyncInit).toBeDefined();
   });
 });

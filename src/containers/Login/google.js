@@ -16,7 +16,7 @@ class GoogleLogin extends Component {
       clientid: process.env.REACT_APP_GOOGLE_ID, // Google client Id
       cookiepolicy: 'single_host_origin',
       requestvisibleactions: 'http://schema.org/AddAction',
-      scope: 'https://www.googleapis.com/auth/plus.login email',
+      scope: 'https://www.googleapis.com/auth/plus.login',
     });
   };
 

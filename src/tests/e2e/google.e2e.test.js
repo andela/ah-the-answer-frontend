@@ -3,6 +3,8 @@ import MockAdapter from 'axios-mock-adapter';
 import Axios from 'axios';
 import { mount } from '../enzyme';
 import GoogleLogin from '../../containers/Login/google';
+import { shallow } from "enzyme";
+import '../unit/social login/windowActions';
 
 const glogin = `${process.env.REACT_APP_API}/api/users/google/`;
 
@@ -20,6 +22,13 @@ describe('Google SDK function', () => {
     },
     id_token: 'adfadsfasdfsdf',
     error: false,
+  };
+  const badRes2 = {
+    status: {
+      signed_in : true,
+    },
+    id_token: 'adfadsfasdfsdf',
+    error: true,
   };
 
   it('throws error on invalid authentication', () => {
@@ -45,5 +54,16 @@ describe('Google SDK function', () => {
     wrapper.instance().getUserDetails('valid');
     global.location = jest.fn();
     expect(global.location.replace).toBeTruthy();
+  });
+  it('calls googleSignInCallback', ()=> {
+    const wrapper = shallow(<GoogleLogin />);
+    wrapper.instance().googleSignInCallback(goodRes);
+    expect(window.gapi.client.load).toBeCalled();
+  });
+  it('calls googleSignInCallback returns error', ()=> {
+    const wrapper = shallow(<GoogleLogin />);
+    wrapper.instance().googleSignInCallback(badRes2);
+    expect(window.gapi.client.load).toBeCalled();
+    expect()
   });
 });
