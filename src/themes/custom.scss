@@ -1,5 +1,5 @@
 h1, h2, h3, h4 {
-    font-family: 'Playfair display';
+  font-family: 'Playfair display';
 }
 // ARTICLES
 .article-list {
@@ -75,7 +75,7 @@ label {
   }
 
   &-header {
-    border-bottom: none;
+    border-bottom: 0;
   }
 
   &-content {
@@ -85,8 +85,8 @@ label {
 
   &-body {
     background: $gray-200;
+    border: 0;
     border-radius: $border-radius;
-    border: none;
     max-height: 75vh;
     overflow: scroll;
   }
@@ -99,7 +99,7 @@ label {
     height:3rem;
     width: 3rem;
   }
-} 
+}
 
 // UTILS
 .display-5 {

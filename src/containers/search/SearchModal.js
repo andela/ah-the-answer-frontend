@@ -11,19 +11,19 @@ const Modal = (props) => {
             <form className="w-100 mb-4" onSubmit={handleSearch}>
               <div className="form-row">
                 <div className="col-9">
-                  <label className="text-white" for="searchID">Search</label>
+                  <label className="text-white" htmlFor="searchID">Search</label>
                   <input type="search" name="search" className="form-control" id="searchID" aria-describedby="searchHelp" placeholder="Search here" />
                 </div>
                 <div className="col-3">
-                  <label className="text-white" for="filterSelectID">Filter by</label>
+                  <label className="text-white" htmlFor="filterSelectID">Filter by</label>
                   <select className="form-control" name="filter" id="filterSelectID">
-                    <option value="all" selected>All</option>
+                    <option value="all">All</option>
                     <option value="author">Author</option>
                     <option value="title">Title</option>
                   </select>
                 </div>
                 <div className="col-12 text-center">
-                  <button type="submit" className="btn btn-primary mt-2 col-6">Search</button>
+                  <button type="submit" className="btn btn-primary mt-2 col-6" id="searchButtonID">Search</button>
                 </div>
               </div>
             </form>
@@ -34,7 +34,7 @@ const Modal = (props) => {
               results.status
                 ? results.data.map(
                   item => (
-                    <div className="card shadow d-flex flex-row mx-4 mb-3">
+                    <div className="card shadow d-flex flex-row mx-4 mb-3" key="{item.id}">
                       <div className="card-body">
                         <h5 className="card-title">{item.title}</h5>
                         <h6 className="card-subtitle mb-2 text-muted">{item.description}</h6>

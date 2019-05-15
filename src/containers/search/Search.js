@@ -12,7 +12,45 @@ export default class Search extends Component {
     },
   }
 
-  handleSearch = (e) => {
+  constructor(props) {
+    super(props);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.sendRequest = this.sendRequest.bind(this);
+  }
+
+  sendRequest = (url, queryEntered) => {
+    const res = Axios.get(url);
+    res.then(
+      (response) => {
+        if (response.data.articles && response.data.articles.length > 0) {
+          this.setState({
+            results: {
+              query: queryEntered,
+              status: true,
+              data: response.data.articles,
+            },
+          });
+        } else {
+          this.setState({
+            results: {
+              query: `No results found for "${queryEntered}"`,
+              status: false,
+              data: [],
+            },
+          });
+        }
+        return this.state;
+      },
+    ).catch(
+      (err) => {
+        console.log(err);
+      },
+    );
+
+    return res;
+  }
+
+  handleSearch(e) {
     e.preventDefault();
     let url;
     const queryEntered = e.target.search.value;
@@ -30,31 +68,6 @@ export default class Search extends Component {
     }
 
     return this.sendRequest(url, queryEntered);
-  }
-
-  sendRequest = (url, queryEntered) => {
-    const res = Axios.get(url);
-    res.then(
-      (response) => {
-        if (response.data.articles.length > 0) {
-          this.setState({
-            results: {
-              query: queryEntered,
-              status: true,
-              data: response.data.articles,
-            },
-          });
-        } else {
-          this.setState({
-            results: {
-              query: `No results found for "${queryEntered}"`,
-              status: false,
-              data: [],
-            },
-          });
-        }
-      },
-    );
   }
 
   render() {
