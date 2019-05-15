@@ -5,9 +5,9 @@ const initState = {
   editMessage: {},
   deleteMessage: {},
   rating: 0,
+  ratingValue: 0,
   userReview: '',
   isReviewed: false,
-
 };
 
 const articleReducer = (state = initState, action) => {
@@ -61,6 +61,7 @@ const articleReducer = (state = initState, action) => {
         ...state,
         isReviewed: action.isReviewed,
         userReview: action.userReview,
+        ratingValue: action.ratingValue,
       };
 
     default:
