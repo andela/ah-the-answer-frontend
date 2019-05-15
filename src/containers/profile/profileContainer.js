@@ -75,7 +75,6 @@ export class ProfileView extends Component {
           </div>
           <div className="col-6">
             <h3 className="text-center"> Bookmarks </h3>
-            {/* <Card /> */}
             <Bookmarks />
           </div>
         </div>
