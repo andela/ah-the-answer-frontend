@@ -33,7 +33,6 @@ class RatingBar extends Component {
 
   render() {
     const { userRating } = this.state;
-    console.log(userRating);
     const fill = "btn btn-secondary"
     const unfill = "btn btn-warning-secondary"
     return (
