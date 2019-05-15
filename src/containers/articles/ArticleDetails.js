@@ -10,6 +10,7 @@ import authUser from '../../helpers/authUser';
 import Edit from '../../components/Edit';
 import RatingDisplay from './RatingDisplay';
 import ReviewArticle from './ReviewArticle';
+import RatingBar from './RatingBar';
 
 class ArticleDetails extends Component {
   componentDidMount() {
@@ -22,7 +23,7 @@ class ArticleDetails extends Component {
 
   render() {
     const userData = authUser();
-    const { article, author, message, rating, userReview, isReviewed } = this.props;
+    const { article, author, message, rating, userReview, isReviewed, ratingValue } = this.props;
     if (message && message === 'The article requested does not exist') {
       this.props.history.push('/');
     }
@@ -72,12 +73,15 @@ class ArticleDetails extends Component {
           <RatingDisplay
             number={rating}
           />
-          <ReviewArticle
-            review={userReview}
-            slug={article.slug}
-            userName={userData.username}
-            isReviewed={isReviewed}
-          />
+          {(author.username === userData.username) ? (null) : (
+            <RatingBar
+              review={userReview}
+              slug={article.slug}
+              userName={userData.username}
+              isReviewed={isReviewed}
+              ratingValue={ratingValue}
+            />
+          )}
         </div>
       );
     }
@@ -112,6 +116,8 @@ const mapStateToProps = state => ({
   rating: state.articles.rating,
   userReview: state.articles.userReview,
   isReviewed: state.articles.isReviewed,
+  ratingValue: state.articles.ratingValue,
+
 });
 
 const mapDispatchToProps = dispatch => ({
