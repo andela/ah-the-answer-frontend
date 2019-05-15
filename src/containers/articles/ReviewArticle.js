@@ -45,7 +45,6 @@ class ReviewArticle extends Component {
   }
 
   render() {
-    console.log(this.props.isReviewed)
     return (
       <div className="dropdown">
         <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
