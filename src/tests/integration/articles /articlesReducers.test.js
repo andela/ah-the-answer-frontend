@@ -189,5 +189,42 @@ describe('articles reducer', () => {
       deleteMessage: {},  
     });
   });
+  it('should handle BOOKMARK_ARTICLE_SUCCESSFUL', () => {
+    expect(articleReducer({
+      bookmarkMessage: {},
+    }, {
+      type: 'BOOKMARK_ARTICLE_SUCCESSFUL',
+      response: {
+        data: {
+          bookmarks: 'here',
+        },
+      },
+    })).toEqual({
+      bookmarkMessage: {
+        bookmarks: 'here',
+      },  
+    });
+  });
+  it('should handle BOOKMARK_ARTICLE_FAILED', () => {
+    expect(articleReducer({
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      bookmarkMessage: {},
+    }, {
+      type: 'BOOKMARK_ARTICLE_FAILED',
+      error: {},
+    })).toEqual({
+      articles: [],
+      error: {},
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      bookmarkMessage: {}, 
+    });
+  }); 
 
 });
