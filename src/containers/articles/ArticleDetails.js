@@ -70,19 +70,19 @@ class ArticleDetails extends Component {
           <div className="container-fluid container-width">
             <div className="lead">{parse(article.body)}</div>
           </div>
-          <div className="container">
-            <CreateComment slug={this.props.match.params.slug} />
-            <div className="col-lg-8 col-sm-12 mx-auto">
-              <CommentList slug={this.props.match.params.slug} />
-            </div>
-          </div>
           {
             authStatus() ? (
               <ArticleFooter id={article.id} />
-            ) : (
-              null
-            )
-          }
+              ) : (
+                null
+                )
+              }
+              <div className="container">
+                <CreateComment slug={this.props.match.params.slug} />
+                <div className="col-lg-8 col-sm-12 mx-auto">
+                  <CommentList slug={this.props.match.params.slug} />
+                </div>
+              </div>
         </div>
       );
     }
