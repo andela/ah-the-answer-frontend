@@ -64,6 +64,5 @@ describe('Google SDK function', () => {
     const wrapper = shallow(<GoogleLogin />);
     wrapper.instance().googleSignInCallback(badRes2);
     expect(window.gapi.client.load).toBeCalled();
-    expect()
   });
 });
