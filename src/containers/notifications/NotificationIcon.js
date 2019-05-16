@@ -43,7 +43,7 @@ class NotificationIcon extends Component {
         return (
           <div>
             <a href="#" className="button-badge">
-              <i className="fa fa-bell notnotif" />
+              <i className="fa fa-bell notnotif text-dark" />
             </a>
 
           </div>
@@ -54,7 +54,7 @@ class NotificationIcon extends Component {
       return (
         <div onClick={this.handleOnclick}>
           <a href="#" className="button-badge">
-            <i className="fa fa-bell" />
+            <i className="fa fa-bell text-dark" />
             <span style={style} className="badge alert">{NotificationsCount}</span>
           </a>
         </div>

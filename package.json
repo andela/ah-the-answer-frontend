@@ -21,8 +21,6 @@
     "html-react-parser": "^0.7.0",
     "html-to-draftjs": "^1.4.0",
     "immutable": "^3.8.2",
-    "eslint-plugin-react": "^7.13.0",
-    "expect": "^24.8.0",
     "i": "^0.3.6",
     "install": "^0.12.2",
     "jquery": "^3.4.1",

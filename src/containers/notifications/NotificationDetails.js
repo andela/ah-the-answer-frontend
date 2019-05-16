@@ -30,7 +30,7 @@ class NotificationDetails extends Component {
             <div className="col-lg-4 mt-4">
               <div className="row">
                 <div className="col-lg-9">
-                  <div className="text-muted">{moment(notifications.CreatedAt).calendar()}</div>
+                  <div className="text-muted">{moment(notifications.createdAt).calendar()}</div>
                 </div>
               </div>
             </div>

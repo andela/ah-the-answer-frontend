@@ -32,27 +32,29 @@ describe('Test notifications', () => {
 
 });
 
-describe('should get notifications from the API', () => {
-    const spy = jest.spyOn(NotificationList.prototype, 'componentDidMount');
-    const wrapper = mount(<NotificationList />);
-   
-    beforeEach(() => {
-      
-        const mock = new MockAdapter(Axios);
-        mock
-        .onGet( url )
-        .reply(200, mockSuccessResponse);
-    });
+describe("Should return the results", () => {
+   const mock = new MockAdapter(Axios);
+   const mockSuccessResponse = {
+       notifications: [
+           {
+               body: "Africa my home",
+               createdAt: "today"
+           }
+       ]
+   }
 
-    it('should call componentDidmount', () => {
-        expect(spy).toHaveBeenCalled();
-    })
-    it('should update the state with the notifications', () => {
-        // const { state } = wrapper.instance()
-        // console.log(mockSuccessResponse)
-        // expect(state.notifications).toBe(mockSuccessResponse.notifications)
-        
-        
-    } )
+   const wrapper = shallow(<NotificationList />);
+   const spy = jest.spyOn(wrapper.instance(), 'componentDidMount');
+   const componentDidMount = wrapper.instance().componentDidMount;
+   let dataReturned;
 
+
+   it("should return notifiucation data", async () => {
+       mock
+       .onGet(url)
+       .reply(200, mockSuccessResponse);
+    const promise = componentDidMount()
+    
+   })
+   wrapper.update()
 })
