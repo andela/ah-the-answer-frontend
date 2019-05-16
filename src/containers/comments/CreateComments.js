@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createComment } from '../../store/actions/commentActions';
 
-class CreateComment extends Component {
+export class CreateComment extends Component {
   state = {
     body: '',
   };
@@ -26,13 +26,13 @@ class CreateComment extends Component {
     const userObject = JSON.parse(localStorage.getItem('user'));
     {
       return userObject && userObject.token ? (
-        <form onSubmit={this.handleSubmit} className="mb-5 comment">
+        <form onSubmit={this.handleSubmit} className="mb-5 comment" data-set='comment-button'>
           <div className="form-group">
             <label className="form-label">Comment</label>
             <textarea rows="5" onChange={this.handleChange} name="body" className="form-control" />
           </div>
           <div className="form-group text-center">
-            <button type="submit" className="btn btn-primary mt-3">
+            <button type="submit" className="btn btn-primary mt-3" >
               Comment
             </button>
           </div>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { deleteComment, editComment } from '../../store/actions/commentActions';
 
-class CommentDetail extends React.Component {
+export class CommentDetail extends React.Component {
   state = {
     body: '',
     isHidden: true,
@@ -45,9 +45,11 @@ class CommentDetail extends React.Component {
               {this.state.isHidden ? (
                 <div>
                   <p className="card-text">{this.props.item.body}</p>
-                  <small className="text-muted mr-auto">
-                    {moment(this.props.item.createdAt).fromNow()}
-                  </small>
+                  <div className="d-flex">
+                    <small className="text-muted ml-auto">
+                      {moment(this.props.item.createdAt).fromNow()}
+                    </small>
+                  </div>
                   {userObject && userObject.username !== this.props.item.author.username ? (
                     <div />
                   ) : !userObject ? (
@@ -72,7 +74,6 @@ class CommentDetail extends React.Component {
                           Delete
                         </button>
                       </div>
-                    
                     </div>
                   )}
                 </div>

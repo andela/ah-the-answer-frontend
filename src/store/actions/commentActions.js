@@ -42,15 +42,15 @@ export const deleteComment = (slug, id) => (dispatch) => {
     .then((response) => {
       if (response) {
         dispatch({
-          type: 'DELETE_COMMENT_SUCCESSFUL',
-          payload: response.data,
+          type: 'DELETE_COMMENTS',
+          response: response.data,
         });
         store.dispatch(getComments(slug));
       }
     })
     .catch((error) => {
       if (error.response) {
-        dispatch({ type: 'DELETE_COMMENT_FAILED', error: error.response.data });
+        dispatch({ type: 'DELETE_COMMENTS_ERROR', error: error.response.data });
       }
     });
 };
