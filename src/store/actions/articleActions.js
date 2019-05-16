@@ -108,10 +108,6 @@ export const getRating = slug => (dispatch) => {
         type: 'GET_RATING',
         articleRating: response.data['Average Rating'],
       });
-    })
-    .catch((error) => {
-      // handle error
-      console.log('Error fecthing and parsing data', error);
     });
 };
 
@@ -137,9 +133,5 @@ export const checkReviewed = (username, slug) => (dispatch) => {
           ratingValue: reviewer.rating_value,
         });
       }
-    })
-    .catch((error) => {
-      // handle error
-      console.log('Error fecthing and parsing data', error);
     });
 };
