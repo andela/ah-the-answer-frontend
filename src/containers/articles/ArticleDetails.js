@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 import isOwner from '../../helpers/isOwner';
-import { getArticle, checkReviewed, getRating } from '../../store/actions/articleActions';
+import { getArticle, checkReviewed, getRating, putRating, postRating } from '../../store/actions/articleActions';
 import authUser from '../../helpers/authUser';
 import Edit from '../../components/Edit';
 import RatingDisplay from './RatingDisplay';
@@ -72,6 +72,8 @@ class ArticleDetails extends Component {
           </div>
           <RatingDisplay
             number={rating}
+            getRating={this.props.getRating}
+            slug={article.slug}
           />
           {(author.username === userData.username) ? (null) : (
             <RatingBar
@@ -80,6 +82,8 @@ class ArticleDetails extends Component {
               userName={userData.username}
               isReviewed={isReviewed}
               ratingValue={ratingValue}
+              putRating={this.props.putRating}
+              postRating={this.props.postRating}
             />
           )}
         </div>
@@ -124,6 +128,8 @@ const mapDispatchToProps = dispatch => ({
   getArticle: slug => dispatch(getArticle(slug)),
   getRating: slug => dispatch(getRating(slug)),
   checkReviewed: (username, slug) => dispatch(checkReviewed(username, slug)),
+  putRating: (slug, userName, review, userRating) => dispatch(putRating(slug, userName, review, userRating)),
+  postRating: (slug, review, userRating) => dispatch(postRating(slug, review, userRating)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleDetails);
