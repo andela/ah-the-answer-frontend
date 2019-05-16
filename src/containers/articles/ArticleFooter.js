@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bookmarkArticle, getBookmarks } from '../../store/actions/articleActions';
 
-class ArticleFooter extends Component {
+export class ArticleFooter extends Component {
+
   state = {
     isBookmarked: false,
   }
@@ -16,7 +17,6 @@ class ArticleFooter extends Component {
     const { article } = nextProps;
     if (this.props.bookmarks !== nextProps.bookmarks) {
       const obj = bookmarks.find(o => o.title === article.title);
-
       if (obj && obj.title === article.title) {
         this.setState({
           isBookmarked: true,
@@ -37,7 +37,7 @@ class ArticleFooter extends Component {
   render() {
     const { isBookmarked } = this.state;
     return (
-      <div className="container-fluid container-width">
+      <div className="container-fluid container-width" data-test="articleFooter">
         <hr />
         <div className="row">
           <button type="button" title="Bookmark this article to read later" id="bookmarkButton" className="btn btn-outline-primary" autoComplete="off" onClick={this.handleClick}>
