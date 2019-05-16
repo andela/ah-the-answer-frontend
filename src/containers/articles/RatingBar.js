@@ -13,6 +13,10 @@ class RatingBar extends Component {
     userRating: 0,
   }
 
+  componentDidMount() {
+    this.setState({ userRating: this.props.ratingValue });
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({ userRating: nextProps.ratingValue });
   }
@@ -26,9 +30,9 @@ class RatingBar extends Component {
     const { userName } = this.props;
     const { slug } = this.props;
     if (this.props.isReviewed) {
-      axios.put(`http://127.0.0.1:8000/api/articles/${slug}/reviews/${userName}`, { review: { review_body: review, rating_value: userRating } }, config);
+      this.props.putRating(slug, userName, review, userRating);
     } else {
-      axios.post(`http://127.0.0.1:8000/api/articles/${slug}/reviews/`, { review: { review_body: review, rating_value: userRating } }, config);
+      this.props.postRating(slug, review, userRating);
     }
   }
 
