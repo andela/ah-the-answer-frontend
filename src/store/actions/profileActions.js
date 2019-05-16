@@ -2,7 +2,6 @@ import axios from 'axios';
 import * as ProfileAction from '../actionTypes/profileActionTypes';
 import authHeader from '../../helpers/authHeader';
 
-
 // const configUrls = {
 //   root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
 // };
@@ -15,7 +14,6 @@ const configUrls = {
 const config = {
   headers: authHeader(),
 };
-
 
 export const fetchFollows = () => {
   return (dispatch) => {
