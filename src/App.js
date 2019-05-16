@@ -3,6 +3,18 @@
 import React from 'react';
 import './themes/bootstrap-custom.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+
+// Bootstrap JS
+import 'jquery/dist/jquery';
+import 'bootstrap/dist/js/bootstrap';
+
+// Font Awesome Icon
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
+// eslint-disable-next-line import/no-named-as-default
+
 import InitiatePasswordReset from './containers/PasswordReset/InitiatePasswordReset';
 import ResetPasswordMessage from './containers/PasswordReset/PasswordResetSuccess';
 import ResetPassword from './containers/PasswordReset/resetPassword';
@@ -16,6 +28,9 @@ import Signup from './containers/signup/Signup';
 import SignupSuccess from './containers/signup/SignupSuccess';
 import profileContainer from './containers/profile/profileContainer';
 import ProfileUpdate from './containers/profile/ProfileUpdate';
+
+
+library.add(faSearch);
 
 function App() {
   return (
