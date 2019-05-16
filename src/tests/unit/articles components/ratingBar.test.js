@@ -43,6 +43,7 @@ describe('test RatingDisplay component', () => {
     const wrapper = mount(
         <RatingBar ratingValue={0}/>,
     );
+    wrapper.setProps({ userRating: 0 });
     const starBar = wrapper.find('span').at(4)
     starBar.simulate('click')
     console.log(starBar.instance().style.color)
