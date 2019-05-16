@@ -1,5 +1,5 @@
 h1, h2, h3, h4 {
-    font-family: 'Playfair display';
+  font-family: "Playfair display", sans-serif;
 }
 // ARTICLES
 .article-list {
@@ -56,6 +56,11 @@ label {
   margin: auto;
 }
 
+hr {
+  background-color: #000;
+  height: 1px;
+}
+
 .bg-facebook {
   background: #3b5998;
 }
@@ -95,4 +100,41 @@ label {
 }
 .alert {
   color:#20c997;
+}
+// MODAL
+.modal {
+  &-dialog {
+    min-width: 60%;
+  }
+
+  &-header {
+    border-bottom: 0;
+  }
+
+  &-content {
+    background: transparent;
+    border: none;
+  }
+
+  &-body {
+    background: $gray-200;
+    border: 0;
+    border-radius: $border-radius;
+    max-height: 75vh;
+    overflow: scroll;
+  }
+}
+
+// CARD
+.card-search {
+  &-img {
+    background: var(--primary);
+    height: 3rem;
+    width: 3rem;
+  }
+}
+
+// UTILS
+.display-5 {
+  font-size: 2rem;
 }

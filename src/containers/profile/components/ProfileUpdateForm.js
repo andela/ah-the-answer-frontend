@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-const setAxios = require('axios');
 
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.1gC7fqNwCSTYxCQAHvfNmfyb2GhenC6jG0nKLJ-izCM'
-setAxios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+
 
 export class ProfileUpdateForm extends Component {
   state = {
