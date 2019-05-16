@@ -259,10 +259,12 @@ describe('Test that the redux connected "ProfileView" component renders', () => 
 
 describe('Test that the redux connected "ProfileUpdate" component renders', () => {
   it('renders', () => {
-    const wrapper = shallow(
-      <Provider store={store}>
-        <ConnectedProfileUpdate />
-      </Provider>,
+    const wrapper = mount(
+     <BrowserRouter>
+       <Provider store={store}>
+         <ConnectedProfileUpdate />
+       </Provider>
+      </BrowserRouter>,
     );
     expect(wrapper.exists()).toBe(true);
   });
