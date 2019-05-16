@@ -31,8 +31,3 @@ window.FB = {
   init: jest.fn(),
   login: jest.fn()
 };
-
-window.localStorage = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-};
