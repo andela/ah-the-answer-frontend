@@ -64,6 +64,18 @@ const articleReducer = (state = initState, action) => {
         ratingValue: action.ratingValue,
       };
 
+    case 'PUT_RATING':
+      return {
+        ...state,
+        ratingValue: action.ratingValue,
+      };
+
+    case 'POST_RATING':
+      return {
+        ...state,
+        ratingValue: action.ratingValue,
+      };
+
     default:
       return state;
   }
