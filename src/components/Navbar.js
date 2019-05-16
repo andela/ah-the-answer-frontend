@@ -1,8 +1,10 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SignedOutLinks from './SignedOutLinks';
 import SignedInLinks from './SignedInLinks';
 import authStatus from '../helpers/authStatus';
+import Search from '../containers/search/Search';
 
 const Navbar = () => {
   const links = authStatus() ? <SignedInLinks /> : <SignedOutLinks />;
@@ -14,7 +16,12 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
         <NavLink className="navbar-brand" to="/">Authors Haven</NavLink>
         { links }
+        <button type="button" className="btn btn-link nav-link text-dark" data-toggle="modal" data-target="#searchModal">
+          <FontAwesomeIcon icon="search" />
+        </button>
       </div>
+
+      <Search />
     </nav>
   );
 };

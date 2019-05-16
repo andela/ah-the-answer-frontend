@@ -34,3 +34,4 @@ package-lock.json
 
 # test snapshots
 __snapshots__/
+.env
