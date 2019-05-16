@@ -135,3 +135,25 @@ export const checkReviewed = (username, slug) => (dispatch) => {
       }
     });
 };
+
+export const putRating = (slug, userName, review, userRating) => (dispatch) => {
+  return axios.put(`http://127.0.0.1:8000/api/articles/${slug}/reviews/${userName}`, { review: { review_body: review, rating_value: userRating } }, config)
+    .then((response) => {
+      // handle success
+      dispatch({
+        type: 'PUT_RATING',
+        ratingValue: userRating,
+      });
+    });
+};
+
+export const postRating = (slug, review, userRating) => (dispatch) => {
+  return axios.post(`http://127.0.0.1:8000/api/articles/${slug}/reviews/`, { review: { review_body: review, rating_value: userRating } }, config)
+    .then((response) => {
+      // handle success
+      dispatch({
+        type: 'POST_RATING',
+        ratingValue: userRating,
+      });
+    });
+};
