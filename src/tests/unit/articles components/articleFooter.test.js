@@ -75,7 +75,7 @@ describe("Footer", () => {
             },
             bookmarks: [{
                 "id": 31,
-                "article_id": 294,
+                "article_id": 31,
                 "title": "Wantana mera"
             }],
             find: jest.fn().mockReturnValue({
