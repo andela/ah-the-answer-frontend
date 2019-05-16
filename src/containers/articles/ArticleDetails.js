@@ -7,12 +7,17 @@ import parse from 'html-react-parser';
 import isOwner from '../../helpers/isOwner';
 import { getArticle } from '../../store/actions/articleActions';
 import Edit from '../../components/Edit';
+import Liking from './Liking';
 
 class ArticleDetails extends Component {
   componentDidMount() {
     const { slug } = this.props.match.params;
     this.props.getArticle(slug);
   }
+
+  updateState= () => {
+    this.componentDidMount();
+  };
 
   render() {
     const { article, author, message } = this.props;
@@ -61,6 +66,13 @@ class ArticleDetails extends Component {
           </div>
           <div className="container-fluid container-width">
             <div className="lead">{parse(article.body)}</div>
+          </div>
+          <div className="container-fluid container-width article-footer text-center">
+            <Liking
+              like={article.like_count}
+              dislike={article.dislike_count}
+              slug={article.slug}
+            />
           </div>
         </div>
       );

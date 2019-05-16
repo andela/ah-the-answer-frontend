@@ -1,6 +1,8 @@
 /* eslint-disable import/no-named-as-default-member */
 // eslint-disable-next-line import/no-named-as-default
 import React from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import './themes/bootstrap-custom.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import InitiatePasswordReset from './containers/PasswordReset/InitiatePasswordReset';
@@ -17,6 +19,7 @@ import SignupSuccess from './containers/signup/SignupSuccess';
 import profileContainer from './containers/profile/profileContainer';
 import ProfileUpdate from './containers/profile/ProfileUpdate';
 
+library.add(faThumbsUp, faThumbsDown);
 function App() {
   return (
     <Router>
