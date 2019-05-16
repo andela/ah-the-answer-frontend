@@ -2,6 +2,7 @@ import React from 'react';
 import { mount, shallow } from '../../enzyme';
 import RatingBar from '../../../containers/articles/RatingBar';
 import { log } from 'util';
+import { postRating } from '../../../store/actions/articleActions';
 
 describe('test RatingDisplay component', () => {
     it('should render', () => {
@@ -32,7 +33,7 @@ describe('test RatingDisplay component', () => {
 
     it('1st star renders color "ffd700" when clicked', () => {
     const wrapper = mount(
-        <RatingBar />,
+        <RatingBar postRating={postRating}/>,
     );
     const starBar = wrapper.find('span').at(0)
     starBar.simulate('click')
@@ -41,7 +42,7 @@ describe('test RatingDisplay component', () => {
 
     it('change "userRating" state value to 5 when 5th star is clicked', () => {
     const wrapper = mount(
-        <RatingBar ratingValue={0}/>,
+        <RatingBar ratingValue={0} postRating={postRating}/>,
     );
     wrapper.setProps({ userRating: 0 });
     const starBar = wrapper.find('span').at(4)
