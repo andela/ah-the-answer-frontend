@@ -25,6 +25,9 @@ class SignedInLinks extends Component {
             Sign Out
           </NavLink>
         </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/profile"><i className="fas fa-user-alt" /></NavLink>
+        </li>
       </ul>
     );
   }

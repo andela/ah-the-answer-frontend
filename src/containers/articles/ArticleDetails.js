@@ -9,6 +9,9 @@ import { getArticle } from '../../store/actions/articleActions';
 import Edit from '../../components/Edit';
 import CreateComment from '../comments/CreateComments';
 import CommentList from '../comments/CommentList';
+import ArticleFooter from './ArticleFooter';
+import authStatus from '../../helpers/authStatus';
+
 
 class ArticleDetails extends Component {
   componentDidMount() {
@@ -73,6 +76,13 @@ class ArticleDetails extends Component {
               <CommentList slug={this.props.match.params.slug} />
             </div>
           </div>
+          {
+            authStatus() ? (
+              <ArticleFooter id={article.id} />
+            ) : (
+              null
+            )
+          }
         </div>
       );
     }
