@@ -21,8 +21,7 @@ class NotificationList extends Component {
       axios.get(url, config)
         .then((res) => {
           const { notifications } = res.data;
-          //console.log(notifications);
-
+         
           this.setState({ notifications });
         });
       axios.put(readUrl, {}, config)
@@ -36,20 +35,15 @@ class NotificationList extends Component {
         return (
           <div className="container" data-test="articleListNone">
             <div className="d-flex justify-content-center">
-              <div className="spinner-grow text-info" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
               <p className="text-muted mt-1 ml-1">You have no notifications</p>
             </div>
           </div>
         );
       }
       return (
-        <div className="article-list section" data-test="articleList">
+        <div className="list-group container p-4">
           { notifications.map(notification => (
-            <Link to={`/notifications/${notification.id}`} key={notification.id}>
-              <NotificationSummary notification={notification} />
-            </Link>
+            <NotificationSummary notification={notification} />
           )) }
         </div>
 

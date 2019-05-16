@@ -1,16 +1,29 @@
 import React from 'react';
 import moment from 'moment';
+import getUrls from 'get-urls';
 
+const makeUrl = (body) => {
+  const url = getUrls(body).values().next().value;
+  const slug = url.split('/')[5];
+  return slug;
+}
 
 const NotificationSummary = ({ notification }) => (
-  <div className="card shadow flex-md-row mb-4 box-shadow article-summary">
-    <div className="card-body d-flex flex-column align-items-start">
+
+  <div className="container row">
+    <div className="list-group-item list-group-item-action flex-column align-items-start mb-4 col-lg-8 col-md-10 col-sm-12 mx-auto">
+      <div className="d-flex w-100 justify-content-between">
+        <small className="text-muted">
+          {moment(notification.CreatedAt).fromNow()}
+        </small>
+      </div>
       <p className="card-text text-muted">{notification.body}</p>
-      <small className="text-muted">
-        {moment(notification.CreatedAt).fromNow()}
-      </small>
+      <div>
+        <a href={`/articles/${makeUrl(notification.body)}`} className="btn btn-primary btn-sm">View Article</a>
+      </div>
     </div>
   </div>
+
 );
 
 export default NotificationSummary;

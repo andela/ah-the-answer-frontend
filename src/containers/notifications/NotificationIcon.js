@@ -3,7 +3,6 @@ import axios from 'axios';
 import authHeader from '../../helpers/authHeader';
 
 const url = 'https://ah-the-answer-backend-staging.herokuapp.com/api/notifications/unread';
-const markRead = 'https://ah-the-answer-backend-staging.herokuapp.com/api/notifications/read-all';
 const config = {
   headers: authHeader(),
 };
