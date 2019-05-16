@@ -274,4 +274,50 @@ describe('articles reducer', () => {
     });
   });
 
+  it('should handle PUT_RATING for a reviewed article', () => {
+    expect(articleReducer({
+      article: {},
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      ratingValue: 0,
+    }, {
+      type: 'PUT_RATING',
+      ratingValue: 5
+    })).toEqual({
+      article: {},
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      ratingValue: 5,
+    });
+  });
+
+  it('should handle POST_RATING for a reviewed article', () => {
+    expect(articleReducer({
+      article: {},
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      ratingValue: 0,
+    }, {
+      type: 'POST_RATING',
+      ratingValue: 5
+    })).toEqual({
+      article: {},
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      ratingValue: 5,
+    });
+  });
+
 });
