@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import authHeader from '../../helpers/authHeader';
 import NotificationSummary from './NotificationSummary';
 
