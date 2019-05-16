@@ -25,10 +25,6 @@ export const fetchFollows = () => {
           followCount: response.data.success[0].follows,
         });
       })
-      .catch((error) => {
-      // handle error
-        console.log('Error fecthing and parsing data', error);
-      });
   };
 };
 
@@ -41,10 +37,6 @@ export const fetchFollowers = () => (dispatch) => {
         followerCount: response.data.success[1].followers,
       });
     })
-    .catch((error) => {
-      // handle error
-      console.log('Error fecthing and parsing data', error);
-    });
 };
 
 export const fetchBio = () => (dispatch) => {
@@ -56,10 +48,6 @@ export const fetchBio = () => (dispatch) => {
         userBio: response.data.profile.user_bio,
       });
     })
-    .catch((error) => {
-      // handle error
-      console.log('Error fecthing and parsing data', error);
-    });
 };
 
 export const fetchName = () => (dispatch) => {
@@ -72,10 +60,6 @@ export const fetchName = () => (dispatch) => {
         userName: response.data.profile.username,
       });
     })
-    .catch((error) => {
-      // handle error
-      console.log('Error fecthing and parsing data', error);
-    });
 };
 
 export const updateProfile = (name, bio) => (dispatch) => {
@@ -87,10 +71,6 @@ export const updateProfile = (name, bio) => (dispatch) => {
         updateMessage: response.data.success,
       });
     })
-    .catch((error) => {
-      // handle error
-      console.log('Error fecthing and parsing data', error);
-    });
 };
 
 export const resetProfileUpdate = () => (dispatch) => {
