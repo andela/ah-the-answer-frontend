@@ -21,7 +21,7 @@ class NotificationList extends Component {
       axios.get(url, config)
         .then((res) => {
           const { notifications } = res.data;
-         
+
           this.setState({ notifications });
         });
       axios.put(readUrl, {}, config)
