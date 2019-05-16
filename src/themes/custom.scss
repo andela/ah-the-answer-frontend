@@ -69,4 +69,9 @@ label {
 }
 .article-like-icons{
   font-size: 2rem;
+  -webkit-transition: font-size 2s, color 2s;
+  transition: font-size 2s, color 2s;
+}
+.article-like-icons:hover {
+  font-size: 4rem;
 }

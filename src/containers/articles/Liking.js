@@ -9,18 +9,41 @@ import { getArticle } from '../../store/actions/articleActions';
 
 const likeUrl = process.env.REACT_APP_API;
 
+const initialState = {
+  dislikeStyle: {
+    color: '#E8E8E8',
+  },
+  likeStyle: {
+    color: '#E8E8E8',
+  },
+};
 class Liking extends Component {
-  state = {
-    iconStyle: {
-      color: '#',
-    },
-  };
+  state = initialState;
+
+  componentDidMount() {
+    this.getLiked();
+  }
+
+  getLiked = () => {
+    this.setState(initialState);
+    axios.get(`${likeUrl}/api/articles/${this.props.slug}/liked/`, { headers: authHeader() })
+      .then(
+        (res) => {
+          if (res.data.message === 'You have reacted to this article before') {
+            if (res.data.liked[0].likes === 1) {
+              this.setState({ likeStyle: { color: 'green' } });
+            } else if (res.data.liked[0].likes === 0) {
+              this.setState({ dislikeStyle: { color: 'red' } });
+            }
+          }
+        },
+      );
+  }
 
   likeArticle= (vote) => {
     const { slug } = this.props;
     let url;
     if (vote === -1) {
-      console.log(vote);
       url = `${likeUrl}/api/articles/${this.props.slug}/dislike/`;
     } else {
       url = `${likeUrl}/api/articles/${this.props.slug}/like/`;
@@ -29,20 +52,21 @@ class Liking extends Component {
       .then(
         (res) => {
           this.props.getArticle(slug);
+          this.getLiked();
         },
       );
   };
 
   render() {
-    const { iconStyle } = this.state;
+    const { dislikeStyle, likeStyle } = this.state;
     return (
       <div className="mt-4">
         <div className="d-inline-block mr-5">
-          <FontAwesomeIcon className="article-like-icons" style={iconStyle} icon="thumbs-down" onClick={() => this.likeArticle(-1)} />
+          <FontAwesomeIcon className="article-like-icons" style={dislikeStyle} icon="thumbs-down" onClick={() => this.likeArticle(-1)} />
           <p>{this.props.dislike}</p>
         </div>
         <div className="d-inline-block">
-          <FontAwesomeIcon className="article-like-icons" icon="thumbs-up" onClick={() => this.likeArticle(1)} />
+          <FontAwesomeIcon className="article-like-icons" style={likeStyle} icon="thumbs-up" onClick={() => this.likeArticle(1)} />
           <p>{this.props.like}</p>
         </div>
       </div>
