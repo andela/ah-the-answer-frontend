@@ -95,7 +95,6 @@ describe('Test comment edited successfull', () => {
     });
     return store.dispatch(editComment(slug, userData, 128)).then(() => {
       const newState = store.getState();
-      console.log(newState);
     });
   });
 });
