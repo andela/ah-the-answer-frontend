@@ -66,7 +66,7 @@ describe('Test comment edited successfull', () => {
     moxios.uninstall();
   });
 
-  it('Store is updated successfully with new', () => {
+  it('Store is updated successfully with new data', () => {
     const expectedState = {
       success: 'Comment updated successful',
       comment: {
