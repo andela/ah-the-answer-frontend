@@ -6,18 +6,24 @@ import TwitterIcon from '../../images/twitter.svg';
 const twitterURL = `${process.env.REACT_APP_API}/api/users/twitter/`;
 
 class TwitterLogin extends Component {
-  twitterLogin = () => {
+  twitterLogin() {
     window.OAuth.initialize(process.env.REACT_APP_TWITTER_KEY);
     window.OAuth.popup('twitter').then((twitter) => {
-      axios.post(twitterURL, {
-        access_token: `${twitter.oauth_token} ${twitter.oauth_token_secret}`,
-      }).then(
-        (res) => {
+      this.twitterAuthentication(twitter);
+    });
+  };
+
+  twitterAuthentication = (twitter) => {
+    axios.post(twitterURL, {
+      access_token: `${twitter.oauth_token} ${twitter.oauth_token_secret}`,
+    }).then(
+      (res) => {
+        if (res.status === 200) {
           localStorage.setItem('user', JSON.stringify(res.data.user));
           window.location.replace('/');
-        },
-      );
-    });
+        }
+      },
+    );
   };
 
   render() {

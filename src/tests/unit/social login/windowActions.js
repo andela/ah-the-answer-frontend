@@ -19,12 +19,20 @@ window.OAuth = {
   initialize : jest.fn(),
   popup: jest.fn().mockImplementation(() => {
     return new Promise(resolve => {
-        jest.fn()
-    })
+        return {
+          oauth_token: 'fdsf',
+          oauth_token_secret: 'dsfdsf',
+        }
+    }).then();
   })
 };
 window.fbAsyncInit = {};
 window.FB = {
   init: jest.fn(),
   login: jest.fn()
+};
+
+window.localStorage = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
 };
