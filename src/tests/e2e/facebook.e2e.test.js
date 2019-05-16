@@ -38,8 +38,10 @@ describe('Facebook SDK function', () => {
     const mock = new MockAdapter(Axios);
     mock.onPost(fbLogin)
       .reply(200, {
-        username: 'A',
-        token: 'fadsfasdfdsfas',
+        user : {
+          username: 'A',
+          token: 'fadsfasdfdsfas',
+        }
       });
     wrapper.instance().loginCallback(response);
     expect(spy).toBeCalledWith(response.authResponse.accessToken);
@@ -58,8 +60,10 @@ describe('Facebook SDK function', () => {
     const mock = new MockAdapter(Axios);
     mock.onPost(fbLogin)
       .reply(400, {
-        username: 'A',
-        token: 'fadsfasdfdsfas',
+        user: {
+          username: 'A',
+          token: 'fadsfasdfdsfas',
+        }
       });
     wrapper.instance().loginCallback(response);
     expect(spy).toBeCalledWith(response.authResponse.accessToken);

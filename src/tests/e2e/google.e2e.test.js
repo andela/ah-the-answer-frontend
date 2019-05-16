@@ -44,12 +44,10 @@ describe('Google SDK function', () => {
     const mock = new MockAdapter(Axios);
     mock.onPost(glogin)
       .reply(200, {
-        data: {
           user: {
             username: 'A',
             token: 'fadsfasdfdsfas',
           },
-        },
       });
     wrapper.instance().getUserDetails('valid');
     global.location = jest.fn();
