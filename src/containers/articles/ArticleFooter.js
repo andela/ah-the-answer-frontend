@@ -16,8 +16,8 @@ export class ArticleFooter extends Component {
     const { bookmarks } = nextProps;
     const { article } = nextProps;
     if (this.props.bookmarks !== nextProps.bookmarks) {
-      const obj = bookmarks.find(o => o.title === article.title);
-      if (obj && obj.title === article.title) {
+      const obj = bookmarks.find(o => o.article_id === article.id);
+      if (obj && obj.article_id === article.id) {
         this.setState({
           isBookmarked: true,
         });
