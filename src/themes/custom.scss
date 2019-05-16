@@ -73,6 +73,14 @@ hr {
   background: #00acee;
 }
 
+
+// Article footer
+#bookmarkButton:hover {
+  color: #20c997;
+  border-color: #20c997;
+  background: none;
+}
+
 // MODAL
 .modal {
   &-dialog {

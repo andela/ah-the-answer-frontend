@@ -8,6 +8,7 @@ describe('articles reducer', () => {
       message: {},
       editMessage: {},
       deleteMessage: {},
+      bookmarkMessage: {},
     });
   });
   it('should handle GET_ARTICLE', () => {
@@ -186,6 +187,86 @@ describe('articles reducer', () => {
       message: {},
       editMessage: {},
       deleteMessage: {},  
+    });
+  });
+  it('should handle BOOKMARK_ARTICLE_SUCCESSFUL', () => {
+    expect(articleReducer({
+      bookmarkMessage: {},
+    }, {
+      type: 'BOOKMARK_ARTICLE_SUCCESSFUL',
+      response: {
+        data: {
+          bookmarks: 'here',
+        },
+      },
+    })).toEqual({
+      bookmarkMessage: {
+        bookmarks: 'here',
+      },  
+    });
+  });
+  it('should handle BOOKMARK_ARTICLE_FAILED', () => {
+    expect(articleReducer({
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      bookmarkMessage: {},
+    }, {
+      type: 'BOOKMARK_ARTICLE_FAILED',
+      error: {},
+    })).toEqual({
+      articles: [],
+      error: {},
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      bookmarkMessage: {}, 
+    });
+  });
+  it('should handle GET_BOOKMARKS_SUCCESS', () => {
+    expect(articleReducer({
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      bookmarkMessage: {},
+      bookmarks: {},
+    }, {
+      type: 'GET_BOOKMARKS_SUCCESS',
+      payload: {},
+    })).toEqual({
+      articles: [],
+      errors: [],
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      bookmarkMessage: {},
+      bookmarks: {},
+    });
+  });
+  it('should handle GET_BOOKMARKS_ERROR', () => {
+    expect(articleReducer({
+      articles: [],
+      error: {},
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      bookmarkMessage: {},
+    }, {
+      type: 'GET_BOOKMARKS_ERROR',
+      error: {},
+    }
+    )).toEqual({
+      articles: [],
+      error: {},
+      message: {},
+      editMessage: {},
+      deleteMessage: {},
+      bookmarkMessage: {},      
     });
   });
 
