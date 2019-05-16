@@ -2,12 +2,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { deleteComment, editComment } from '../../store/actions/commentActions';
+import moment from 'moment';
 
 class CommentDetail extends React.Component {
   state = {
     body: '',
     isHidden: true,
   };
+
+  componentDidMount() {
+    this.setState({
+      body: this.props.item.body,
+    });
+  }
 
   handleDelete = (id) => {
     this.props.deleteComment(this.props.slug, id);
@@ -31,52 +38,68 @@ class CommentDetail extends React.Component {
   render() {
     const userObject = JSON.parse(localStorage.getItem('user'));
     return (
-      <div className="container">
-        {this.state.isHidden ? (
-          <div className="text-center">
-            <p className="container text-center comment">{this.props.item.body}</p>
-            {userObject && userObject.user.username !== this.props.item.author.username ? (
-              <div />
-            ) : !userObject ? (
-              <div />
-            ) : (
-              <div>
-                <button type="button" className="badge badge-primary" onClick={this.handleOpen}>
-                  Edit Comment
-                </button>
-                <button
-                  type="button"
-                  className="badge badge-danger"
-                  onClick={() => {
-                    if (window.confirm('Are you sure you wish to delete this item?')) this.handleDelete(this.props.item.id);
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
-            )}
-          </div>
-        ) : (
-          <div>
-            <textarea
-              name="body"
-              rows="7"
-              onChange={this.handleChange}
-              className="form-control edit-comment"
-            >
-              {this.props.item.body}
-            </textarea>
-            <div className="text-center mt-2">
-              <button
-                type="button"
-                className="badge badge-primary"
-                onClick={() => this.handleSubmit(this.props.item.id)}
-              >
-                Update Comment
-              </button>
+      <div className="card mb-3 mx-auto">
+        <div className="card-body">
+          <p className="card-text">
+            <div>
+              {this.state.isHidden ? (
+                <div>
+                  <p className="card-text">{this.props.item.body}</p>
+                  {userObject && userObject.username !== this.props.item.author.username ? (
+                    <div />
+                  ) : !userObject ? (
+                    <div />
+                  ) : (
+                    <div className="d-flex w-100 card-text">
+                      <div className="w-25 mr-auto d-flex align-items-center">
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-sm col mr-2"
+                          onClick={this.handleOpen}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-danger col btn-sm"
+                          onClick={() => {
+                            if (window.confirm('Are you sure you wish to delete this item?')) this.handleDelete(this.props.item.id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                      <p className="card-text">
+                        <small className="text-muted">{moment(this.props.item.createdAt).fromNow()}</small>
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="m-2">
+                  <label className="form-label">Update Comment</label>
+                  <textarea
+                    name="body"
+                    rows="5"
+                    onChange={this.handleChange}
+                    className="form-control edit-comment"
+                    defaultValue={this.props.item.body}
+                  />
+
+                  <div className="text-center mt-2">
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-sm col-2"
+                      onClick={() => this.handleSubmit(this.props.item.id)}
+                    >
+                      Update
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        )}
+          </p>
+        </div>
       </div>
     );
   }

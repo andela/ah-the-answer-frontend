@@ -25,9 +25,10 @@ class CreateComment extends Component {
   render() {
     const userObject = JSON.parse(localStorage.getItem('user'));
     {
-      return userObject && userObject.user.token ? (
+      return userObject && userObject.token ? (
         <form onSubmit={this.handleSubmit} className="mb-5 comment">
           <div className="form-group">
+            <label className="form-label">Comment</label>
             <textarea onChange={this.handleChange} name="body" className="form-control" />
           </div>
           <div className="form-group text-center">

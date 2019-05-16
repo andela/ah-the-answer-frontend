@@ -25,19 +25,18 @@ class ArticleDetails extends Component {
       return (
         <div className="container article-details">
           <div className="row float-right mt-4">
-            {
-              isOwner(author.username) ? (
-                <Edit slug={article.slug} />
-              ) : (
-                null
-              )
-            }
+            {isOwner(author.username) ? <Edit slug={article.slug} /> : null}
           </div>
           <div className="row">
             <div className="col-lg-4 mt-4">
               <div className="row">
                 <div className="col-lg-3">
-                  <Link to={`/profile/${article.author.username}`} className="btn btn-info profile-img d-flex align-items-center justify-content-center">{article.author.username.slice(0, 2)}</Link>
+                  <Link
+                    to={`/profile/${article.author.username}`}
+                    className="btn btn-info profile-img d-flex align-items-center justify-content-center"
+                  >
+                    {article.author.username.slice(0, 2)}
+                  </Link>
                 </div>
                 <div className="col-lg-9">
                   <div className="text-muted">
@@ -58,14 +57,22 @@ class ArticleDetails extends Component {
           </div>
           <div className="container-fluid text-center">
             <hr />
-            <img src="https://res.cloudinary.com/dv85uhrw5/image/upload/v1556052045/pocvovruu6lhhic2fhq1.jpg" alt="" className="img-fluid rounded" />
+            <img
+              src="https://res.cloudinary.com/dv85uhrw5/image/upload/v1556052045/pocvovruu6lhhic2fhq1.jpg"
+              alt=""
+              className="img-fluid rounded"
+            />
             <hr />
           </div>
           <div className="container-fluid container-width">
             <div className="lead">{parse(article.body)}</div>
           </div>
-          <CommentList slug={this.props.match.params.slug} />
-          <CreateComment slug={this.props.match.params.slug} />
+          <div className="container">
+            <CreateComment slug={this.props.match.params.slug} />
+            <div className="col-lg-8 col-sm-12 mx-auto">
+              <CommentList slug={this.props.match.params.slug} />
+            </div>
+          </div>
         </div>
       );
     }
@@ -103,4 +110,7 @@ const mapDispatchToProps = dispatch => ({
   getArticle: slug => dispatch(getArticle(slug)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ArticleDetails);
