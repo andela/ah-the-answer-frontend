@@ -80,7 +80,8 @@
     "axios-mock-adapter": "^1.16.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-react": "^7.13.0",
-    "moxios": "^0.4.0"
+    "eslint-plugin-react": "^7.12.4",
+    "moxios": "^0.4.0",
+    "react-test-renderer": "^16.8.6"
   }
 }
