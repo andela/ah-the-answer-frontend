@@ -50,14 +50,15 @@ describe('Twitter component', () => {
     expect(window.OAuth.popup).toBeCalled();
   });
   it('calls the backend', ()=> {
-    const wrapper = mount(<TwitterLogin />)
+    const wrapper = mount(<TwitterLogin />);
     const mock = new MockAdapter(Axios);
     mock.onPost(twitterURL)
       .reply(200, {
-        username: 'A',
-        token: 'fadsfasdfdsfas',
+        user: {
+          username: 'testuser',
+          token: 'testtoken',
+        }
       });
-    Storage.prototype.setItem =  jest.fn();
     wrapper.instance().twitterAuthentication({oauth_token: 'h',oauth_token_secret: 'a'});
   })
 });

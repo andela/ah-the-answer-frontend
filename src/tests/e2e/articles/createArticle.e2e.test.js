@@ -9,7 +9,7 @@ const user = {
   username: 'testuser',
   token: 'testtoken',
 };
-localStorage.setItem('user', JSON.stringify(user));
+// localStorage.setItem('user', JSON.stringify(user));
 
 
 describe('article creation', () => {
