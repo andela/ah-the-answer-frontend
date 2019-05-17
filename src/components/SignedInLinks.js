@@ -5,7 +5,6 @@ import NotificationIcon from '../containers/notifications/NotificationIcon'
 class SignedInLinks extends Component {
   handleLogout = () => {
     localStorage.clear();
-    window.location.replace('/');
   };
 
   render() {
@@ -27,9 +26,12 @@ class SignedInLinks extends Component {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link text-danger" to="/notifications">
+          <NavLink className="nav-link" to="/notifications">
             <NotificationIcon />
           </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/profile"><i className="text-dark fas fa-user-alt" /></NavLink>
         </li>
       </ul>
     );
