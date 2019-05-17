@@ -2,13 +2,13 @@ import axios from 'axios';
 import * as ProfileAction from '../actionTypes/profileActionTypes';
 import authHeader from '../../helpers/authHeader';
 
-// const configUrls = {
-//   root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
-// };
-
 const configUrls = {
-  root: 'http://127.0.0.1:8000/api/',
+  root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
 };
+
+// const configUrls = {
+//   root: 'http://127.0.0.1:8000/api/',
+// };
 
 
 const config = {
