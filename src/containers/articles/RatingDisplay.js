@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactStars from 'react-stars';
 
 export class RatingDisplay extends Component {
   state ={
@@ -17,9 +18,14 @@ export class RatingDisplay extends Component {
 
   render() {
     return (
-      <div className="container">
-        <p className="text-center">Rated: {this.state.avgRating || 0}</p>
-      </div>
+      <ReactStars
+        size={15}
+        color1="#f1f1f1"
+        color2="#20c997"
+        half={false}
+        edit={false}
+        value={this.state.avgRating || 0}
+      />
     );
   }
 }
