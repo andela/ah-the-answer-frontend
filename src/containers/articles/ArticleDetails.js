@@ -88,9 +88,9 @@ class ArticleDetails extends Component {
             <div className="lead">{parse(article.body)}</div>
           </div>
           <div className="container container-width d-flex align-items-center">
-            <div className="ml-auto">
-              <div className="text-primary mb-0">Rate The Article?</div>
-              {(author.username === userData.username) ? (null) : (
+            {(author.username === userData.username || userData === false) ? (null) : (
+              <div className="ml-auto">
+                <div className="text-primary mb-0">Rate The Article?</div>
                 <RatingBar
                   review={userReview}
                   slug={article.slug}
@@ -100,8 +100,8 @@ class ArticleDetails extends Component {
                   putRating={this.props.putRating}
                   postRating={this.props.postRating}
                 />
-              )}
-            </div>
+              </div>
+            )}
           </div>
           {
             authStatus() ? (
