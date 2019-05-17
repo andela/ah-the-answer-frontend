@@ -6,11 +6,11 @@ const makeUrl = (body) => {
   const url = getUrls(body).values().next().value;
   const slug = url.split('/')[5];
   return slug;
-}
+};
 
 const NotificationSummary = ({ notification }) => (
 
-  <div className="container row">
+  <div className="container row" data-test="notificationSummary">
     <div className="list-group-item list-group-item-action flex-column align-items-start mb-4 col-lg-8 col-md-10 col-sm-12 mx-auto">
       <div className="d-flex w-100 justify-content-between">
         <small className="text-muted">

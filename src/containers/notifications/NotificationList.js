@@ -17,15 +17,13 @@ class NotificationList extends Component {
     }
 
     componentDidMount() {
-      axios.get(url, config)
+      const response1 = axios.get(url, config)
         .then((res) => {
           const { notifications } = res.data;
-
           this.setState({ notifications });
         });
-      axios.put(readUrl, {}, config)
-        .then(() => {
-        });
+      axios.put(readUrl, {}, config);
+      return response1;
     }
 
     render() {
