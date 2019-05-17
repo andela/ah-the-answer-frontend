@@ -8,6 +8,7 @@ const initState = {
   ratingValue: 0,
   userReview: '',
   isReviewed: false,
+  bookmarkMessage: {},
 };
 
 const articleReducer = (state = initState, action) => {
@@ -76,6 +77,26 @@ const articleReducer = (state = initState, action) => {
         ratingValue: action.ratingValue,
       };
 
+    case 'BOOKMARK_ARTICLE_SUCCESSFUL':
+      return {
+        ...state,
+        bookmarkMessage: action.response.data,
+      };
+    case 'BOOKMARK_ARTICLE_FAILED':
+      return {
+        ...state,
+        error: action.error,
+      };
+    case 'GET_BOOKMARKS_SUCCESS':
+      return {
+        ...state,
+        bookmarks: action.payload,
+      };
+    case 'GET_BOOKMARKS_ERROR':
+      return {
+        ...state,
+        error: action.error,
+      };
     default:
       return state;
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const SignedOutLinks = () => (
-  <ul className="navbar-nav ml-auto mt-2 mt-lg-0 signedOutLink" data-test="signedOutLink">
+  <ul className="navbar-nav ml-auto mt-2 mt-lg-0" data-test="signedOutLink">
     <li className="nav-item">
       <NavLink className="nav-link" to="/">Home</NavLink>
     </li>

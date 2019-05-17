@@ -1,35 +1,37 @@
+
 h1, h2, h3, h4 {
   font-family: "Playfair display", sans-serif;
 }
+
 // ARTICLES
 .article-list {
-    a {
-        text-decoration: none;
-    }
+  a {
+    text-decoration: none;
+  }
 
-    .card {
-        height: 25vh;
-    }
+  .card {
+    height: 25vh;
+  }
 
-    .card-img-left {
-        width: 40%;
-        object-fit: cover;
-    }
+  .card-img-left {
+    width: 40%;
+    object-fit: cover;
+  }
 }
 
 .profile-img {
-    width:4rem;
-    height:4rem;
-    border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
 }
 
 .container-width {
-    width: 80%;
+  width: 80%;
 }
 
 // SIGNUP PAGE
 .full-height {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 label {
@@ -48,12 +50,18 @@ label {
 // END OF SIGNUP PAGE
 
 #profileImageID {
-    object-fit: cover;
-    height:100%;
-    width: 100%;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
+
 .social-login {
   margin: auto;
+}
+
+hr {
+  background-color: #000;
+  height: 1px;
 }
 
 .bg-facebook {
@@ -66,6 +74,14 @@ label {
 
 .bg-twitter {
   background: #00acee;
+}
+
+
+// Article footer
+#bookmarkButton:hover {
+  color: #20c997;
+  border-color: #20c997;
+  background: none;
 }
 
 // MODAL
@@ -105,3 +121,4 @@ label {
 .display-5 {
   font-size: 2rem;
 }
+
