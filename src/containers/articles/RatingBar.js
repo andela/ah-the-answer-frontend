@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactStars from 'react-stars';
-import axios from 'axios';
 import authHeader from '../../helpers/authHeader';
 
 const config = {
