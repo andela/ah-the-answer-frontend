@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 class SignedInLinks extends Component {
   handleLogout = () => {
     localStorage.clear();
-    window.location.replace('/');
   };
 
   render() {
