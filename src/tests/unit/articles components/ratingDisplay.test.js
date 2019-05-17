@@ -15,11 +15,16 @@ describe('test RatingDisplay component', () => {
     expect(wrapper.exists()).toBe(true);
       });
     
-    it('renders a given "rating" state value', () => {
+    it('renders default stars when provided no props', () => {
     const wrapper = mount(<RatingDisplay getRating={getRating}/>);
-    wrapper.setProps({ rating: 5 });
-    const text = wrapper.find('p').text();
-    expect(text).toEqual('Rated: 5');
+    const starBar = wrapper.find('span').at(0)
+    expect(starBar.props().style.color).toEqual('#f1f1f1');
     });
 
+    it('1st star renders color', () => {
+    const wrapper = mount(<RatingDisplay getRating={getRating}/>);
+    wrapper.setProps({ rating: 5 });
+    const starBar = wrapper.find('span').at(0)
+    expect(starBar.instance().style.color).toEqual('rgb(32, 201, 151)');
+    });
 });
