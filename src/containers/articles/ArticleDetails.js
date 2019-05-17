@@ -39,8 +39,8 @@ class ArticleDetails extends Component {
               )
             }
           </div>
-          <div className="row">
-            <div className="col-lg-4 mt-4">
+          <div className="row d-flex align-items-center pt-4">
+            <div className="col-lg-4">
               <div className="row">
                 <div className="col-lg-3">
                   <Link to={`/profile/${article.author.username}`} className="btn btn-info profile-img d-flex align-items-center justify-content-center">{article.author.username.slice(0, 2)}</Link>
@@ -58,8 +58,18 @@ class ArticleDetails extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-lg-8">
-              <h1 className="mt-4">{article.title}</h1>
+            <div className="col-lg-6">
+              <h1 className="m-0">{article.title}</h1>
+            </div>
+            <div className="col-lg-2 d-flex align-items-center">
+              <div>
+                <div className="text-muted mb-0">Rating</div>
+                <RatingDisplay
+                  number={rating}
+                  getRating={this.props.getRating}
+                  slug={article.slug}
+                />
+              </div>
             </div>
           </div>
           <div className="container-fluid text-center">
@@ -70,22 +80,22 @@ class ArticleDetails extends Component {
           <div className="container-fluid container-width">
             <div className="lead">{parse(article.body)}</div>
           </div>
-          <RatingDisplay
-            number={rating}
-            getRating={this.props.getRating}
-            slug={article.slug}
-          />
-          {(author.username === userData.username) ? (null) : (
-            <RatingBar
-              review={userReview}
-              slug={article.slug}
-              userName={userData.username}
-              isReviewed={isReviewed}
-              ratingValue={ratingValue}
-              putRating={this.props.putRating}
-              postRating={this.props.postRating}
-            />
-          )}
+          <div className="container container-width d-flex align-items-center">
+            <div className="ml-auto">
+              <div className="text-primary mb-0">Rate The Article?</div>
+              {(author.username === userData.username) ? (null) : (
+                <RatingBar
+                  review={userReview}
+                  slug={article.slug}
+                  userName={userData.username}
+                  isReviewed={isReviewed}
+                  ratingValue={ratingValue}
+                  putRating={this.props.putRating}
+                  postRating={this.props.postRating}
+                />
+              )}
+            </div>
+          </div>
         </div>
       );
     }
