@@ -1,13 +1,13 @@
 import axios from 'axios';
 import authHeader from '../../helpers/authHeader';
 
-// const configUrls = {
-//   root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
-// };
-
 const configUrls = {
-  root: 'http://127.0.0.1:8000/api/articles/',
+  root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
 };
+
+// const configUrls = {
+//   root: 'http://127.0.0.1:8000/api/articles/',
+// };
 
 
 const config = {
@@ -101,7 +101,7 @@ export const updateArticle = (slug, article) => {
 };
 
 export const getRating = slug => (dispatch) => {
-  return axios.get(`http://127.0.0.1:8000/api/articles/${slug}/reviews/`)
+  return axios.get(`${configUrls.root}${slug}/reviews/`)
     .then((response) => {
       // handle success
       dispatch({
@@ -112,7 +112,7 @@ export const getRating = slug => (dispatch) => {
 };
 
 export const checkReviewed = (username, slug) => (dispatch) => {
-  return axios.get(`http://127.0.0.1:8000/api/articles/${slug}/reviews/`)
+  return axios.get(`${configUrls.root}${slug}/reviews/`)
     .then((response) => {
       // handle success
       const reviewer = response.data.reviews.find((element) => {
@@ -137,7 +137,7 @@ export const checkReviewed = (username, slug) => (dispatch) => {
 };
 
 export const putRating = (slug, userName, review, userRating) => (dispatch) => {
-  return axios.put(`http://127.0.0.1:8000/api/articles/${slug}/reviews/${userName}`, { review: { review_body: review, rating_value: userRating } }, config)
+  return axios.put(`${configUrls.root}${slug}/reviews/${userName}`, { review: { review_body: review, rating_value: userRating } }, config)
     .then((response) => {
       // handle success
       dispatch({
@@ -148,7 +148,7 @@ export const putRating = (slug, userName, review, userRating) => (dispatch) => {
 };
 
 export const postRating = (slug, review, userRating) => (dispatch) => {
-  return axios.post(`http://127.0.0.1:8000/api/articles/${slug}/reviews/`, { review: { review_body: review, rating_value: userRating } }, config)
+  return axios.post(`${configUrls.root}${slug}/reviews/`, { review: { review_body: review, rating_value: userRating } }, config)
     .then((response) => {
       // handle success
       dispatch({
