@@ -251,9 +251,11 @@ describe('Test viewProfile function that routes the profile containers', () => {
 describe('Test that the redux connected "ProfileView" component renders', () => {
   it('renders', () => {
     const wrapper = mount(
+      <BrowserRouter>
       <Provider store={store}>
         <ConnectedProfileView />
-      </Provider>,
+      </Provider>
+      </BrowserRouter>,
     );
     expect(wrapper.exists()).toBe(true);
   });
