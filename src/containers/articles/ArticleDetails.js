@@ -9,7 +9,6 @@ import { getArticle, checkReviewed, getRating, putRating, postRating } from '../
 import authUser from '../../helpers/authUser';
 import Edit from '../../components/Edit';
 import RatingDisplay from './RatingDisplay';
-import ReviewArticle from './ReviewArticle';
 import RatingBar from './RatingBar';
 
 class ArticleDetails extends Component {
