@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import authHeader from '../../helpers/authHeader';
 import { getArticle } from '../../store/actions/articleActions';
 
-
 const likeUrl = process.env.REACT_APP_API;
 
 const initialState = {
@@ -16,8 +15,9 @@ const initialState = {
   likeStyle: {
     color: '#E8E8E8',
   },
+  loggedIn: true,
 };
-class Liking extends Component {
+export class LikingArticle extends Component {
   state = initialState;
 
   componentDidMount() {
@@ -38,7 +38,7 @@ class Liking extends Component {
           }
         },
       );
-  }
+  };
 
   likeArticle= (vote) => {
     const { slug } = this.props;
@@ -51,42 +51,50 @@ class Liking extends Component {
     axios.post(url, {}, { headers: authHeader() })
       .then(
         (res) => {
-          this.props.getArticle(slug);
-          this.getLiked();
+          if (res.status === 200) {
+            this.props.getArticle(slug);
+            this.getLiked();
+          } else {
+            this.setState({ loggedIn: false });
+          }
         },
       );
   };
 
   render() {
-    const { dislikeStyle, likeStyle } = this.state;
+    const { dislikeStyle, likeStyle, loggedIn } = this.state;
     return (
       <div className="mt-4">
         <div className="d-inline-block mr-5">
-          <FontAwesomeIcon className="article-like-icons" style={dislikeStyle} icon="thumbs-down" onClick={() => this.likeArticle(-1)} />
+          <FontAwesomeIcon className="article-like-icons" id="dislike" style={dislikeStyle} icon="thumbs-down" onClick={() => this.likeArticle(-1)} />
           <p>{this.props.dislike}</p>
         </div>
         <div className="d-inline-block">
-          <FontAwesomeIcon className="article-like-icons" style={likeStyle} icon="thumbs-up" onClick={() => this.likeArticle(1)} />
+          <FontAwesomeIcon className="article-like-icons" id="like" style={likeStyle} icon="thumbs-up" onClick={() => this.likeArticle(1)} />
           <p>{this.props.like}</p>
         </div>
+        { loggedIn === false ? <div className="text-danger">Only logged in users can like/dislike</div> : '' }
       </div>
     );
   }
 }
 
-Liking.propTypes = {
+LikingArticle.propTypes = {
   slug: PropTypes.string,
   like: PropTypes.number,
   dislike: PropTypes.number,
+
 };
-Liking.defaultProps = {
+LikingArticle.defaultProps = {
   slug: '',
   like: 0,
   dislike: 0,
 };
-
+const mapStateToProps = state => ({
+  article: state.article.article,
+});
 const mapDispatchToProps = dispatch => ({
   getArticle: slug => dispatch(getArticle(slug)),
 });
 
-export default connect(null, mapDispatchToProps)(Liking);
+export default connect(mapStateToProps, mapDispatchToProps)(LikingArticle);

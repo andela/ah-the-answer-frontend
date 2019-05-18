@@ -7,7 +7,7 @@ import parse from 'html-react-parser';
 import isOwner from '../../helpers/isOwner';
 import { getArticle } from '../../store/actions/articleActions';
 import Edit from '../../components/Edit';
-import Liking from './Liking';
+import LikingArticle from './LikingArticle';
 
 class ArticleDetails extends Component {
   componentDidMount() {
@@ -68,7 +68,7 @@ class ArticleDetails extends Component {
             <div className="lead">{parse(article.body)}</div>
           </div>
           <div className="container-fluid container-width article-footer text-center">
-            <Liking
+            <LikingArticle
               like={article.like_count}
               dislike={article.dislike_count}
               slug={article.slug}
