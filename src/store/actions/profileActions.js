@@ -1,11 +1,6 @@
 import axios from 'axios';
 import * as ProfileAction from '../actionTypes/profileActionTypes';
 
-const setAxios = require('axios');
-
-// const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.1gC7fqNwCSTYxCQAHvfNmfyb2GhenC6jG0nKLJ-izCM';
-// setAxios.defaults.headers.common = { Authorization: `Bearer ${token}` };
-
 export const fetchFollows = () => {
   return (dispatch) => {
     return axios.get(' http://127.0.0.1:8000/api/follows/count/Kyppy/')
