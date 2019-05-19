@@ -1,8 +1,12 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import * as ProfileAction from '../../../store/actionTypes/profileActionTypes';
 import { shallow, mount } from '../../enzyme';
+import ConnectedSocialFollowing from '../../../containers/profile/components/connectedSocialFollowing';
 import SocialFollowing from '../../../containers/profile/components/SocialFollowing';
 import NameTag from '../../../containers/profile/components/NameTag';
 import BiographyText from '../../../containers/profile/components/BiographyText';
@@ -32,13 +36,13 @@ describe('Test SocialFollowing component', () => {
   it('renders a given number', () => {
     const wrapper = shallow(<SocialFollowing number={10} />);
     const text = wrapper.find('p').text();
-    expect(text).toEqual('10 Social Media Point');
+    expect(text).toEqual('10 ');
   });
 
   it('renders a given social media point name', () => {
     const wrapper = shallow(<SocialFollowing socialName="Follows" />);
     const text = wrapper.find('p').text();
-    expect(text).toEqual('999 Follows');
+    expect(text).toEqual('0 Follows');
   });
 });
 
@@ -55,7 +59,7 @@ describe('Test NameTag component', () => {
   });
 
   it('renders a given second name', () => {
-    const wrapper = shallow(<NameTag secondName="Doe" />);
+    const wrapper = shallow(<NameTag userName="Doe" />);
     const text = wrapper.find('h5').text();
     expect(text).toEqual('@Doe');
   });
@@ -157,18 +161,35 @@ describe('Test ProfileUpdate container', () => {
 
 describe('Test ProfileView container', () => {
   it('renders', () => {
+    const testStore = configureMockStore([thunk]);
+    let store = testStore({});
     const mockFtn = jest.fn();
-    const wrapper = mount(
+    const wrapper = shallow(
       <BrowserRouter>
-        <ProfileView
-          fetchBio={mockFtn}
-          fetchName={mockFtn}
-          fetchFollows={mockFtn}
-          fetchFollowers={mockFtn}
-          profileprops={{
-            givenName: 'Bob', userName: 'User', bio: 'Default Story', follows: 0, followers: 0, profileImg: '...',
-          }}
-        />
+        <Provider store={store}>
+          <ProfileView
+              fetchBio={mockFtn}
+              fetchName={mockFtn}
+              fetchFollows={mockFtn}
+              fetchFollowers={mockFtn}
+              match={{
+                params: {
+                  username: 'User'
+                },
+              }}
+              profileprops={{
+                givenName: 'Bob',
+                userName: 'User',
+                bio: 'Default Story',
+                follows: 0,
+                followers: 0,
+                profileImg: '...',
+                follows: {
+                  checkfollow: true
+                },
+              }}
+          />
+        </Provider>
       </BrowserRouter>,
     );
     expect(wrapper.exists()).toBe(true);
