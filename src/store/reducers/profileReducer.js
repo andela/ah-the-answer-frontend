@@ -8,6 +8,7 @@ const initialState = {
   bio: 'Default Story',
   profileImg: '...',
   updateMessage: false,
+  checkfollow: false,
 };
 
 export default function Profile(state = initialState, action) {
@@ -19,6 +20,7 @@ export default function Profile(state = initialState, action) {
       };
 
     case ProfileAction.FETCH_FOLLOWERS:
+    console.log(action.followerCount);
       return {
         ...state,
         followers: action.followerCount,
@@ -54,7 +56,7 @@ export default function Profile(state = initialState, action) {
         ...state,
         updateMessage: false,
       };
-
+    
     default:
       return state;
   }
