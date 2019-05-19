@@ -4,17 +4,51 @@ import {
   fetchBio, fetchName, updateProfile, resetProfileUpdate,
 } from '../../store/actions/profileActions';
 import ProfileUpdateForm from './components/ProfileUpdateForm';
+import authUser from '../../helpers/authUser';
 
 export class ProfileUpdate extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      givenName: 0,
+      bio: '',
+      updateMessage: '',
+    };
+  }
+
   componentDidMount() {
-    this.props.fetchName();
-    this.props.fetchBio();
+    const {
+      fetchName,
+      fetchBio,
+    } = this.props
+
+    const userData = authUser();
+    const userName = userData.username;
+
+    fetchName(userName);
+    fetchBio(userName);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.givenName !== nextProps.profileprops.givenName
+      || prevState.bio !== nextProps.profileprops.bio
+      || prevState.updateMessage !== nextProps.profileprops.updateMessage) {
+      return {
+        givenName: nextProps.profileprops.givenName,
+        bio: nextProps.profileprops.bio,
+        updateMessage: nextProps.profileprops.updateMessage,
+      };
+    }
+    return null;
   }
 
   render() {
-    const { profileprops: { givenName } } = this.props;
-    const { profileprops: { bio } } = this.props;
-    const { profileprops: { updateMessage } } = this.props;
+    const {
+      givenName,
+      bio,
+      updateMessage,
+    } = this.state;
+
     return (
       <div className="container">
         <div className="row">
@@ -57,8 +91,8 @@ const mapStateToProps = state => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  fetchBio: () => dispatch(fetchBio()),
-  fetchName: () => dispatch(fetchName()),
+  fetchBio: currentUserProf => dispatch(fetchBio(currentUserProf)),
+  fetchName: currentUserProf => dispatch(fetchName(currentUserProf)),
   updateProfile: (name, bio) => dispatch(updateProfile(name, bio)),
   resetProfileUpdate: () => dispatch(resetProfileUpdate()),
 });
