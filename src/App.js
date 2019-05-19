@@ -28,7 +28,7 @@ import Signup from './containers/signup/Signup';
 import SignupSuccess from './containers/signup/SignupSuccess';
 import profileContainer from './containers/profile/profileContainer';
 import ProfileUpdate from './containers/profile/ProfileUpdate';
-import UnProtected from './helpers/unProtected';
+import UnProtectedRoute from './helpers/unProtected';
 
 
 library.add(faSearch);
@@ -47,7 +47,7 @@ function App() {
           <Route exact path="/articles/:slug" component={ArticleDetails} />
           <Route path="/articles/:slug/edit" component={EditArticle} />
           <Route path="/signup" component={Signup} />
-          <UnProtected path="/login" component={Login} />
+          <UnProtectedRoute path="/login" component={Login} />
           <Route path="/success-signup" component={SignupSuccess} />
           <Route path="/profile" component={profileContainer} />
           <Route path="/editprofile" component={ProfileUpdate} />
