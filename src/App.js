@@ -16,6 +16,8 @@ import Signup from './containers/signup/Signup';
 import SignupSuccess from './containers/signup/SignupSuccess';
 import profileContainer from './containers/profile/profileContainer';
 import ProfileUpdate from './containers/profile/ProfileUpdate';
+import Followers from './containers/follow/followers';
+import FollowedUsers from './containers/follow/followingList';
 
 function App() {
   return (
@@ -33,8 +35,10 @@ function App() {
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/success-signup" component={SignupSuccess} />
-          <Route path="/profile" component={profileContainer} />
+          <Route path="/profile/:username" component={profileContainer} />
           <Route path="/editprofile" component={ProfileUpdate} />
+          <Route path="/followings" component={FollowedUsers} />
+          <Route path="/follows" component={Followers} />
         </Switch>
       </div>
     </Router>
