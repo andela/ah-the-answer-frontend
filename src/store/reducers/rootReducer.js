@@ -4,6 +4,8 @@ import RequestPasswordReset from './requestPasswordReset';
 import authReducer from './authReducer';
 import articleReducer from './articleReducer';
 import followingReducer from './followReducer';
+import commentReducer from './commentReducer';
+
 
 const rootReducer = combineReducers({
   profile: profileReducer,
@@ -11,6 +13,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   articles: articleReducer,
   follows: followingReducer,
+  comments: commentReducer,
 });
 
 export default rootReducer;

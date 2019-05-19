@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { signInUser } from '../../store/actions/authActions';
-import FbIcon from '../../images/facebook.svg';
-import TwitterIcon from '../../images/twitter.svg';
-import GoogleIcon from '../../images/google.svg';
+import GoogleLogin from './google';
+import FacebookLogin from './facebook';
+import TwitterLogin from './twitter';
 
 export class Login extends Component {
   state = {
@@ -48,15 +48,9 @@ export class Login extends Component {
 
                 <h5 className="text-center mb-4 mt-5">Sign In with</h5>
                 <div className="row mb-5" role="group" aria-label="Basic example">
-                  <button type="button" className="btn bg-facebook ml-2 col">
-                    <img src={FbIcon} alt="facebook icon" />
-                  </button>
-                  <button type="button" className="btn bg-google ml-2 col">
-                    <img src={GoogleIcon} alt="google icon" />
-                  </button>
-                  <button type="button" className="btn bg-twitter ml-2 mr-2 col">
-                    <img src={TwitterIcon} alt="twitter icon" id="errorMessages" />
-                  </button>
+                  <FacebookLogin />
+                  <GoogleLogin />
+                  <TwitterLogin />
                 </div>
                 <div className="text-center text-danger">
                   {errorMessages ? <p>{errorMessages}</p> : null}
