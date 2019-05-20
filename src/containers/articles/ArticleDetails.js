@@ -14,7 +14,7 @@ import CreateComment from '../comments/CreateComments';
 import CommentList from '../comments/CommentList';
 import ArticleFooter from './ArticleFooter';
 import authStatus from '../../helpers/authStatus';
-
+import LikingArticle from './LikingArticle';
 
 class ArticleDetails extends Component {
   componentDidMount() {
@@ -24,6 +24,10 @@ class ArticleDetails extends Component {
     this.props.getRating(slug);
     this.props.checkReviewed(userData.username, slug);
   }
+
+  updateState= () => {
+    this.componentDidMount();
+  };
 
   render() {
     const userData = authUser();
@@ -86,6 +90,13 @@ class ArticleDetails extends Component {
           </div>
           <div className="container-fluid container-width">
             <div className="lead">{parse(article.body)}</div>
+          </div>
+          <div className="container-fluid container-width article-footer text-center">
+            <LikingArticle
+              like={article.like_count}
+              dislike={article.dislike_count}
+              slug={article.slug}
+            />
           </div>
           <div className="container container-width d-flex align-items-center">
             {(author.username === userData.username || userData === false) ? (null) : (

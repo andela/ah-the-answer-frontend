@@ -90,4 +90,4 @@ describe('Create Component', () => {
     wrapper.instance().handleSubmit(e2);
     expect(spy2).toBeCalledWith(e2);
   });
-})
+});
