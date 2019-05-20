@@ -1,4 +1,3 @@
-
 h1, h2, h3, h4 {
   font-family: "Playfair display", sans-serif;
 }
@@ -59,6 +58,7 @@ label {
   margin: auto;
 }
 
+
 .bg-facebook {
   background: #3b5998;
 }
@@ -69,6 +69,14 @@ label {
 
 .bg-twitter {
   background: #00acee;
+}
+.article-like-icons{
+  font-size: 1.4rem;
+  -webkit-transition: font-size 2s, color 2s;
+  transition: font-size 2s, color 2s;
+}
+.article-like-icons:hover {
+  font-size: 2rem;
 }
 
 // Notifications
