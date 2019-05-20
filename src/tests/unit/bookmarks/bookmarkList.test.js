@@ -5,12 +5,25 @@ import configureMockStore from 'redux-mock-store';
 import { BrowserRouter as Router } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import BookmarkList from '../../../containers/bookmarks/BookmarkList';
+import Bookmark from '../../../containers/bookmarks/Bookmarks';
+
+const user = {
+  username: 'testuser',
+  token: 'testtoken',
+};
+
+localStorage.setItem('user', JSON.stringify(user));
 
 describe('components', () => {
-  xit('should render self and child components', () => {
+  it('should render self and child components', () => {
     const testStore = configureMockStore([thunk]);
     let store = testStore({
       bookmarks: [],
+      articles: {
+        bookmarks: [
+          {title: 'hello',}
+        ]
+      }
     });
     const div = document.createElement('div');
     const props = {
@@ -28,7 +41,7 @@ describe('components', () => {
     ReactDOM.render(
       <Provider store={store}>
         <Router>
-          <BookmarkList />
+          <BookmarkList Bookmark/>
         </Router>
       </Provider>, div );
     ReactDOM.unmountComponentAtNode(div);
