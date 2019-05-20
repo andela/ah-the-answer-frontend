@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import NotificationIcon from '../containers/notifications/NotificationIcon'
 
 class SignedInLinks extends Component {
   handleLogout = () => {
@@ -25,7 +26,12 @@ class SignedInLinks extends Component {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link" to="/profile"><i className="fas fa-user-alt" /></NavLink>
+          <NavLink className="nav-link" to="/notifications">
+            <NotificationIcon />
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/profile"><i className="text-dark fas fa-user-alt" /></NavLink>
         </li>
       </ul>
     );

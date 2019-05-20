@@ -21,6 +21,9 @@ import Signup from './containers/signup/Signup';
 import SignupSuccess from './containers/signup/SignupSuccess';
 import profileContainer from './containers/profile/profileContainer';
 import ProfileUpdate from './containers/profile/ProfileUpdate';
+import NotificationList from './containers/notifications/NotificationList';
+import NotificationDetails from './containers/notifications/NotificationDetails';
+
 
 library.add(faThumbsUp, faThumbsDown, faSearch);
 function App() {
@@ -41,6 +44,8 @@ function App() {
           <Route path="/success-signup" component={SignupSuccess} />
           <Route path="/profile" component={profileContainer} />
           <Route path="/editprofile" component={ProfileUpdate} />
+          <Route exact path="/notifications" component={NotificationList} />
+          <Route path="/notifications/:id" component={NotificationDetails} />
         </Switch>
       </div>
     </Router>
