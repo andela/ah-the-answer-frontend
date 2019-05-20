@@ -23,6 +23,13 @@ const initialState = {
   profileImg: '...',
 };
 
+const user = {
+  username: 'testuser',
+  token: 'testtoken',
+};
+
+localStorage.setItem('user', JSON.stringify(user));
+
 describe('Test SocialFollowing component', () => {
   it('renders', () => {
     const wrapper = shallow(<SocialFollowing />);

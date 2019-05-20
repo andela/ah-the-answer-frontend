@@ -28,6 +28,7 @@ import Signup from './containers/signup/Signup';
 import SignupSuccess from './containers/signup/SignupSuccess';
 import profileContainer from './containers/profile/profileContainer';
 import ProfileUpdate from './containers/profile/ProfileUpdate';
+import BookmarkList from './containers/bookmarks/BookmarkList';
 
 
 library.add(faSearch);
@@ -50,6 +51,7 @@ function App() {
           <Route path="/success-signup" component={SignupSuccess} />
           <Route path="/profile" component={profileContainer} />
           <Route path="/editprofile" component={ProfileUpdate} />
+          <Route path="/bookmarks" component={BookmarkList} />
         </Switch>
       </div>
     </Router>
