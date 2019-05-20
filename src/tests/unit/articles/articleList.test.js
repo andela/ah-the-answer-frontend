@@ -1,9 +1,9 @@
 import React from 'react';
-import { mount } from '../../enzyme';
+import { shallow } from '../../enzyme';
 import ArticleList from '../../../containers/articles/ArticleList';
 
 describe('render article list', () => {
-  let wrapper;
+  let wrapper, wrapper2;
   beforeEach(() => {
     const props = {
       articles: [
@@ -86,7 +86,9 @@ describe('render article list', () => {
         },
       ],
     };
-    wrapper = mount(<ArticleList {...props} />);
+    const props2 = { articles: [] }
+    wrapper = shallow(<ArticleList {...props} />);
+    wrapper2 = shallow(<ArticleList {...props2} />)
   });
   it('should render article list', () => {
     const response = wrapper.find('[data-test="articleList"]');

@@ -197,6 +197,9 @@ label {
 
 .social-share:hover {
   opacity: 0.8;
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 .button-disabled {
@@ -224,4 +227,26 @@ label {
 .trash-icon,
 .edit-icon {
   cursor: pointer;
+}
+
+.page {
+  &-item {
+    &.disabled {
+      .page-link {
+        background: $gray-200;
+      }
+    }
+  }
+
+  &-link {
+    &:hover {
+      background: $primary;
+      color: #ffffff;
+      transition: $btn-transition;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
 }

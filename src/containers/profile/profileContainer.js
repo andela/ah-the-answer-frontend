@@ -1,7 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {
   fetchFollows, fetchFollowers, fetchBio, fetchName,
 } from '../../store/actions/profileActions';
