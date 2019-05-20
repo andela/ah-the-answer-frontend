@@ -21,6 +21,7 @@ import Signup from './containers/signup/Signup';
 import SignupSuccess from './containers/signup/SignupSuccess';
 import profileContainer from './containers/profile/profileContainer';
 import ProfileUpdate from './containers/profile/ProfileUpdate';
+import BookmarkList from './containers/bookmarks/BookmarkList';
 import NotificationList from './containers/notifications/NotificationList';
 import NotificationDetails from './containers/notifications/NotificationDetails';
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/success-signup" component={SignupSuccess} />
           <Route path="/profile" component={profileContainer} />
           <Route path="/editprofile" component={ProfileUpdate} />
+          <Route path="/bookmarks" component={BookmarkList} />
           <Route exact path="/notifications" component={NotificationList} />
           <Route path="/notifications/:id" component={NotificationDetails} />
         </Switch>
