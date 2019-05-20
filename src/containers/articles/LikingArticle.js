@@ -51,7 +51,7 @@ export class LikingArticle extends Component {
     axios.post(url, {}, { headers: authHeader() })
       .then(
         (res) => {
-          if (res.status === 200) {
+          if (res.status === 200 || res.status === 202 || res.status === 201 ) {
             this.props.getArticle(slug);
             this.getLiked();
           } else {
@@ -60,7 +60,6 @@ export class LikingArticle extends Component {
         },
       );
   };
-
   render() {
     const { dislikeStyle, likeStyle, loggedIn } = this.state;
     return (
