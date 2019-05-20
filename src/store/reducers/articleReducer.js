@@ -4,6 +4,7 @@ const initState = {
   message: {},
   editMessage: {},
   deleteMessage: {},
+  bookmarkMessage: {},
 };
 
 const articleReducer = (state = initState, action) => {
@@ -41,6 +42,26 @@ const articleReducer = (state = initState, action) => {
         editMessage: action.response.data,
       };
     case 'UPDATE_ARTICLE_FAILED':
+      return {
+        ...state,
+        error: action.error,
+      };
+    case 'BOOKMARK_ARTICLE_SUCCESSFUL':
+      return {
+        ...state,
+        bookmarkMessage: action.response.data,
+      };
+    case 'BOOKMARK_ARTICLE_FAILED':
+      return {
+        ...state,
+        error: action.error,
+      };
+    case 'GET_BOOKMARKS_SUCCESS':
+      return {
+        ...state,
+        bookmarks: action.payload,
+      };
+    case 'GET_BOOKMARKS_ERROR':
       return {
         ...state,
         error: action.error,

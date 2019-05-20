@@ -11,6 +11,7 @@ import NameTag from './components/NameTag';
 import SocialFollowing from './components/SocialFollowing';
 // eslint-disable-next-line import/no-named-as-default
 import ConnectedSocialFollowing from './components/connectedSocialFollowing';
+import Bookmarks from '../../containers/bookmarks/Bookmarks';
 import authUser from '../../helpers/authUser';
 
 const userDetails = authUser();
@@ -143,7 +144,7 @@ export class ProfileView extends Component {
           </div>
           <div className="col-6">
             <h3 className="text-center"> Bookmarks </h3>
-            <Card />
+            <Bookmarks />
           </div>
         </div>
       </div>
