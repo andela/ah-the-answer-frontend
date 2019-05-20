@@ -18,7 +18,6 @@ import Profile from '../../../store/reducers/profileReducer';
 import ViewProfile from '../../../containers/profile/profileView';
 import App from '../../../App';
 import store from '../../../store/store';
-import thunk from 'redux-thunk';
 
 const initialState = {
   follows: 0,
@@ -328,7 +327,7 @@ describe('Test viewProfile function that routes the profile containers', () => {
 
 describe('Test that the redux connected "ProfileView" component renders', () => {
   it('renders', () => {
-    const wrapper = mount(
+    const wrapper = shallow(
       <BrowserRouter>
       <Provider store={store}>
         <ConnectedProfileView />
