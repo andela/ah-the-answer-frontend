@@ -161,13 +161,24 @@ describe('Test ProfileUpdate container', () => {
 });
 
 describe('Test ProfileView component', () => {
-  it('renders', () => {
+  it("should render and update state", () => {
     const testStore = configureMockStore([thunk]);
     let store = testStore({});
     const mockFtn = jest.fn();
     const wrapper = shallow(
-      <ConnectedProfileView
+      <ProfileView
           store={store}
+          profileprops={{
+            givenName: 'Test',
+            userName: 'testUser',
+            bio: 'Default test Story',
+            follows: 2,
+            followers: 5,
+            profileImg: '...',
+            follows: {
+              checkfollow: true
+            },
+          }}
           fetchBio={mockFtn}
           fetchName={mockFtn}
           fetchFollows={mockFtn}
@@ -177,31 +188,20 @@ describe('Test ProfileView component', () => {
               username: 'User'
             },
           }}
-          profileprops={{
-            givenName: 'Bob',
-            userName: 'User',
-            bio: 'Default Story',
-            follows: 0,
-            followers: 0,
-            profileImg: '...',
-            follows: {
-              checkfollow: true
-            },
-          }}
       />
     );
-    expect(wrapper.exists()).toBe(true);
-  });
+  })
+
+});
+
+describe("Unit test for component", () => {
   it('updates state with store data', () => {
     const data = {
-      givenName: 'Bob',
-      userName: 'User',
-      bio: 'Default Story',
-      follows: 0,
-      followers: 0,
-      follows: {
-        checkfollow: true
-      },
+      givenName: 'Test',
+      userName: 'testUser',
+      bio: 'Default test Story',
+      follows: 2,
+      followers: 5,
     }
     const wrapper = shallow(<ProfileView 
       profileprops={data}
@@ -222,19 +222,19 @@ describe('Test ProfileView component', () => {
     expect(spy).toBeCalled()
     expect(wrapper.instance().state).toEqual(data)
   });
-  it('updates state with new data', () => {
+})
+
+describe("Unit test for Updated state", () => {
+  it('updates state with store data', () => {
     const data = {
-      givenName: 'Bob',
-      userName: 'User',
-      bio: 'Default Story',
-      follows: 0,
-      followers: 0,
-      follows: {
-        checkfollow: true
-      },
+      givenName: 'Test',
+      userName: 'testUser',
+      bio: 'Default test Story',
+      follows: 2,
+      followers: 5,
     }
-    const wrapper = shallow(<ProfileView 
-      profileprops={data}
+    const wrapper = shallow(<ProfileView
+      profileprops={data} 
       match={{
         params: {
           username: 'User'
@@ -245,17 +245,25 @@ describe('Test ProfileView component', () => {
       fetchFollows={jest.fn()}
       fetchFollowers={jest.fn()}
     />)
-    const spy = jest.spyOn(wrapper.instance(), 'componentDidMount');
 
-    wrapper.instance().componentDidMount()
-    const initState = wrapper.instance().state
-
-    console.log(wrapper.instance())
-
-    expect(spy).toBeCalled()
-    expect(initState).toEqual(data)
+    wrapper.setProps({
+      profileprops:{ 
+        followers: 3,
+        follows: 4,
+        givenName: 'user',
+        userName: 'test',
+        bio: "default story", 
+       }
+      })
+    expect(wrapper.state().followers).toEqual(3)
+    expect(wrapper.state().follows).toEqual(4)
+    expect(wrapper.state().givenName).toEqual('user')
+    expect(wrapper.state().userName).toEqual('test')
+    expect(wrapper.state().bio).toEqual('default story')
   });
-});
+})
+
+
 
 describe('Test "fetchBio" reducer', () => {
   it('renders', () => {
@@ -346,6 +354,20 @@ describe('Test that the redux connected "ProfileUpdate" component renders', () =
          <ConnectedProfileUpdate />
        </Provider>
       </BrowserRouter>,
+    );
+    expect(wrapper.exists()).toBe(true);
+  });
+});
+
+describe('Test that the redux connected "ConnectedSocialFollowing" component renders', () => {
+  it('renders', () => {
+    const wrapper = mount(
+      <ConnectedSocialFollowing 
+        store={store}
+        getFollowers={jest.fn()}
+        userName={'user'}
+        followers={3}
+      />
     );
     expect(wrapper.exists()).toBe(true);
   });
