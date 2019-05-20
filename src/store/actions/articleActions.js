@@ -5,6 +5,11 @@ const configUrls = {
   root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
 };
 
+// const configUrls = {
+//   root: 'http://127.0.0.1:8000/api/articles/',
+// };
+
+
 const config = {
   headers: authHeader(),
 };
@@ -93,6 +98,64 @@ export const updateArticle = (slug, article) => {
         dispatch({ type: 'UPDATE_ARTICLE_FAILED', error: error.response.data });
       });
   };
+};
+
+export const getRating = slug => (dispatch) => {
+  return axios.get(`${configUrls.root}${slug}/reviews/`)
+    .then((response) => {
+      // handle success
+      dispatch({
+        type: 'GET_RATING',
+        articleRating: response.data['Average Rating'],
+      });
+    });
+};
+
+export const checkReviewed = (username, slug) => (dispatch) => {
+  return axios.get(`${configUrls.root}${slug}/reviews/`)
+    .then((response) => {
+      // handle success
+      const reviewer = response.data.reviews.find((element) => {
+        return element.reviewer_username === username;
+      });
+      if (reviewer === undefined) {
+        dispatch({
+          type: 'REVIEW_STATUS',
+          isReviewed: false,
+          userReview: '',
+          ratingValue: 0,
+        });
+      } else {
+        dispatch({
+          type: 'REVIEW_STATUS',
+          isReviewed: true,
+          userReview: reviewer.review_body,
+          ratingValue: reviewer.rating_value,
+        });
+      }
+    });
+};
+
+export const putRating = (slug, userName, review, userRating) => (dispatch) => {
+  return axios.put(`${configUrls.root}${slug}/reviews/${userName}`, { review: { review_body: review, rating_value: userRating } }, config)
+    .then((response) => {
+      // handle success
+      dispatch({
+        type: 'PUT_RATING',
+        ratingValue: userRating,
+      });
+    });
+};
+
+export const postRating = (slug, review, userRating) => (dispatch) => {
+  return axios.post(`${configUrls.root}${slug}/reviews/`, { review: { review_body: review, rating_value: userRating } }, config)
+    .then((response) => {
+      // handle success
+      dispatch({
+        type: 'POST_RATING',
+        ratingValue: userRating,
+      });
+    });
 };
 
 export const bookmarkArticle = (id) => {

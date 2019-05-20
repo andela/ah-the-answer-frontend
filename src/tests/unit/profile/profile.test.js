@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import * as ProfileAction from '../../../store/actionTypes/profileActionTypes';
 import { shallow, mount } from '../../enzyme';
@@ -8,11 +9,13 @@ import NameTag from '../../../containers/profile/components/NameTag';
 import BiographyText from '../../../containers/profile/components/BiographyText';
 import Card from '../../../containers/profile/components/Card';
 import { ProfileUpdateForm } from '../../../containers/profile/components/ProfileUpdateForm';
-import { ProfileUpdate } from '../../../containers/profile/ProfileUpdate';
-import { ProfileView } from '../../../containers/profile/profileContainer';
+import ConnectedProfileUpdate, { ProfileUpdate } from '../../../containers/profile/ProfileUpdate';
+import ConnectedProfileView, { ProfileView } from '../../../containers/profile/profileContainer';
 import Profile from '../../../store/reducers/profileReducer';
 import ViewProfile from '../../../containers/profile/profileView';
+import App from '../../../App';
 import store from '../../../store/store';
+import thunk from 'redux-thunk';
 
 const initialState = {
   follows: 0,
@@ -233,7 +236,7 @@ describe('Test "updateProfile" reducer', () => {
   });
 });
 
-describe('Test "updateProfile" reducer', () => {
+describe('Test "resetUpdate" reducer', () => {
   it('renders', () => {
     const action = { type: ProfileAction.RESET_UPDATE_MESSAGE, updateMessage: false };
     const response = Profile(initialState, action);
@@ -247,6 +250,32 @@ describe('Test viewProfile function that routes the profile containers', () => {
       <Provider store={store}>
         <ViewProfile />
       </Provider>,
+    );
+    expect(wrapper.exists()).toBe(true);
+  });
+});
+
+describe('Test that the redux connected "ProfileView" component renders', () => {
+  it('renders', () => {
+    const wrapper = mount(
+      <BrowserRouter>
+      <Provider store={store}>
+        <ConnectedProfileView />
+      </Provider>
+      </BrowserRouter>,
+    );
+    expect(wrapper.exists()).toBe(true);
+  });
+});
+
+describe('Test that the redux connected "ProfileUpdate" component renders', () => {
+  it('renders', () => {
+    const wrapper = mount(
+     <BrowserRouter>
+       <Provider store={store}>
+         <ConnectedProfileUpdate />
+       </Provider>
+      </BrowserRouter>,
     );
     expect(wrapper.exists()).toBe(true);
   });

@@ -1,4 +1,3 @@
-
 h1, h2, h3, h4 {
   font-family: "Playfair display", sans-serif;
 }
@@ -70,7 +69,42 @@ label {
 .bg-twitter {
   background: #00acee;
 }
+.article-like-icons{
+  font-size: 1.4rem;
+  -webkit-transition: font-size 2s, color 2s;
+  transition: font-size 2s, color 2s;
+}
+.article-like-icons:hover {
+  font-size: 2rem;
+}
 
+// Notifications
+.button-badge {
+  text-decoration: none;
+  padding: 0.01rem 0.3rem;
+  position: relative;
+  display: inline-block;
+  border-radius: .2rem;
+  transition: all ease 0.4s;
+}
+
+.button-badge:hover {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.badge {
+  position: absolute;
+  top: -18px;
+  right: -28px;
+  font-size: .8em;
+}
+
+.fa {
+  color: white;
+}
+.alert {
+  color:black;
+}
 
 // Article footer
 #bookmarkButton:hover {

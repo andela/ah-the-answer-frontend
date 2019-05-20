@@ -1,20 +1,13 @@
 /* eslint-disable import/no-named-as-default-member */
 // eslint-disable-next-line import/no-named-as-default
 import React from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faThumbsUp, faThumbsDown, faSearch } from '@fortawesome/free-solid-svg-icons';
 import './themes/bootstrap-custom.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-
 // Bootstrap JS
 import 'jquery/dist/jquery';
 import 'bootstrap/dist/js/bootstrap';
-
-// Font Awesome Icon
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
-// eslint-disable-next-line import/no-named-as-default
-
 import InitiatePasswordReset from './containers/PasswordReset/InitiatePasswordReset';
 import ResetPasswordMessage from './containers/PasswordReset/PasswordResetSuccess';
 import ResetPassword from './containers/PasswordReset/resetPassword';
@@ -29,10 +22,11 @@ import SignupSuccess from './containers/signup/SignupSuccess';
 import profileContainer from './containers/profile/profileContainer';
 import ProfileUpdate from './containers/profile/ProfileUpdate';
 import BookmarkList from './containers/bookmarks/BookmarkList';
+import NotificationList from './containers/notifications/NotificationList';
+import NotificationDetails from './containers/notifications/NotificationDetails';
 
 
-library.add(faSearch);
-
+library.add(faThumbsUp, faThumbsDown, faSearch);
 function App() {
   return (
     <Router>
@@ -52,6 +46,8 @@ function App() {
           <Route path="/profile" component={profileContainer} />
           <Route path="/editprofile" component={ProfileUpdate} />
           <Route path="/bookmarks" component={BookmarkList} />
+          <Route exact path="/notifications" component={NotificationList} />
+          <Route path="/notifications/:id" component={NotificationDetails} />
         </Switch>
       </div>
     </Router>
