@@ -5,7 +5,6 @@ import configureMockStore from 'redux-mock-store';
 import { BrowserRouter as Router } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import BookmarkList from '../../../containers/bookmarks/BookmarkList';
-import Bookmark from '../../../containers/bookmarks/Bookmarks';
 
 const user = {
   username: 'testuser',
