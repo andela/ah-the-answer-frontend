@@ -59,11 +59,6 @@ label {
   margin: auto;
 }
 
-hr {
-  background-color: #000;
-  height: 1px;
-}
-
 .bg-facebook {
   background: #3b5998;
 }
@@ -76,6 +71,33 @@ hr {
   background: #00acee;
 }
 
+// Notifications
+.button-badge {
+  text-decoration: none;
+  padding: 0.01rem 0.3rem;
+  position: relative;
+  display: inline-block;
+  border-radius: .2rem;
+  transition: all ease 0.4s;
+}
+
+.button-badge:hover {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.badge {
+  position: absolute;
+  top: -18px;
+  right: -28px;
+  font-size: .8em;
+}
+
+.fa {
+  color: white;
+}
+.alert {
+  color:black;
+}
 
 // Article footer
 #bookmarkButton:hover {
