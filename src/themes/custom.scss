@@ -153,12 +153,12 @@ label {
 
 // SOCIAL SHARE
 .social-share {
+  cursor: pointer;
   float: left;
   margin-left: 2px;
-  cursor: pointer;
 }
 
-.social-share:hover{
+.social-share:hover {
   opacity: 0.8;
 }
 
