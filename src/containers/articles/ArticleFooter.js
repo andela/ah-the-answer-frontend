@@ -39,8 +39,8 @@ export class ArticleFooter extends Component {
     return (
       <div className="container-fluid container-width" data-test="articleFooter">
         <hr />
-        <div className="row">
-          <button type="button" title="Bookmark this article to read later" id="bookmarkButton" className="btn btn-outline-primary" autoComplete="off" onClick={this.handleClick}>
+        <div className="">
+          <button type="button" title="Bookmark this article to read later" id="bookmarkButton" className="btn btn-outline-primary ml-2 no-outline" autoComplete="off" onClick={this.handleClick}>
             { isBookmarked ? <i className="fas fa-bookmark fa-lg" /> : <i className="far fa-bookmark fa-lg" /> }
           </button>
         </div>
