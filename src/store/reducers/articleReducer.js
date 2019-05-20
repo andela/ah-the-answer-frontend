@@ -4,6 +4,10 @@ const initState = {
   message: {},
   editMessage: {},
   deleteMessage: {},
+  rating: 0,
+  ratingValue: 0,
+  userReview: '',
+  isReviewed: false,
   bookmarkMessage: {},
 };
 
@@ -46,6 +50,33 @@ const articleReducer = (state = initState, action) => {
         ...state,
         error: action.error,
       };
+
+    case 'GET_RATING':
+      return {
+        ...state,
+        rating: action.articleRating,
+      };
+
+    case 'REVIEW_STATUS':
+      return {
+        ...state,
+        isReviewed: action.isReviewed,
+        userReview: action.userReview,
+        ratingValue: action.ratingValue,
+      };
+
+    case 'PUT_RATING':
+      return {
+        ...state,
+        ratingValue: action.ratingValue,
+      };
+
+    case 'POST_RATING':
+      return {
+        ...state,
+        ratingValue: action.ratingValue,
+      };
+
     case 'BOOKMARK_ARTICLE_SUCCESSFUL':
       return {
         ...state,

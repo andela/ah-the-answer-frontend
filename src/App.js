@@ -30,6 +30,8 @@ import profileContainer from './containers/profile/profileContainer';
 import ProfileUpdate from './containers/profile/ProfileUpdate';
 import Followers from './containers/follow/followers';
 import FollowedUsers from './containers/follow/followingList';
+import NotificationList from './containers/notifications/NotificationList';
+import NotificationDetails from './containers/notifications/NotificationDetails';
 
 
 library.add(faSearch);
@@ -54,6 +56,8 @@ function App() {
           <Route path="/editprofile" component={ProfileUpdate} />
           <Route path="/followings" component={FollowedUsers} />
           <Route path="/follows" component={Followers} />
+          <Route exact path="/notifications" component={NotificationList} />
+          <Route path="/notifications/:id" component={NotificationDetails} />
         </Switch>
       </div>
     </Router>
