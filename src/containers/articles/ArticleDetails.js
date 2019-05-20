@@ -5,8 +5,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 import isOwner from '../../helpers/isOwner';
-import { getArticle } from '../../store/actions/articleActions';
+import { getArticle, checkReviewed, getRating, putRating, postRating } from '../../store/actions/articleActions';
+import authUser from '../../helpers/authUser';
 import Edit from '../../components/Edit';
+import RatingDisplay from './RatingDisplay';
+import RatingBar from './RatingBar';
 import CreateComment from '../comments/CreateComments';
 import CommentList from '../comments/CommentList';
 import ArticleFooter from './ArticleFooter';
@@ -15,12 +18,16 @@ import authStatus from '../../helpers/authStatus';
 
 class ArticleDetails extends Component {
   componentDidMount() {
+    const userData = authUser();
     const { slug } = this.props.match.params;
     this.props.getArticle(slug);
+    this.props.getRating(slug);
+    this.props.checkReviewed(userData.username, slug);
   }
 
   render() {
-    const { article, author, message } = this.props;
+    const userData = authUser();
+    const { article, author, message, rating, userReview, isReviewed, ratingValue } = this.props;
     if (message && message === 'The article requested does not exist') {
       this.props.history.push('/');
     }
@@ -30,8 +37,8 @@ class ArticleDetails extends Component {
           <div className="row float-right mt-4">
             {isOwner(author.username) ? <Edit slug={article.slug} /> : null}
           </div>
-          <div className="row">
-            <div className="col-lg-4 mt-4">
+          <div className="row d-flex align-items-center pt-4">
+            <div className="col-lg-4">
               <div className="row">
                 <div className="col-lg-3">
                   <Link
@@ -54,8 +61,18 @@ class ArticleDetails extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-lg-8">
-              <h1 className="mt-4">{article.title}</h1>
+            <div className="col-lg-6">
+              <h1 className="m-0">{article.title}</h1>
+            </div>
+            <div className="col-lg-2 d-flex align-items-center">
+              <div>
+                <div className="text-muted mb-0">Rating</div>
+                <RatingDisplay
+                  number={rating}
+                  getRating={this.props.getRating}
+                  slug={article.slug}
+                />
+              </div>
             </div>
           </div>
           <div className="container-fluid text-center">
@@ -70,19 +87,35 @@ class ArticleDetails extends Component {
           <div className="container-fluid container-width">
             <div className="lead">{parse(article.body)}</div>
           </div>
+          <div className="container container-width d-flex align-items-center">
+            {(author.username === userData.username || userData === false) ? (null) : (
+              <div className="ml-auto">
+                <div className="text-primary mb-0">Rate The Article?</div>
+                <RatingBar
+                  review={userReview}
+                  slug={article.slug}
+                  userName={userData.username}
+                  isReviewed={isReviewed}
+                  ratingValue={ratingValue}
+                  putRating={this.props.putRating}
+                  postRating={this.props.postRating}
+                />
+              </div>
+            )}
+          </div>
           {
             authStatus() ? (
               <ArticleFooter id={article.id} />
-              ) : (
-                null
-                )
+            ) : (
+              null
+            )
               }
-              <div className="container">
-                <CreateComment slug={this.props.match.params.slug} />
-                <div className="col-lg-8 col-sm-12 mx-auto">
-                  <CommentList slug={this.props.match.params.slug} />
-                </div>
-              </div>
+          <div className="container">
+            <CreateComment slug={this.props.match.params.slug} />
+            <div className="col-lg-8 col-sm-12 mx-auto">
+              <CommentList slug={this.props.match.params.slug} />
+            </div>
+          </div>
         </div>
       );
     }
@@ -114,10 +147,19 @@ const mapStateToProps = state => ({
   article: state.articles.article,
   author: state.articles.author,
   message: state.articles.message,
+  rating: state.articles.rating,
+  userReview: state.articles.userReview,
+  isReviewed: state.articles.isReviewed,
+  ratingValue: state.articles.ratingValue,
+
 });
 
 const mapDispatchToProps = dispatch => ({
   getArticle: slug => dispatch(getArticle(slug)),
+  getRating: slug => dispatch(getRating(slug)),
+  checkReviewed: (username, slug) => dispatch(checkReviewed(username, slug)),
+  putRating: (slug, userName, review, userRating) => dispatch(putRating(slug, userName, review, userRating)),
+  postRating: (slug, review, userRating) => dispatch(postRating(slug, review, userRating)),
 });
 
 export default connect(
