@@ -157,3 +157,12 @@ label {
   margin-left: 2px;
   cursor: pointer;
 }
+
+.social-share:hover{
+  opacity: 0.8;
+}
+
+.button-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}

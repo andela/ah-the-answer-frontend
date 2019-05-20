@@ -7,6 +7,7 @@ import {
   EmailShareButton, EmailIcon,
   WhatsappShareButton, WhatsappIcon,
 } from 'react-share';
+import authStatus from '../../helpers/authStatus';
 import { bookmarkArticle, getBookmarks } from '../../store/actions/articleActions';
 
 export class ArticleFooter extends Component {
@@ -49,9 +50,18 @@ export class ArticleFooter extends Component {
       <div className="container-fluid container-width" data-test="articleFooter">
         <hr />
         <div className="">
-          <button type="button" title="Bookmark this article to read later" id="bookmarkButton" className="btn btn-outline-primary ml-2 no-outline" autoComplete="off" onClick={this.handleClick}>
-            { isBookmarked ? <i className="fas fa-bookmark fa-lg" /> : <i className="far fa-bookmark fa-lg" /> }
-          </button>
+          {
+            authStatus() ? (
+              <button type="button" title="Bookmark this article to read later" id="bookmarkButton" className="btn btn-outline-primary ml-2 no-outline" autoComplete="off" onClick={this.handleClick}>
+                { isBookmarked ? <i className="fas fa-bookmark fa-lg" /> : <i className="far fa-bookmark fa-lg" /> }
+              </button>
+            ) : (
+              <button type="button" title="Log in to bookmark this article" id="bookmarkButton" className="btn btn-outline-secondary ml-2 no-outline button-disabled" autoComplete="off" disabled>
+                <i className="far fa-bookmark fa-lg" />
+              </button>
+            )
+          }
+
           <div className="float-right social-buttons">
             <FacebookShareButton
               url={`${url}${article.slug}`}
