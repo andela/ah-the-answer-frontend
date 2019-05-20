@@ -90,11 +90,9 @@ LikingArticle.defaultProps = {
   like: 0,
   dislike: 0,
 };
-const mapStateToProps = state => ({
-  article: state.article.article,
-});
+
 const mapDispatchToProps = dispatch => ({
   getArticle: slug => dispatch(getArticle(slug)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LikingArticle);
+export default connect(null, mapDispatchToProps)(LikingArticle);
