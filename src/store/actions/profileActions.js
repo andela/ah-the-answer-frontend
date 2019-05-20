@@ -1,23 +1,21 @@
 import axios from 'axios';
 import * as ProfileAction from '../actionTypes/profileActionTypes';
 import authHeader from '../../helpers/authHeader';
+import authUser from '../../helpers/authUser';
 
 const configUrls = {
-  root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
+  root: 'https://ah-the-answer-backend-staging.herokuapp.com/api',
 };
-
-// const configUrls = {
-//   root: 'http://127.0.0.1:8000/api/',
-// };
-
-
+const user = authUser();
 const config = {
   headers: authHeader(),
 };
 
-export const fetchFollows = () => {
+export const fetchFollows = (currentUserProf) => {
   return (dispatch) => {
-    return axios.get(`${configUrls.root}follows/count/Kyppy/`, config)
+    return axios.get(
+      `${configUrls.root}/follows/count/${currentUserProf}/`,
+      config)
       .then((response) => {
         // handle success
         dispatch({
@@ -28,8 +26,8 @@ export const fetchFollows = () => {
   };
 };
 
-export const fetchFollowers = () => (dispatch) => {
-  return axios.get(`${configUrls.root}follows/count/Kyppy/`)
+export const fetchFollowers = currentUserProf => (dispatch) => {
+  return axios.get(`${configUrls.root}/follows/count/${currentUserProf}/`)
     .then((response) => {
       // handle success
       dispatch({
@@ -39,8 +37,10 @@ export const fetchFollowers = () => (dispatch) => {
     })
 };
 
-export const fetchBio = () => (dispatch) => {
-  return axios.get(`${configUrls.root}profiles/Kyppy/`, config)
+export const fetchBio = currentUserProf => (dispatch) => {
+  return axios.get(
+    `${configUrls.root}/profiles/${currentUserProf}/`,
+    config)
     .then((response) => {
       // handle success
       dispatch({
@@ -50,8 +50,10 @@ export const fetchBio = () => (dispatch) => {
     })
 };
 
-export const fetchName = () => (dispatch) => {
-  return axios.get(`${configUrls.root}profiles/Kyppy/`, config)
+export const fetchName = currentUserProf => (dispatch) => {
+  return axios.get(
+    `${configUrls.root}/profiles/${currentUserProf}/`,
+    config)
     .then((response) => {
       // handle success
       dispatch({
@@ -63,7 +65,10 @@ export const fetchName = () => (dispatch) => {
 };
 
 export const updateProfile = (name, bio) => (dispatch) => {
-  return axios.put(`${configUrls.root}profile/Kyppy/edit/`, { profile: { name: name, user_bio: bio } }, config)
+  return axios.put(
+    `${configUrls.root}/profile/${user.username}/edit/`,
+    { profile: { name: name, user_bio: bio } },
+    config)
     .then((response) => {
       // handle success
       dispatch({

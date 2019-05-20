@@ -9,22 +9,70 @@ import Card from './components/Card';
 import BiographyText from './components/BiographyText';
 import NameTag from './components/NameTag';
 import SocialFollowing from './components/SocialFollowing';
+// eslint-disable-next-line import/no-named-as-default
+import ConnectedSocialFollowing from './components/connectedSocialFollowing';
 import Bookmarks from '../../containers/bookmarks/Bookmarks';
+import authUser from '../../helpers/authUser';
+
+const userDetails = authUser();
 
 export class ProfileView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      follows: 0,
+      followers: 0,
+      bio: '',
+      userName: '',
+      givenName: '',
+    };
+  }
+
   componentDidMount() {
-    this.props.fetchName();
-    this.props.fetchBio();
-    this.props.fetchFollows();
-    this.props.fetchFollowers();
+    const {
+      fetchName,
+      fetchBio,
+      fetchFollows,
+      fetchFollowers,
+    } = this.props;
+
+    const username = this.props.match.params.username;
+
+    if (!username) {
+      this.props.history.push('/');
+    }
+
+    fetchName(username);
+    fetchBio(username);
+    fetchFollows(username);
+    fetchFollowers(username);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.followers !== nextProps.profileprops.followers
+      || prevState.follows !== nextProps.profileprops.follows
+      || prevState.bio !== nextProps.profileprops.bio
+      || prevState.userName !== nextProps.profileprops.userName
+      || prevState.givenName !== nextProps.profileprops.givenName) {
+      return {
+        follows: nextProps.profileprops.follows,
+        followers: nextProps.profileprops.followers,
+        bio: nextProps.profileprops.bio,
+        userName: nextProps.profileprops.userName,
+        givenName: nextProps.profileprops.givenName,
+      };
+    }
+    return null;
   }
 
   render() {
-    const { profileprops: { follows } } = this.props;
-    const { profileprops: { followers } } = this.props;
-    const { profileprops: { bio } } = this.props;
-    const { profileprops: { userName } } = this.props;
-    const { profileprops: { givenName } } = this.props;
+    const {
+      follows,
+      followers,
+      bio,
+      userName,
+      givenName,
+    } = this.state;
     return (
       <div className="container py-2">
         <div className="row">
@@ -35,32 +83,53 @@ export class ProfileView extends Component {
             <div className="row">
               <NameTag
                 firstName={givenName}
-                secondName={userName}
-                textfetchMethod={this.props.fetchName}
+                userName={this.props.match.params.username}
+                followers={followers}
               />
             </div>
             <div className="row">
               <BiographyText
                 text={bio}
-                textfetchMethod={this.props.fetchBio}
               />
             </div>
-            <div className="row">
-              <div className="col-6">
-                <SocialFollowing
-                  socialName="Follows"
-                  number={follows}
-                  badgefetchMethod={this.props.fetchFollows}
-                />
-              </div>
-              <div className="col-6">
-                <SocialFollowing
-                  socialName="Followers"
-                  number={followers}
-                  badgefetchMethod={this.props.fetchFollowers}
-                />
-              </div>
-            </div>
+            {
+              (userDetails.username === userName) ? (
+                <div className="row">
+                  <div className="col-6">
+                    <Link to={`/followings/${userName}`}>
+                      <SocialFollowing
+                        socialName="Follows"
+                        number={follows}
+                      />
+                    </Link>
+                  </div>
+                  <div className="col-6">
+                    <Link to={`/follows/${userName}`}>
+                      <SocialFollowing
+                        socialName="Followers"
+                        number={followers}
+                      />
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <div className="row">
+                  <div className="col-6">
+                    <SocialFollowing
+                      socialName="Follows"
+                      number={follows}
+                    />
+                  </div>
+                  <div className="col-6">
+                    <ConnectedSocialFollowing
+                      getFollowers={this.props.fetchFollowers}
+                      userName={this.props.match.params.username}
+                      followers={followers}
+                    />
+                  </div>
+                </div>
+              )
+            }
           </div>
         </div>
         <div className="row">
@@ -83,18 +152,15 @@ export class ProfileView extends Component {
   }
 }
 
-const mapStateToProps = state => (
-  {
-    profileprops: state.profile,
-  }
-);
+const mapStateToProps = state => ({
+  profileprops: state.profile,
+});
 
 const mapDispatchToProps = dispatch => ({
-  fetchFollows: () => dispatch(fetchFollows()),
-  fetchFollowers: () => dispatch(fetchFollowers()),
-  fetchBio: () => dispatch(fetchBio()),
-  fetchName: () => dispatch(fetchName()),
-
+  fetchFollows: currentUserProf => dispatch(fetchFollows(currentUserProf)),
+  fetchFollowers: currentUserProf => dispatch(fetchFollowers(currentUserProf)),
+  fetchBio: currentUserProf => dispatch(fetchBio(currentUserProf)),
+  fetchName: currentUserProf => dispatch(fetchName(currentUserProf)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);

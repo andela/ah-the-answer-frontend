@@ -2,8 +2,11 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import * as ProfileAction from '../../../store/actionTypes/profileActionTypes';
 import { shallow, mount } from '../../enzyme';
+import ConnectedSocialFollowing from '../../../containers/profile/components/connectedSocialFollowing';
 import SocialFollowing from '../../../containers/profile/components/SocialFollowing';
 import NameTag from '../../../containers/profile/components/NameTag';
 import BiographyText from '../../../containers/profile/components/BiographyText';
@@ -15,7 +18,6 @@ import Profile from '../../../store/reducers/profileReducer';
 import ViewProfile from '../../../containers/profile/profileView';
 import App from '../../../App';
 import store from '../../../store/store';
-import thunk from 'redux-thunk';
 
 const initialState = {
   follows: 0,
@@ -35,13 +37,13 @@ describe('Test SocialFollowing component', () => {
   it('renders a given number', () => {
     const wrapper = shallow(<SocialFollowing number={10} />);
     const text = wrapper.find('p').text();
-    expect(text).toEqual('10 Social Media Point');
+    expect(text).toEqual('10 ');
   });
 
   it('renders a given social media point name', () => {
     const wrapper = shallow(<SocialFollowing socialName="Follows" />);
     const text = wrapper.find('p').text();
-    expect(text).toEqual('999 Follows');
+    expect(text).toEqual('0 Follows');
   });
 });
 
@@ -58,7 +60,7 @@ describe('Test NameTag component', () => {
   });
 
   it('renders a given second name', () => {
-    const wrapper = shallow(<NameTag secondName="Doe" />);
+    const wrapper = shallow(<NameTag userName="Doe" />);
     const text = wrapper.find('h5').text();
     expect(text).toEqual('@Doe');
   });
@@ -158,27 +160,110 @@ describe('Test ProfileUpdate container', () => {
   });
 });
 
-describe('Test ProfileView container', () => {
-  it('renders', () => {
+describe('Test ProfileView component', () => {
+  it("should render and update state", () => {
+    const testStore = configureMockStore([thunk]);
+    let store = testStore({});
     const mockFtn = jest.fn();
-    const wrapper = mount(
-      <Provider store={store}>
-        <BrowserRouter>
-          <ProfileView
-            fetchBio={mockFtn}
-            fetchName={mockFtn}
-            fetchFollows={mockFtn}
-            fetchFollowers={mockFtn}
-            profileprops={{
-              givenName: 'Bob', userName: 'User', bio: 'Default Story', follows: 0, followers: 0, profileImg: '...',
-            }}
-          />
-        </BrowserRouter>
-      </Provider>,
+    const wrapper = shallow(
+      <ProfileView
+          store={store}
+          profileprops={{
+            givenName: 'Test',
+            userName: 'testUser',
+            bio: 'Default test Story',
+            follows: 2,
+            followers: 5,
+            profileImg: '...',
+            follows: {
+              checkfollow: true
+            },
+          }}
+          fetchBio={mockFtn}
+          fetchName={mockFtn}
+          fetchFollows={mockFtn}
+          fetchFollowers={mockFtn}
+          match={{
+            params: {
+              username: 'User'
+            },
+          }}
+      />
     );
-    expect(wrapper.exists()).toBe(true);
-  });
+  })
+
 });
+
+describe("Unit test for component", () => {
+  it('updates state with store data', () => {
+    const data = {
+      givenName: 'Test',
+      userName: 'testUser',
+      bio: 'Default test Story',
+      follows: 2,
+      followers: 5,
+    }
+    const wrapper = shallow(<ProfileView 
+      profileprops={data}
+      match={{
+        params: {
+          username: 'User'
+        },
+      }}
+      fetchBio={jest.fn()}
+      fetchName={jest.fn()}
+      fetchFollows={jest.fn()}
+      fetchFollowers={jest.fn()}
+    />)
+    const spy = jest.spyOn(wrapper.instance(), 'componentDidMount');
+
+    wrapper.instance().componentDidMount()
+
+    expect(spy).toBeCalled()
+    expect(wrapper.instance().state).toEqual(data)
+  });
+})
+
+describe("Unit test for Updated state", () => {
+  it('updates state with store data', () => {
+    const data = {
+      givenName: 'Test',
+      userName: 'testUser',
+      bio: 'Default test Story',
+      follows: 2,
+      followers: 5,
+    }
+    const wrapper = shallow(<ProfileView
+      profileprops={data} 
+      match={{
+        params: {
+          username: 'User'
+        },
+      }}
+      fetchBio={jest.fn()}
+      fetchName={jest.fn()}
+      fetchFollows={jest.fn()}
+      fetchFollowers={jest.fn()}
+    />)
+
+    wrapper.setProps({
+      profileprops:{ 
+        followers: 3,
+        follows: 4,
+        givenName: 'user',
+        userName: 'test',
+        bio: "default story", 
+       }
+      })
+    expect(wrapper.state().followers).toEqual(3)
+    expect(wrapper.state().follows).toEqual(4)
+    expect(wrapper.state().givenName).toEqual('user')
+    expect(wrapper.state().userName).toEqual('test')
+    expect(wrapper.state().bio).toEqual('default story')
+  });
+})
+
+
 
 describe('Test "fetchBio" reducer', () => {
   it('renders', () => {
@@ -250,7 +335,7 @@ describe('Test viewProfile function that routes the profile containers', () => {
 
 describe('Test that the redux connected "ProfileView" component renders', () => {
   it('renders', () => {
-    const wrapper = mount(
+    const wrapper = shallow(
       <BrowserRouter>
       <Provider store={store}>
         <ConnectedProfileView />
@@ -269,6 +354,20 @@ describe('Test that the redux connected "ProfileUpdate" component renders', () =
          <ConnectedProfileUpdate />
        </Provider>
       </BrowserRouter>,
+    );
+    expect(wrapper.exists()).toBe(true);
+  });
+});
+
+describe('Test that the redux connected "ConnectedSocialFollowing" component renders', () => {
+  it('renders', () => {
+    const wrapper = mount(
+      <ConnectedSocialFollowing 
+        store={store}
+        getFollowers={jest.fn()}
+        userName={'user'}
+        followers={3}
+      />
     );
     expect(wrapper.exists()).toBe(true);
   });
