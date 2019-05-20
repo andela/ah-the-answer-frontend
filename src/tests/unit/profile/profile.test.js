@@ -13,7 +13,7 @@ import BiographyText from '../../../containers/profile/components/BiographyText'
 import Card from '../../../containers/profile/components/Card';
 import { ProfileUpdateForm } from '../../../containers/profile/components/ProfileUpdateForm';
 import { ProfileUpdate } from '../../../containers/profile/ProfileUpdate';
-import { ProfileView } from '../../../containers/profile/profileContainer';
+import ConnectedProfileView, { ProfileView } from '../../../containers/profile/profileContainer';
 import Profile from '../../../store/reducers/profileReducer';
 import ViewProfile from '../../../containers/profile/profileView';
 import store from '../../../store/store';
@@ -159,40 +159,100 @@ describe('Test ProfileUpdate container', () => {
   });
 });
 
-describe('Test ProfileView container', () => {
+describe('Test ProfileView component', () => {
   it('renders', () => {
     const testStore = configureMockStore([thunk]);
     let store = testStore({});
     const mockFtn = jest.fn();
     const wrapper = shallow(
-      <BrowserRouter>
-        <Provider store={store}>
-          <ProfileView
-              fetchBio={mockFtn}
-              fetchName={mockFtn}
-              fetchFollows={mockFtn}
-              fetchFollowers={mockFtn}
-              match={{
-                params: {
-                  username: 'User'
-                },
-              }}
-              profileprops={{
-                givenName: 'Bob',
-                userName: 'User',
-                bio: 'Default Story',
-                follows: 0,
-                followers: 0,
-                profileImg: '...',
-                follows: {
-                  checkfollow: true
-                },
-              }}
-          />
-        </Provider>
-      </BrowserRouter>,
+      <ConnectedProfileView
+          store={store}
+          fetchBio={mockFtn}
+          fetchName={mockFtn}
+          fetchFollows={mockFtn}
+          fetchFollowers={mockFtn}
+          match={{
+            params: {
+              username: 'User'
+            },
+          }}
+          profileprops={{
+            givenName: 'Bob',
+            userName: 'User',
+            bio: 'Default Story',
+            follows: 0,
+            followers: 0,
+            profileImg: '...',
+            follows: {
+              checkfollow: true
+            },
+          }}
+      />
     );
     expect(wrapper.exists()).toBe(true);
+  });
+  it('updates state with store data', () => {
+    const data = {
+      givenName: 'Bob',
+      userName: 'User',
+      bio: 'Default Story',
+      follows: 0,
+      followers: 0,
+      follows: {
+        checkfollow: true
+      },
+    }
+    const wrapper = shallow(<ProfileView 
+      profileprops={data}
+      match={{
+        params: {
+          username: 'User'
+        },
+      }}
+      fetchBio={jest.fn()}
+      fetchName={jest.fn()}
+      fetchFollows={jest.fn()}
+      fetchFollowers={jest.fn()}
+    />)
+    const spy = jest.spyOn(wrapper.instance(), 'componentDidMount');
+
+    wrapper.instance().componentDidMount()
+
+    expect(spy).toBeCalled()
+    expect(wrapper.instance().state).toEqual(data)
+  });
+  it('updates state with new data', () => {
+    const data = {
+      givenName: 'Bob',
+      userName: 'User',
+      bio: 'Default Story',
+      follows: 0,
+      followers: 0,
+      follows: {
+        checkfollow: true
+      },
+    }
+    const wrapper = shallow(<ProfileView 
+      profileprops={data}
+      match={{
+        params: {
+          username: 'User'
+        },
+      }}
+      fetchBio={jest.fn()}
+      fetchName={jest.fn()}
+      fetchFollows={jest.fn()}
+      fetchFollowers={jest.fn()}
+    />)
+    const spy = jest.spyOn(wrapper.instance(), 'componentDidMount');
+
+    wrapper.instance().componentDidMount()
+    const initState = wrapper.instance().state
+
+    console.log(wrapper.instance())
+
+    expect(spy).toBeCalled()
+    expect(initState).toEqual(data)
   });
 });
 
