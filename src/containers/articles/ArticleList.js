@@ -18,9 +18,15 @@ const ArticleList = ({ articles }) => {
   return (
     <div className="article-list section" data-test="articleList">
       { articles && articles.slice(5).map((article) => {
+        let imgRegex = /<img[^>]+src="(http:\/\/[^">]+)"/g;
+        let src = imgRegex.exec(article.body);
+        let imgSrc = 'https://res.cloudinary.com/dv85uhrw5/image/upload/v1556052045/pocvovruu6lhhic2fhq1.jpg';
+        if (src) {
+          imgSrc = src[1];
+        }
         return (
           <Link to={`/articles/${article.slug}`} key={article.id}>
-            <ArticleSummary article={article} />
+            <ArticleSummary article={article} image={imgSrc} />
           </Link>
         );
       }) }

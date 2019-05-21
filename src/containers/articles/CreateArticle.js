@@ -100,7 +100,6 @@ export class CreateArticle extends Component {
     try {
       const url = 'https://cors-anywhere.herokuapp.com/https://api.cloudinary.com/v1_1/dv85uhrw5/image/upload';
       const formData = new FormData();
-      const headers = { 'Content-Type': 'application/x-wwww-form-urlencoded' };
       formData.append('file', file);
       formData.append('upload_preset', 'cczvn3h1');
       return axios.post(url, formData, { config });
