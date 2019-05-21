@@ -7,7 +7,9 @@ const ArticleSummary = ({ article, image }) => (
   <div className="card shadow flex-md-row mb-4 box-shadow article-summary" data-test="articleSummary">
     <img className="card-img-left flex-auto d-none d-md-block" src={image} alt={article.description} />
     <div className="card-body d-flex flex-column align-items-start">
-      <h5 className="card-title text-primary text-bold">{article.title}</h5>
+      <a href={`/articles/${article.slug}`}>
+        <h5 className="card-title text-primary text-bold">{article.title}</h5>
+      </a>
       <p className="card-text text-muted">{smartTruncate(article.description, 100)}</p>
       <small className="text-muted">
         <span className="mr-1">By</span>
