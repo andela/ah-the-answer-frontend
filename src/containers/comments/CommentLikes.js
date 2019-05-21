@@ -8,6 +8,14 @@ const config = {
   headers: authHeader(),
 };
 
+// const configUrls = {
+//   root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
+// };
+
+const configUrls = {
+  root: 'http://127.0.0.1:8000/api/articles/',
+};
+
 class CommentLikes extends Component {
   state = {
     likeStyle: {
@@ -26,7 +34,7 @@ class CommentLikes extends Component {
 
 
   checkIfLiked=(username, id) => {
-    axios.get(`https://ah-the-answer-backend-staging.herokuapp.com/api/articles/comments/check/${username}/${id}/`)
+    axios.get(`${configUrls.root}comments/check/${username}/${id}/`)
       .then((response) => {
         const likeCheck = response.data.hasRated;
         if (likeCheck) {
@@ -38,7 +46,7 @@ class CommentLikes extends Component {
   }
 
   getCommentRating = (id) => {
-    axios.get(`https://ah-the-answer-backend-staging.herokuapp.com/api/articles/comments/${id}/rating/`)
+    axios.get(`${configUrls.root}comments/${id}/rating/`)
       .then(
         (res) => {
           this.setState({ likes: res.data.likes });
@@ -51,14 +59,13 @@ class CommentLikes extends Component {
     const { likes } = this.state;
     let url;
     if (vote === -1) {
-      url = `https://ah-the-answer-backend-staging.herokuapp.com/api/articles/comments/${commentID}/dislike/`;
+      url = `${configUrls.root}comments/${commentID}/dislike/`;
     } else {
-      url = `https://ah-the-answer-backend-staging.herokuapp.com/api/articles/comments/${commentID}/like/`;
+      url = `${configUrls.root}comments/${commentID}/like/`;
     }
     axios.post(url, {}, config )
       .then(
         (res) => {
-          console.log(res.data.message);
           if (res.data.message === `You liked comment: ${commentID}`) {
             this.setState({ likeStyle: { color: 'green' } });
             this.setState({ likes: likes + 1 });
@@ -78,7 +85,7 @@ class CommentLikes extends Component {
     return (
       <div className="mt-4">
         <div className="d-inline-block">
-          <FontAwesomeIcon className="article-like-icons" id="like" style={likeStyle} icon="thumbs-up" onClick={() => this.likeComment(1)} />
+          <FontAwesomeIcon className="comment-like-icons" id="like" style={likeStyle} icon="thumbs-up" onClick={() => this.likeComment(1)} />
           <p>{likes}</p>
         </div>
         { loggedIn === false ? <div className="text-danger">Only logged in users can like/dislike</div> : '' }
