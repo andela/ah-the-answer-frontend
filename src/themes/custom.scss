@@ -72,10 +72,19 @@ label {
 .article-like-icons{
   font-size: 1.4rem;
   -webkit-transition: font-size 2s, color 2s;
-  transition: font-size 2s, color 2s;
+  transition: font-size 2s, color 0.5s;
 }
 .article-like-icons:hover {
   font-size: 2rem;
+}
+
+.comment-like-icons {
+  @extend .article-like-icons;
+  font-size: 1rem;
+}
+
+.comment-like-icons:hover {
+  font-size: 1rem;
 }
 
 // Notifications
