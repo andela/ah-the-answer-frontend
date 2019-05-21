@@ -227,7 +227,7 @@ export class EditArticle extends Component {
                     trigger: '#',
                   }}
                   toolbar={{
-                    options: ['inline', 'blockType', 'list', 'fontSize', 'textAlign', 'link', 'embedded', 'image', 'remove', 'colorPicker', 'history'],
+                    options: ['inline', 'blockType', 'list', 'fontSize', 'textAlign', 'link', 'image', 'remove', 'colorPicker', 'history'],
                     inline: {
                       options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace', 'superscript', 'subscript'],
                     },
