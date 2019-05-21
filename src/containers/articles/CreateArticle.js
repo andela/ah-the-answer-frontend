@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { WithContext as ReactTags } from 'react-tag-input';
 import { connect } from 'react-redux';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
@@ -7,6 +8,13 @@ import PropTypes from 'prop-types';
 import { createArticle } from '../../store/actions/articleActions';
 import authStatus from '../../helpers/authStatus';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
+const KeyCodes = {
+  enter: 13,
+  space: 32,
+};
+
+const delimiters = [KeyCodes.enter, KeyCodes.enter];
 
 export class CreateArticle extends Component {
   state = {
@@ -26,6 +34,9 @@ export class CreateArticle extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
+    this.handleTagDelete = this.handleTagDelete.bind(this);
+    this.handleTagAddition = this.handleTagAddition.bind(this);
+    this.handleTagDrag = this.handleTagDrag.bind(this);
   }
 
   onEditorStateChange(body) {
@@ -43,6 +54,27 @@ export class CreateArticle extends Component {
     return null;
   }
 
+  handleTagDelete(i) {
+    const { tags } = this.state;
+    this.setState({
+      tags: tags.filter((tag, index) => index !== i),
+    });
+  }
+  
+  handleTagAddition(tag) {
+    this.setState(state => ({ tags: [...state.tags, tag] }));
+  }
+
+  handleTagDrag(tag, currPos, newPos) {
+    const tags = [...this.state.tags];
+    const newTags = tags.slice();
+  
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+  
+    this.setState({ tags: newTags });
+  }
+
   handleChange(e) {
     this.setState({
       [e.target.id]: e.target.value,
@@ -54,7 +86,7 @@ export class CreateArticle extends Component {
   handleSubmit(e) {
     e.preventDefault();
     // check if body,title or description are empty and prevent submit
-    const { body } = this.state;
+    const { body, tags } = this.state;
     const content = convertToRaw(body.getCurrentContent());
     const contentTextLength = content.blocks[0].text.length;
     const title = document.getElementById('title').value;
@@ -80,12 +112,16 @@ export class CreateArticle extends Component {
         { ...prevState, redirect: !prevState.redirect }
       ),
     );
+
+    let newTags = [];
+    tags.map(tag => newTags.push(tag.text));
+
     const newArticle = {
       title: this.state.title,
       description: this.state.description,
       body: draftToHtml(content),
       is_published: this.state.is_published,
-      tags: this.state.tags,
+      tags: newTags,
     };
     this.props.createArticle(newArticle);
   }
@@ -94,7 +130,7 @@ export class CreateArticle extends Component {
     if (authStatus() === false) {
       this.props.history.push('/');
     }
-    const { body, redirect } = this.state;
+    const { body, redirect, tags } = this.state;
     const { message } = this.props;
 
     // Redirect the user to the article after it has been created
@@ -140,7 +176,16 @@ export class CreateArticle extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="tags">Tags</label>
-            <input className="form-control" autoComplete="off" type="text" id="tags" />
+            <div>
+              <ReactTags
+                tags={tags}
+                handleDelete={this.handleTagDelete}
+                handleAddition={this.handleTagAddition}
+                handleDrag={this.handleTagDrag}
+                delimiters={delimiters}
+              />
+            </div>
+            {/* <input className="form-control" autoComplete="off" type="text" id="tags" /> */}
           </div>
           <Editor
             initialEditorState={body}
