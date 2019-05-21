@@ -23,6 +23,7 @@ class CommentLikes extends Component {
     },
     likes: 0,
     loggedIn: true,
+    clickReady: true,
   };
 
   componentDidMount() {
@@ -55,24 +56,30 @@ class CommentLikes extends Component {
   };
 
   likeComment= () => {
-    const { commentID } = this.props;
-    const { likes } = this.state;
-    const url = `${configUrls.root}comments/${commentID}/like/`;
-    axios.post(url, {}, config)
-      .then(
-        (res) => {
-          if (res.data.message === `You liked comment: ${commentID}`) {
-            this.setState({ likeStyle: { color: 'green' } });
-            this.setState({ likes: likes + 1 });
-          } else if (res.data.message === `Your like has been reverted for comment: ${commentID}`) {
-            this.setState({ likeStyle: { color: '#E8E8E8' } });
-            this.setState({ likes: likes - 1 });
-          }
-        },
-      )
-      .catch((error) => {
-        console.log(error.data);
-      });
+    const { clickReady } = this.state;
+    if (clickReady === true) {
+      this.setState({ clickReady: false });
+      const { commentID } = this.props;
+      const { likes } = this.state;
+      const url = `${configUrls.root}comments/${commentID}/like/`;
+      axios.post(url, {}, config)
+        .then(
+          (res) => {
+            if (res.data.message === `You liked comment: ${commentID}`) {
+              this.setState({ likeStyle: { color: 'green' } });
+              this.setState({ likes: likes + 1 });
+              this.setState({ clickReady: true });
+            } else if (res.data.message === `Your like has been reverted for comment: ${commentID}`) {
+              this.setState({ likeStyle: { color: '#E8E8E8' } });
+              this.setState({ likes: likes - 1 });
+              this.setState({ clickReady: true });
+            }
+          },
+        )
+        .catch((error) => {
+          console.log(error.data);
+        });
+    }
   };
 
   render() {
