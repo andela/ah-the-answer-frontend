@@ -22,32 +22,11 @@ describe('components', () => {
         bookmarks: [
           {title: 'hello',}
         ]
-      },
-      article:         {
-        id: 69,
-        title: "Peoples Power",
-        body: "People need to know",
-        description: "Power",
-        is_published: true,
-        date_created: "2019-05-21T13:52:41.388893Z",
-        date_modified: "2019-05-21T13:53:28.249640Z",
-        slug: "peoples-power-a777c5f14f66",
-        read_time: "2 min",
-        author: {
-            "email": "ryanwire@outlook.com",
-            "username": "ryanwire"
-        },
-        like_count: 0,
-        dislike_count: 0,
-        tags: []
-    },
-    author: {
-        email: "ryanwire@outlook.com",
-        username: "ryanwire"
-    },
+      }
     });
     const div = document.createElement('div');
     const props = {
+      message: 'The article requested does not exist',
       match: {
         params: {
           slug: 'dummy',
