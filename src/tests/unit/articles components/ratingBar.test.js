@@ -47,7 +47,6 @@ describe('test RatingDisplay component', () => {
     wrapper.setProps({ userRating: 0 });
     const starBar = wrapper.find('span').at(4)
     starBar.simulate('click')
-    console.log(starBar.instance().style.color)
     expect(wrapper.state().userRating).toEqual(5);
     });
 
