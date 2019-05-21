@@ -54,16 +54,11 @@ class CommentLikes extends Component {
       );
   };
 
-  likeComment= (vote) => {
+  likeComment= () => {
     const { commentID } = this.props;
     const { likes } = this.state;
-    let url;
-    if (vote === -1) {
-      url = `${configUrls.root}comments/${commentID}/dislike/`;
-    } else {
-      url = `${configUrls.root}comments/${commentID}/like/`;
-    }
-    axios.post(url, {}, config )
+    const url = `${configUrls.root}comments/${commentID}/like/`;
+    axios.post(url, {}, config)
       .then(
         (res) => {
           if (res.data.message === `You liked comment: ${commentID}`) {
@@ -85,7 +80,7 @@ class CommentLikes extends Component {
     return (
       <div className="mt-4">
         <div className="d-inline-block">
-          <FontAwesomeIcon className="comment-like-icons" id="like" style={likeStyle} icon="thumbs-up" onClick={() => this.likeComment(1)} />
+          <FontAwesomeIcon className="comment-like-icons" id="like" style={likeStyle} icon="thumbs-up" onClick={() => this.likeComment()} />
           <p>{likes}</p>
         </div>
         { loggedIn === false ? <div className="text-danger">Only logged in users can like/dislike</div> : '' }
