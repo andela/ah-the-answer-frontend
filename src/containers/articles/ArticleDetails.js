@@ -79,17 +79,9 @@ class ArticleDetails extends Component {
               </div>
             </div>
           </div>
-          <div className="container-fluid text-center">
-            <hr />
-            <img
-              src="https://res.cloudinary.com/dv85uhrw5/image/upload/v1556052045/pocvovruu6lhhic2fhq1.jpg"
-              alt=""
-              className="img-fluid rounded"
-            />
-            <hr />
-          </div>
           <div className="container-fluid container-width">
-            <div className="lead">{parse(article.body)}</div>
+            <hr />
+            <div className="lead article-body">{parse(article.body)}</div>
           </div>
           <div className="container-fluid container-width article-footer text-center">
             <LikingArticle

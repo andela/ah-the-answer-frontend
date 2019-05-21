@@ -4,8 +4,10 @@ import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { createArticle } from '../../store/actions/articleActions';
 import authStatus from '../../helpers/authStatus';
+import authHeader from '../../helpers/authHeader';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 export class CreateArticle extends Component {
@@ -90,6 +92,23 @@ export class CreateArticle extends Component {
     this.props.createArticle(newArticle);
   }
 
+  uploadImageCallBack(file) {
+    const config = {
+      headers: authHeader(),
+    };
+
+    try {
+      const url = 'https://cors-anywhere.herokuapp.com/https://api.cloudinary.com/v1_1/dv85uhrw5/image/upload';
+      const formData = new FormData();
+      const headers = { 'Content-Type': 'application/x-wwww-form-urlencoded' };
+      formData.append('file', file);
+      formData.append('upload_preset', 'cczvn3h1');
+      return axios.post(url, formData, { config });
+    } catch (err) {
+      return err;
+    }
+  }
+
   render() {
     if (authStatus() === false) {
       this.props.history.push('/');
@@ -164,10 +183,17 @@ export class CreateArticle extends Component {
               },
               image: {
                 uploadCallback: this.uploadImageCallBack,
+                className: 'detail-image',
+                alignmentEnabled: false,
                 previewImage: true,
+                inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
                 alt: {
                   present: true,
                   mandatory: true,
+                },
+                defaultSize: {
+                  height: '100%',
+                  width: '95%',
                 },
               },
             }}
