@@ -11,6 +11,22 @@ import authHeader from '../../helpers/authHeader';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 export class CreateArticle extends Component {
+  static uploadImageCallBack(file) {
+    const config = {
+      headers: authHeader(),
+    };
+
+    try {
+      const url = 'https://cors-anywhere.herokuapp.com/https://api.cloudinary.com/v1_1/dv85uhrw5/image/upload';
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'cczvn3h1');
+      return axios.post(url, formData, { config });
+    } catch (err) {
+      return err;
+    }
+  }
+
   state = {
     title: '',
     description: '',
@@ -92,22 +108,6 @@ export class CreateArticle extends Component {
     this.props.createArticle(newArticle);
   }
 
-  uploadImageCallBack(file) {
-    const config = {
-      headers: authHeader(),
-    };
-
-    try {
-      const url = 'https://cors-anywhere.herokuapp.com/https://api.cloudinary.com/v1_1/dv85uhrw5/image/upload';
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', 'cczvn3h1');
-      return axios.post(url, formData, { config });
-    } catch (err) {
-      return err;
-    }
-  }
-
   render() {
     if (authStatus() === false) {
       this.props.history.push('/');
@@ -181,7 +181,7 @@ export class CreateArticle extends Component {
                 options: [8, 9, 10, 11, 12, 14, 16, 18, 24],
               },
               image: {
-                uploadCallback: this.uploadImageCallBack,
+                uploadCallback: CreateArticle.uploadImageCallBack,
                 className: 'detail-image',
                 alignmentEnabled: false,
                 previewImage: true,
@@ -218,11 +218,12 @@ export class CreateArticle extends Component {
 CreateArticle.propTypes = {
   errors: PropTypes.shape({}),
   message: PropTypes.shape({}),
-  createArticle: PropTypes.func.isRequired,
+  createArticle: PropTypes.func,
 };
 CreateArticle.defaultProps = {
   errors: {},
   message: {},
+  createArticle: () => {},
 };
 
 const mapStateToProps = state => ({

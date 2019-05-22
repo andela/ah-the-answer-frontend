@@ -13,6 +13,22 @@ import authHeader from '../../helpers/authHeader';
 import { updateArticle, getArticle, deleteArticle } from '../../store/actions/articleActions';
 
 export class EditArticle extends Component {
+  static uploadImageCallBack(file) {
+    const config = {
+      headers: authHeader(),
+    };
+
+    try {
+      const url = 'https://cors-anywhere.herokuapp.com/https://api.cloudinary.com/v1_1/dv85uhrw5/image/upload';
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'cczvn3h1');
+      return axios.post(url, formData, { config });
+    } catch (err) {
+      return err;
+    }
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -86,22 +102,6 @@ export class EditArticle extends Component {
       is_published: this.state.is_published,
     };
     this.props.updateArticle(slug, updatedArticle);
-  }
-
-  uploadImageCallBack(file) {
-    const config = {
-      headers: authHeader(),
-    };
-
-    try {
-      const url = 'https://cors-anywhere.herokuapp.com/https://api.cloudinary.com/v1_1/dv85uhrw5/image/upload';
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', 'cczvn3h1');
-      return axios.post(url, formData, { config });
-    } catch (err) {
-      return err;
-    }
   }
 
   render() {
@@ -235,7 +235,7 @@ export class EditArticle extends Component {
                       options: [8, 9, 10, 11, 12, 14, 16, 18, 24],
                     },
                     image: {
-                      uploadCallback: this.uploadImageCallBack,
+                      uploadCallback: EditArticle.uploadImageCallBack,
                       alignmentEnabled: false,
                       previewImage: true,
                       inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
