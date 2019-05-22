@@ -90,13 +90,14 @@ export class CommentDetail extends React.Component {
                   ) : revealEdits ? (
                     <div className="d-flex w-100 card-text">
                       <div className="w-25 m-auto d-flex mt-2">
-                        <FontAwesomeIcon icon="edit" className="col edit-icon" onClick={this.handleOpen}>
+                        <FontAwesomeIcon icon="edit" color="#33A2FF" className="col edit-icon" onClick={this.handleOpen}>
                           Edit
                         </FontAwesomeIcon>
 
                         <FontAwesomeIcon
                           className="col trash-icon"
                           icon="trash"
+                          color="#E3081C"
                           onClick={() => {
                             if (window.confirm('Are you sure you wish to delete this item?')) this.handleDelete(item.id);
                           }}
