@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCommentHistory } from '../../store/actions/commentHistoryAction';
 import CommentHistoryDetail from './commentHistoryDetail';
+
 export class CommentHistoryList extends Component {
   componentDidMount() {
     const { slug, id, getCommentHistory } = this.props;

@@ -3,13 +3,13 @@ import { mount } from 'enzyme';
 import CommentHistory, {
   CommentHistoryList,
 } from '../../../containers/commentHistory/CommentHistory';
-import CommentHistoryDetail from '../../../containers/commentHistory/CommentHistoryDetail';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mockData } from './CommentHistoryAction.test';
 import { getCommentHistory } from '../../../store/actions/commentHistoryAction';
+import CommentHistoryDetail from '../../../containers/commentHistory/commentHistoryDetail';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
