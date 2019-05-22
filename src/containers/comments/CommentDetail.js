@@ -78,7 +78,7 @@ export class CommentDetail extends React.Component {
                   ) : null}
                   <div className="d-flex">
                     {moment(item.createdAt).format() !== moment(item.updatedAt).format() ? (
-                      <span onClick={this.handleReveal} className="btnEdit info">
+                      <span onClick={this.handleReveal} className="btn-edit info">
                         {!historyReveal ? 'Edited' : 'Close'}
                       </span>
                     ) : null}
@@ -91,12 +91,12 @@ export class CommentDetail extends React.Component {
                   ) : revealEdits ? (
                     <div className="d-flex w-100 card-text">
                       <div className="w-25 m-auto d-flex mt-2">
-                        <FontAwesomeIcon icon="edit" className="col editIcon" onClick={this.handleOpen}>
+                        <FontAwesomeIcon icon="edit" className="col edit-icon" onClick={this.handleOpen}>
                           Edit
                         </FontAwesomeIcon>
 
                         <FontAwesomeIcon
-                          className="col trashIcon"
+                          className="col trash-icon"
                           icon="trash"
                           onClick={() => {
                             if (window.confirm('Are you sure you wish to delete this item?')) this.handleDelete(item.id);
@@ -110,7 +110,6 @@ export class CommentDetail extends React.Component {
                         <FontAwesomeIcon
                           icon="edit"
                           className="col text-white"
-                          onClick={this.handleOpen}
                         >
                           Edit
                         </FontAwesomeIcon>
@@ -118,9 +117,6 @@ export class CommentDetail extends React.Component {
                         <FontAwesomeIcon
                           className="col text-white"
                           icon="trash"
-                          onClick={() => {
-                            if (window.confirm('Are you sure you wish to delete this item?')) this.handleDelete(item.id);
-                          }}
                         />
                       </div>
                     </div>

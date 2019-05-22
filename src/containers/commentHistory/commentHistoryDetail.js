@@ -14,7 +14,7 @@ const CommentHistoryDetail = (props) => {
           <small className="bd-highlight text-muted">{user.email}</small>
         </div>
       </div>
-      <span className="w-75 pr-2 historyComment mb-2 justify-content-start">{item.body}</span>
+      <span className="w-75 pr-2 history-comment mb-2 justify-content-start">{item.body}</span>
       <small className="text-muted">{moment(item.history_date).fromNow()}</small>
     </div>
   );
