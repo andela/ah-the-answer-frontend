@@ -12,6 +12,9 @@ import 'bootstrap/dist/js/bootstrap';
 // Font Awesome Icon
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 // eslint-disable-next-line import/no-named-as-default
 
@@ -31,7 +34,9 @@ import ProfileUpdate from './containers/profile/ProfileUpdate';
 
 
 library.add(faSearch);
-
+library.add(faTrash);
+library.add(faEdit);
+library.add(faUser);
 function App() {
   return (
     <Router>

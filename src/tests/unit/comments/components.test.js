@@ -2,13 +2,13 @@ import React from 'react';
 import { create } from 'react-test-renderer';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import configureMockStore from 'redux-mock-store';
+import ReactDOM from 'react-dom';
 import CreateComments from '../../../containers/comments/CreateComments';
 
 import store from '../../../store/store';
 import { getComments } from '../../../store/actions/commentActions';
-import thunk from 'redux-thunk';
-import configureMockStore from 'redux-mock-store';
-import ReactDOM from 'react-dom';
 import { CommentDetail } from '../../../containers/comments/CommentDetail';
 import CommentList from '../../../containers/comments/CommentList';
 
@@ -36,7 +36,7 @@ describe('Component Render', () => {
   it('should render CreateComments component', () => {
     const test_div = document.createElement('div');
     const testStore = configureMockStore([thunk]);
-    let store = testStore();
+    const store = testStore();
     ReactDOM.render(
       <Provider store={store}>
         <CreateComments />
@@ -51,10 +51,10 @@ describe('Component Render', () => {
     const testStore = configureMockStore([thunk]);
     const props = {
       item: {
-        body: 'body',
+        author: { username: 'username' },
       },
     };
-    let store = testStore({});
+    const store = testStore({});
     ReactDOM.render(
       <Provider store={store}>
         <CommentDetail {...props} />
@@ -72,7 +72,7 @@ describe('Component Render', () => {
         body: 'body',
       },
     };
-    let store = testStore({});
+    const store = testStore({});
     ReactDOM.render(
       <Provider store={store}>
         <CommentList {...props} />
@@ -93,11 +93,12 @@ describe('Handle Submit', () => {
       editComment: jest.fn(),
       deleteComment: jest.fn(),
       item: {
-        body: 'body',
+        author: { username: 'username' },
+
       },
     };
     const testStore = configureMockStore([thunk]);
-    let store = testStore({});
+    const store = testStore({});
     const wrapper = mount(<CommentDetail {...props} />);
     wrapper.instance().handleSubmit({ preventDefault: () => {} });
     wrapper.instance().handleDelete();
