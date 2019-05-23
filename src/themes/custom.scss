@@ -151,3 +151,25 @@ label {
   font-size: 2rem;
 }
 
+//Comment history styles
+.btn-edit {
+  border: none;
+  background-color: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* On mouse-over */
+.btn-edit:hover {text-decoration: underline;}
+
+.info {color: rgb(32, 201, 151);}
+.history-comment {
+  color: rgb(0, 0, 0);
+  font-size: 0.75rem;
+}
+
+.trash-icon,
+.edit-icon {
+  cursor: pointer;
+}

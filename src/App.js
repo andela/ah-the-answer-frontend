@@ -2,12 +2,22 @@
 // eslint-disable-next-line import/no-named-as-default
 import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faThumbsUp, faThumbsDown, faSearch } from '@fortawesome/free-solid-svg-icons';
+import {
+  faThumbsUp,
+  faThumbsDown,
+  faSearch,
+  faTrash,
+  faEdit,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 import './themes/bootstrap-custom.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // Bootstrap JS
 import 'jquery/dist/jquery';
 import 'bootstrap/dist/js/bootstrap';
+
+// eslint-disable-next-line import/no-named-as-default
+
 import InitiatePasswordReset from './containers/PasswordReset/InitiatePasswordReset';
 import ResetPasswordMessage from './containers/PasswordReset/PasswordResetSuccess';
 import ResetPassword from './containers/PasswordReset/resetPassword';
@@ -25,8 +35,8 @@ import BookmarkList from './containers/bookmarks/BookmarkList';
 import NotificationList from './containers/notifications/NotificationList';
 import NotificationDetails from './containers/notifications/NotificationDetails';
 
+library.add(faThumbsUp, faThumbsDown, faSearch, faTrash, faEdit, faUser);
 
-library.add(faThumbsUp, faThumbsDown, faSearch);
 function App() {
   return (
     <Router>
