@@ -3,23 +3,6 @@ import { EditorState } from 'draft-js';
 import { mount } from '../../enzyme';
 import { CreateArticle } from '../../../containers/articles/CreateArticle';
 
-// describe('Create Component', () => {
-//   let wrapper;
-//   const mockCreatefn = jest.fn();
-//   beforeEach(() => {
-//     wrapper = shallow(<CreateArticle createArticle={mockCreatefn} />);
-//   });
-// //   describe('when the form is submitted', () => {
-//   it('should call the mock create function', {
-//     wrapper.find('#articleForm').simulate(
-//       'submit',
-//       {preventDefault() {}}
-//     );
-//     expect(mockCreatefn().mock.calls.length).toBe(1);
-//   });
-// //   });
-// });
-
 function createWrapper() {
   const props = {
     errors: {},
@@ -81,12 +64,17 @@ describe('Create Component', () => {
     wrapper.instance().handleChange(e);
     expect(spy).toBeCalledWith(e);
 
-    // wrapper.setState({
-    //     body: '<p>lorem ipsum dispusm kipsum blah blah</p>',
-    // })
 
     const spy2 = jest.spyOn(wrapper.instance(), 'handleSubmit');
-    const e2 = {target: {name: '',  value: ''}, preventDefault: jest.fn()};
+    const e2 = {
+      target: {
+        title: { 
+          value: ''
+        },
+        description: {
+          value: ''
+        }
+      }, preventDefault: jest.fn()};
     wrapper.instance().handleSubmit(e2);
     expect(spy2).toBeCalledWith(e2);
   });

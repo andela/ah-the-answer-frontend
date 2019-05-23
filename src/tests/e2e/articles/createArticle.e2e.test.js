@@ -15,25 +15,17 @@ localStorage.setItem('user', JSON.stringify(user));
 describe('article creation', () => {
   const wrapper = mount(<CreateArticle />, { attachTo: document.body });
   it('should highlight empty field errors', async () => {
-    const title = wrapper.find('input#title');
-    const description = wrapper.find('input#description');
-
-    title.simulate('change', {
-      target: {
-        name: 'title',
-        value: '',
-      },
-    });
-    description.simulate('change', {
-      target: {
-        name: 'description',
-        value: '',
-      },
-    });
     wrapper.find('form').simulate('submit', {
-      preventDefault: () => {},
-      target: [{ value: '' }],
-    });
+      target: {
+          title: {
+              value: ''
+          },
+          description: {
+              value: ''
+          }
+      },
+      preventDefault: jest.fn()
+  })
     const errorMessage = wrapper.find('#title').props().className;
     expect(errorMessage).toEqual('form-control');
   });
