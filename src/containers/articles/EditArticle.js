@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { WithContext as ReactTags } from 'react-tag-input';
 import { connect } from 'react-redux';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
@@ -10,6 +11,13 @@ import authStatus from '../../helpers/authStatus';
 import isOwner from '../../helpers/isOwner';
 import { updateArticle, getArticle, deleteArticle } from '../../store/actions/articleActions';
 
+const KeyCodes = {
+  enter: 13,
+  space: 32,
+};
+
+const delimiters = [KeyCodes.enter, KeyCodes.enter];
+
 export class EditArticle extends Component {
   constructor(props) {
     super(props);
@@ -18,10 +26,14 @@ export class EditArticle extends Component {
       description: '',
       body: EditorState.createEmpty(),
       is_published: true,
+      tags: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
+    this.handleTagDelete = this.handleTagDelete.bind(this);
+    this.handleTagAddition = this.handleTagAddition.bind(this);
+    this.handleTagDrag = this.handleTagDrag.bind(this);
   }
 
   componentDidMount() {
@@ -38,11 +50,19 @@ export class EditArticle extends Component {
       const contentBlock = htmlToDraft(articleBody);
       const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
       const body = EditorState.createWithContent(contentState);
+      
+      const newTags = [];
+
+      for (let i = 0; i < article.tags.length; i++) {
+        const obj = { id: 'i', text: article.tags[i] };
+        newTags.push(obj);
+      }
 
       this.setState({
         title: article.title,
         description: article.description,
         body,
+        tags: newTags,
         is_published: true,
       });
     } catch (e) {}
@@ -64,11 +84,34 @@ export class EditArticle extends Component {
     });
   }
 
+  handleTagDelete(i) {
+    const { tags } = this.state;
+    this.setState({
+      tags: tags.filter((tag, index) => index !== i),
+    });
+  }
+  
+  handleTagAddition(tag) {
+    this.setState(state => ({ tags: [...state.tags, tag] }));
+  }
+
+  handleTagDrag(tag, currPos, newPos) {
+    const tags = [...this.state.tags];
+    const newTags = tags.slice();
+  
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+  
+    this.setState({ tags: newTags });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
-    document.getElementById('title').classList.remove('is-invalid');
-    document.getElementById('description').classList.remove('is-invalid');
-    const { body } = this.state;
+    try {
+      document.getElementById('title').classList.remove('is-invalid');
+      document.getElementById('description').classList.remove('is-invalid');
+    } catch (e) {}
+    const { body, tags } = this.state;
     // check if body is empty and prevent submit
     const content = convertToRaw(body.getCurrentContent());
     const contentTextLength = content.blocks[0].text.length;
@@ -77,11 +120,14 @@ export class EditArticle extends Component {
       return;
     }
     const slug = this.props.match.params.slug;
+    let newTags = [];
+    tags.map(tag => newTags.push(tag.text));
     const updatedArticle = {
       title: this.state.title,
       description: this.state.description,
       body: draftToHtml(content),
       is_published: this.state.is_published,
+      tags: newTags,
     };
     this.props.updateArticle(slug, updatedArticle);
   }
@@ -91,12 +137,13 @@ export class EditArticle extends Component {
     if (authStatus() === false) {
       this.props.history.push('/');
     }
+
     const author = this.props.article.author;
     const urlSlug = this.props.match.params.slug;
     const articleUrl = `/articles/${urlSlug}`;
 
     const article = this.state;
-    const { body } = this.state;
+    const { body, tags } = this.state;
     const { editMessage, deleteMessage, message } = this.props;
 
     const { errors } = this.props;
@@ -129,9 +176,9 @@ export class EditArticle extends Component {
       document.getElementById('description-text').innerText = errors.errors.description;
     }
     // Check if token is invalid and redirect user to homepage
-    if (errors && errors.detail) {
-      this.props.history.push('/');
-    }
+    // if (errors && errors.detail) {
+    //   this.props.history.push('/');
+    // }
 
     // Functionality to redirect page to new url when title is updated and slug changes
     if (editMessage && editMessage.article) {
@@ -175,7 +222,7 @@ export class EditArticle extends Component {
                           Are you sure you want to delete this article?
                         </div>
                         <div className="modal-footer">
-                          <button type="button" className="btn btn-danger" onClick={this.handleClick} data-dismiss="modal">Delete</button>
+                          <button id="delete" type="button" className="btn btn-danger" onClick={this.handleClick} data-dismiss="modal">Delete</button>
                         </div>
                       </div>
                     </div>
@@ -196,7 +243,15 @@ export class EditArticle extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="tags">Tags</label>
-                  <input className="form-control" autoComplete="off" type="text" id="tags" value={article.tags} />
+                  <div>
+                    <ReactTags
+                      tags={tags}
+                      handleDelete={this.handleTagDelete}
+                      handleAddition={this.handleTagAddition}
+                      handleDrag={this.handleTagDrag}
+                      delimiters={delimiters}
+                    />
+                  </div>
                 </div>
                 <Editor
                   editorState={body}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getBookmarks } from '../../store/actions/articleActions';
+import authStatus from '../../helpers/authStatus';
 
 export class BookmarkList extends Component {
   componentDidMount() {
@@ -9,7 +10,10 @@ export class BookmarkList extends Component {
   }
 
   render() {
-    const { bookmarks } = this.props;
+    if (authStatus() === false) {
+      this.props.history.push('/');
+    }
+    const { bookmarks, bookmarknumber } = this.props;
     if (bookmarks && bookmarks.length === 0) {
       return (
         <div className="container" data-test="articleListNone">
@@ -24,14 +28,14 @@ export class BookmarkList extends Component {
     }
     return (
       <div className="article-list section" data-test="bookmarkList">
-        { bookmarks && bookmarks.slice(0, 5).map((bookmark) => {
+        { bookmarks && bookmarks.slice(0, bookmarknumber).map((bookmark) => {
           return (
-            <Link to="/" className="list-group-item text-center" key={bookmark.id}>
+            <Link to={`/articles/${bookmark.article_slug}`} className="list-group-item text-center" key={bookmark.id}>
               {bookmark.title}
             </Link>
           );
         })}
-        <li className="list-group-item text-center"><Link to="/bookmarks">View More</Link></li>
+        { bookmarknumber === 5 ? <li className="list-group-item text-center"><Link to="/bookmarks">View More</Link></li> : null }
       </div>
     );
   }
