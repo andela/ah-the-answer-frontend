@@ -63,7 +63,7 @@ class NotificationList extends Component {
             this.getAllNotifications();
             this.MarkNotificationRead();
           } else {
-            this.getReadNotification();
+            this.getAllNotifications();
           }
         });
     }
