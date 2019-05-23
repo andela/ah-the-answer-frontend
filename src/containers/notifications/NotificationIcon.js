@@ -28,12 +28,11 @@ class NotificationIcon extends Component {
     }
 
     checkStatus = () => {
-      const response = axios.get(urlstatus, config)
+      axios.get(urlstatus, config)
         .then((res) => {
           const { status } = res.data.subscription;
           this.setState({ isSubscribed: status });
         });
-      return response;
     }
 
     handleOnclick = () => {
@@ -64,7 +63,7 @@ class NotificationIcon extends Component {
 
       return (
         <div onClick={this.handleOnclick}>
-          <a  className="button-badge">
+          <a className="button-badge">
             <i className="fa fa-bell text-dark" />
             <span style={style} className="badge alert">{NotificationsCount}</span>
           </a>
