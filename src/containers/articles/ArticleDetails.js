@@ -114,13 +114,7 @@ class ArticleDetails extends Component {
               </div>
             )}
           </div>
-          {
-            authStatus() ? (
-              <ArticleFooter id={article.id} />
-            ) : (
-              null
-            )
-              }
+          <ArticleFooter id={article.id} />
           <div className="container">
             <CreateComment slug={this.props.match.params.slug} />
             <div className="col-lg-8 col-sm-12 mx-auto">

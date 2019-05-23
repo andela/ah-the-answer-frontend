@@ -151,6 +151,21 @@ label {
   font-size: 2rem;
 }
 
+// SOCIAL SHARE
+.social-share {
+  cursor: pointer;
+  float: left;
+  margin-left: 2px;
+}
+
+.social-share:hover {
+  opacity: 0.8;
+}
+
+.button-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
 //Comment history styles
 .btn-edit {
   border: none;
