@@ -23,9 +23,9 @@ export const createArticle = (article) => {
   };
 };
 
-export const getArticles = () => {
+export const getArticles = (articleOffset) => {
   return (dispatch) => {
-    return axios.get(`${configUrls.root}?limit=15`)
+    return axios.get(`${configUrls.root}?limit=10&offset=${articleOffset}`)
       .then((response) => {
         if (response) {
           dispatch({

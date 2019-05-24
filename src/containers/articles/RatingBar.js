@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import ReactStars from 'react-stars';
-import authHeader from '../../helpers/authHeader';
 
-const config = {
-  headers: authHeader(),
-};
 
 class RatingBar extends Component {
   state ={
