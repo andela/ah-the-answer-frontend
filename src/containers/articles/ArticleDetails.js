@@ -64,22 +64,22 @@ class ArticleDetails extends Component {
     String.prototype.insert = function (start, stop, comment, index, username) {
       if (start !== stop && start < stop) {
         return `${this.substring(0, start)}
-                <span tabindex="0" 
-                data-toggle="tooltip"
-                key="${index}"
-                title="${comment} by @${username}" 
-                class="highlight-tooltip"
-                rel="tooltip">
+                <span 
+                  data-tooltip-theme="base"
+                  key="${index}"
+                  data-tooltip="${comment} by @${username}" 
+                  class="highlight-tooltip"
+                 >
                 ${this.substring(start, stop)}
                 </span>${this.substring(stop)}`;
       }
       return `${this.substring(0, stop)}
-              <span tabindex="0" 
-               data-toggle="tooltip"
+              <span
+               data-tooltip-theme="base"
                key="${index}"
-               title="${comment} by @${username}" 
+               data-tooltip="${comment} by @${username}" 
                class="highlight-tooltip"
-               rel="tooltip">
+               >
                ${this.substring(stop, start)}
               </span>${this.substring(start)}`;
     };
