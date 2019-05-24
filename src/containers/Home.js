@@ -23,14 +23,13 @@ export class Home extends Component {
     const { articles, count } = this.props;
     return (
       <div className="home container-fluid p-0">
-        <FeaturedArticleList articles={articles} />
         <div className="container-fluid d-flex px-5 py-3">
-          <div className="col-lg-8 col-md-8 col-sm-12 p-0">
+          <div className="col-lg-9 col-md-8 col-sm-12 p-0">
             <h2 className="text-center mb-4 sticky-top bg-white p-2">Featured</h2>
             <ArticleList articles={articles} />
             <Pages changeOffset={this.handleOffset} articleCount={count} />
           </div>
-          <div className="col-lg-3 offset-1 col-md-4 d-none d-md-block">
+          <div className="col-lg-3 col-md-4 d-none d-md-block">
             <h2 className="text-center mb-4 sticky-top">New Articles</h2>
             <ul className="list-group list-group-flush sticky-top">
               <NewArticleList articles={articles} />
