@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { WithContext as ReactTags } from 'react-tag-input';
 import { connect } from 'react-redux';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
@@ -9,6 +10,13 @@ import { createArticle } from '../../store/actions/articleActions';
 import authStatus from '../../helpers/authStatus';
 import authHeader from '../../helpers/authHeader';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
+const KeyCodes = {
+  enter: 13,
+  space: 32,
+};
+
+const delimiters = [KeyCodes.enter, KeyCodes.enter];
 
 export class CreateArticle extends Component {
   static uploadImageCallBack(file) {
@@ -44,6 +52,9 @@ export class CreateArticle extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
+    this.handleTagDelete = this.handleTagDelete.bind(this);
+    this.handleTagAddition = this.handleTagAddition.bind(this);
+    this.handleTagDrag = this.handleTagDrag.bind(this);
   }
 
   onEditorStateChange(body) {
@@ -61,23 +72,43 @@ export class CreateArticle extends Component {
     return null;
   }
 
+  handleTagDelete(i) {
+    const { tags } = this.state;
+    this.setState({
+      tags: tags.filter((tag, index) => index !== i),
+    });
+  }
+
+  handleTagAddition(tag) {
+    this.setState(state => ({ tags: [...state.tags, tag] }));
+  }
+
+  handleTagDrag(tag, currPos, newPos) {
+    const tags = [...this.state.tags];
+    const newTags = tags.slice();
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+    this.setState({ tags: newTags });
+  }
+
   handleChange(e) {
     this.setState({
       [e.target.id]: e.target.value,
     });
-    document.getElementById('title').classList.remove('is-invalid');
-    document.getElementById('description').classList.remove('is-invalid');
+    try {
+      document.getElementById('title').classList.remove('is-invalid');
+      document.getElementById('description').classList.remove('is-invalid');
+    } catch (e) {}
   }
 
   handleSubmit(e) {
     e.preventDefault();
     // check if body,title or description are empty and prevent submit
-    const { body } = this.state;
+    const { body, tags } = this.state;
     const content = convertToRaw(body.getCurrentContent());
     const contentTextLength = content.blocks[0].text.length;
-    const title = document.getElementById('title').value;
-    const description = document.getElementById('description').value;
-
+    const title = e.target.title.value;
+    const description = e.target.description.value;
     if (title.length === 0) {
       document.getElementById('title').classList.add('is-invalid');
       document.getElementById('title-text').innerText = 'This field may not be empty.';
@@ -92,18 +123,21 @@ export class CreateArticle extends Component {
     if (contentTextLength < 10) {
       return;
     }
-
     this.setState(
       prevState => (
         { ...prevState, redirect: !prevState.redirect }
       ),
     );
+
+    let newTags = [];
+    tags.map(tag => newTags.push(tag.text));
+
     const newArticle = {
       title: this.state.title,
       description: this.state.description,
       body: draftToHtml(content),
       is_published: this.state.is_published,
-      tags: this.state.tags,
+      tags: newTags,
     };
     this.props.createArticle(newArticle);
   }
@@ -112,7 +146,7 @@ export class CreateArticle extends Component {
     if (authStatus() === false) {
       this.props.history.push('/');
     }
-    const { body, redirect } = this.state;
+    const { body, redirect, tags } = this.state;
     const { message } = this.props;
 
     // Redirect the user to the article after it has been created
@@ -148,17 +182,25 @@ export class CreateArticle extends Component {
           <h5 className="text-center mt-3">Create Article</h5>
           <div className="form-group">
             <label htmlFor="title">Title</label>
-            <input type="text" id="title" autoComplete="off" className="form-control" onChange={this.handleChange} />
+            <input type="text" id="title" autoComplete="off" name="title" className="form-control" onChange={this.handleChange} />
             <div className="invalid-feedback" id="title-text" />
           </div>
           <div className="form-group">
             <label htmlFor="description">Description</label>
-            <input type="text" maxLength="128" id="description" autoComplete="off" onChange={this.handleChange} className="form-control" />
+            <input type="text" maxLength="128" id="description" autoComplete="off" name="description" onChange={this.handleChange} className="form-control" />
             <div className="invalid-feedback" id="description-text" />
           </div>
           <div className="form-group">
             <label htmlFor="tags">Tags</label>
-            <input className="form-control" autoComplete="off" type="text" id="tags" />
+            <div>
+              <ReactTags
+                tags={tags}
+                handleDelete={this.handleTagDelete}
+                handleAddition={this.handleTagAddition}
+                handleDrag={this.handleTagDrag}
+                delimiters={delimiters}
+              />
+            </div>
           </div>
           <Editor
             initialEditorState={body}

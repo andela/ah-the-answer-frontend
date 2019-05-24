@@ -28,6 +28,22 @@ h1, h2, h3, h4 {
   width: 80%;
 }
 
+// Tags
+.ReactTags__tag {
+  background-color: brown;
+  font-weight: 600;
+  color: white;
+  padding: 0.3em;
+  margin: 0.1em;
+  border-radius: 30px;
+}
+.ReactTags__tagInputField {
+  height: 3em;
+  width: 30em;
+  border-radius: 2px;
+  margin: 0.5em;
+}
+
 // SIGNUP PAGE
 .full-height {
   min-height: 100vh;
@@ -157,6 +173,21 @@ label {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+// SOCIAL SHARE
+.social-share {
+  cursor: pointer;
+  float: left;
+  margin-left: 2px;
+}
+
+.social-share:hover {
+  opacity: 0.8;
+}
+
+.button-disabled {
+  opacity: 0.6;
+  pointer-events: none;
 }
 //Comment history styles
 .btn-edit {

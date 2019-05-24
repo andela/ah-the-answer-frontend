@@ -82,6 +82,13 @@ class ArticleDetails extends Component {
           <div className="container-fluid container-width">
             <hr />
             <div className="lead article-body">{parse(article.body)}</div>
+            <div className="row">
+              <hr />
+              <ul>
+                <span><strong>Article tags:</strong></span>
+                { article.tags.map(tag => <li className="tag-item">{tag}</li>) }
+              </ul>
+            </div>
           </div>
           <div className="container-fluid container-width article-footer text-center">
             <LikingArticle
@@ -106,13 +113,7 @@ class ArticleDetails extends Component {
               </div>
             )}
           </div>
-          {
-            authStatus() ? (
-              <ArticleFooter id={article.id} />
-            ) : (
-              null
-            )
-              }
+          <ArticleFooter id={article.id} />
           <div className="container">
             <CreateComment slug={this.props.match.params.slug} />
             <div className="col-lg-8 col-sm-12 mx-auto">
