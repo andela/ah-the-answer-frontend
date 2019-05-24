@@ -167,6 +167,13 @@ label {
   font-size: 2rem;
 }
 
+// ARTICLE BODY IMAGES
+.article-body img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 // SOCIAL SHARE
 .social-share {
   cursor: pointer;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import ArticleSummary from './ArticleSummary';
 
 const ArticleList = ({ articles }) => {
@@ -18,10 +17,14 @@ const ArticleList = ({ articles }) => {
   return (
     <div className="article-list section" data-test="articleList">
       { articles && articles.slice(5).map((article) => {
+        const imgRegex = /<img[^>]+src="(http:\/\/[^">]+)"/g;
+        const src = imgRegex.exec(article.body);
+        let imgSrc = 'https://res.cloudinary.com/dv85uhrw5/image/upload/v1556052045/pocvovruu6lhhic2fhq1.jpg';
+        if (src) {
+          imgSrc = src[1];
+        }
         return (
-          <Link to={`/articles/${article.slug}`} key={article.id}>
-            <ArticleSummary article={article} />
-          </Link>
+          <ArticleSummary article={article} image={imgSrc} />
         );
       }) }
     </div>

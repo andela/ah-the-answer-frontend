@@ -6,9 +6,11 @@ import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import authStatus from '../../helpers/authStatus';
 import isOwner from '../../helpers/isOwner';
+import authHeader from '../../helpers/authHeader';
 import { updateArticle, getArticle, deleteArticle } from '../../store/actions/articleActions';
 
 const KeyCodes = {
@@ -19,6 +21,22 @@ const KeyCodes = {
 const delimiters = [KeyCodes.enter, KeyCodes.enter];
 
 export class EditArticle extends Component {
+  static uploadImageCallBack(file) {
+    const config = {
+      headers: authHeader(),
+    };
+
+    try {
+      const url = 'https://cors-anywhere.herokuapp.com/https://api.cloudinary.com/v1_1/dv85uhrw5/image/upload';
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'cczvn3h1');
+      return axios.post(url, formData, { config });
+    } catch (err) {
+      return err;
+    }
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -264,7 +282,7 @@ export class EditArticle extends Component {
                     trigger: '#',
                   }}
                   toolbar={{
-                    options: ['inline', 'blockType', 'list', 'fontSize', 'textAlign', 'link', 'embedded', 'image', 'remove', 'colorPicker', 'history'],
+                    options: ['inline', 'blockType', 'list', 'fontSize', 'textAlign', 'link', 'image', 'remove', 'colorPicker', 'history'],
                     inline: {
                       options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace', 'superscript', 'subscript'],
                     },
@@ -272,11 +290,17 @@ export class EditArticle extends Component {
                       options: [8, 9, 10, 11, 12, 14, 16, 18, 24],
                     },
                     image: {
-                      uploadCallback: this.uploadImageCallBack,
+                      uploadCallback: EditArticle.uploadImageCallBack,
+                      alignmentEnabled: false,
                       previewImage: true,
+                      inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
                       alt: {
                         present: true,
                         mandatory: true,
+                      },
+                      defaultSize: {
+                        height: '100%',
+                        width: '95%',
                       },
                     },
                   }}
