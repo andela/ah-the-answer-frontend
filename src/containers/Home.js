@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ArticleList from './articles/ArticleList';
 import { getArticles } from '../store/actions/articleActions';
-import FeaturedArticleList from './articles/FeaturedArticleList';
 import NewArticleList from './articles/NewArticleList';
 import Pages from './articles/Pages';
 
@@ -30,7 +29,7 @@ export class Home extends Component {
             <Pages changeOffset={this.handleOffset} articleCount={count} />
           </div>
           <div className="col-lg-3 col-md-4 d-none d-md-block">
-            <h2 className="text-center mb-4 sticky-top">New Articles</h2>
+            <h2 className="text-center mb-4 sticky-top p-2">New</h2>
             <ul className="list-group list-group-flush sticky-top">
               <NewArticleList articles={articles} />
             </ul>

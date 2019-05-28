@@ -30,18 +30,28 @@ h1, h2, h3, h4 {
 
 // Tags
 .ReactTags__tag {
-  background-color: brown;
+  background-color: $primary;
   font-weight: 600;
   color: white;
-  padding: 0.3em;
-  margin: 0.1em;
-  border-radius: 30px;
+  padding: 0.5rem;
+  margin-right:0.2rem;
+  margin-top: 0.5rem;
+  border-radius: 4px;
 }
 .ReactTags__tagInputField {
   height: 3em;
   width: 30em;
+  padding: 0.6rem 1rem;
+  outline: none;
+  border: none;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
   border-radius: 2px;
-  margin: 0.5em;
+  margin-top: 1rem;
+}
+
+.ReactTags__remove {
+  margin-left: 0.5rem;
 }
 
 // SIGNUP PAGE
@@ -101,8 +111,12 @@ label {
   }
 }
 
-.article-like-icons:hover {
-  font-size: 2rem;
+.article-like-icons {
+  transition: all .2s ease;
+
+  &:hover {
+    transform: scale(1.3);
+  }
 }
 
 .comment-like-icons {

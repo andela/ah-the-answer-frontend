@@ -9,6 +9,7 @@ import {
 } from 'react-share';
 import authStatus from '../../helpers/authStatus';
 import { bookmarkArticle, getBookmarks } from '../../store/actions/articleActions';
+import LikingArticle from './LikingArticle';
 
 export class ArticleFooter extends Component {
 
@@ -48,8 +49,8 @@ export class ArticleFooter extends Component {
     const url = 'https://ah-the-answer-frontend-staging.herokuapp.com/articles/';
     return (
       <div className="container-fluid container-width" data-test="articleFooter">
-        <hr />
-        <div className="">
+        <div className="d-flex align-items-center">
+          <div className="col-3">
           {
             authStatus() ? (
               <button type="button" title="Bookmark this article to read later" id="bookmarkButton" className="btn btn-outline-primary ml-2 no-outline" autoComplete="off" onClick={this.handleClick}>
@@ -61,8 +62,15 @@ export class ArticleFooter extends Component {
               </button>
             )
           }
-
-          <div className="float-right social-buttons">
+          </div>
+          <div className="col-6">
+            <LikingArticle
+              like={article.like_count}
+              dislike={article.dislike_count}
+              slug={article.slug}
+            />
+          </div>
+          <div className="col-3 social-buttons">
             <FacebookShareButton
               url={`${url}${article.slug}`}
               quote={article.title}
@@ -105,7 +113,6 @@ export class ArticleFooter extends Component {
             </EmailShareButton>
           </div>
         </div>
-        <hr />
       </div>
     );
   }

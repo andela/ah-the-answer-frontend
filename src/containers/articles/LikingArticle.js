@@ -63,12 +63,12 @@ export class LikingArticle extends Component {
   render() {
     const { dislikeStyle, likeStyle, loggedIn } = this.state;
     return (
-      <div className="mt-4">
-        <div className="d-inline-block mr-5">
+      <div className="d-flex align-items-center justify-content-center mt-4">
+        <div className="mr-4 mt-2 text-center">
           <FontAwesomeIcon className="article-like-icons" id="dislike" style={dislikeStyle} icon="thumbs-down" onClick={() => this.likeArticle(-1)} />
           <p>{this.props.dislike}</p>
         </div>
-        <div className="d-inline-block">
+        <div className="text-center mt-2">
           <FontAwesomeIcon className="article-like-icons" id="like" style={likeStyle} icon="thumbs-up" onClick={() => this.likeArticle(1)} />
           <p>{this.props.like}</p>
         </div>
