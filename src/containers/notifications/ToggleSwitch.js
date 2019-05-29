@@ -7,8 +7,8 @@ class Toggle extends Component {
     return (
       <div className=" container Notification article-details">
         <p>Manage Notifications</p>
-        { this.props.isSubscribed ? <div onClick={this.props.handleClick} className="btn  btn-secondary btn-sm">OFF</div>
-          : <div onClick={this.props.handleClick} className="btn  btn-success btn-sm">ON</div> }
+        { this.props.isSubscribed ? <div onClick={this.props.handleClick} className="btn  btn-success btn-sm">ON</div>
+          : <div onClick={this.props.handleClick} className="btn btn-secondary  btn-sm">OFF</div> }
       </div>
     );
   }
