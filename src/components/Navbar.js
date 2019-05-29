@@ -5,6 +5,7 @@ import SignedOutLinks from './SignedOutLinks';
 import SignedInLinks from './SignedInLinks';
 import authStatus from '../helpers/authStatus';
 import Search from '../containers/search/Search';
+import Logo from '../images/logo.png';
 
 const Navbar = () => {
   const links = authStatus() ? <SignedInLinks /> : <SignedOutLinks />;
@@ -14,7 +15,10 @@ const Navbar = () => {
         <span className="navbar-toggler-icon" />
       </button>
       <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <NavLink className="navbar-brand" to="/">Authors Haven</NavLink>
+        <NavLink className="navbar-brand" to="/">
+          <img alt="logo" className="logo mr-2" src={Logo} />
+          Authors Haven
+        </NavLink>
         { links }
         <button type="button" className="btn btn-link nav-link text-dark" data-toggle="modal" data-target="#searchModal">
           <FontAwesomeIcon icon="search" />

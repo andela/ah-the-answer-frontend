@@ -13,8 +13,6 @@ import RatingBar from './RatingBar';
 import CreateComment from '../comments/CreateComments';
 import CommentList from '../comments/CommentList';
 import ArticleFooter from './ArticleFooter';
-import authStatus from '../../helpers/authStatus';
-import LikingArticle from './LikingArticle';
 
 class ArticleDetails extends Component {
   componentDidMount() {
@@ -68,14 +66,16 @@ class ArticleDetails extends Component {
             <div className="col-lg-6">
               <h1 className="m-0">{article.title}</h1>
             </div>
-            <div className="col-lg-2 d-flex align-items-center">
+            <div className="col-lg-2 d-flex flex-column align-items-center">
               <div>
-                <div className="text-muted mb-0">Rating</div>
                 <RatingDisplay
                   number={rating}
                   getRating={this.props.getRating}
                   slug={article.slug}
                 />
+              </div>
+              <div className="mt-2">
+                { article.tags.map(tag => <span className="tag-item mr-2">#{tag}</span>) }
               </div>
             </div>
           </div>
@@ -84,18 +84,7 @@ class ArticleDetails extends Component {
             <div className="lead article-body">{parse(article.body)}</div>
             <div className="row">
               <hr />
-              <ul>
-                <span><strong>Article tags:</strong></span>
-                { article.tags.map(tag => <li className="tag-item">{tag}</li>) }
-              </ul>
             </div>
-          </div>
-          <div className="container-fluid container-width article-footer text-center">
-            <LikingArticle
-              like={article.like_count}
-              dislike={article.dislike_count}
-              slug={article.slug}
-            />
           </div>
           <div className="container container-width d-flex align-items-center">
             {(author.username === userData.username || userData === false) ? (null) : (
@@ -114,7 +103,7 @@ class ArticleDetails extends Component {
             )}
           </div>
           <ArticleFooter id={article.id} />
-          <div className="container">
+          <div className="container col-lg-6 mt-4">
             <CreateComment slug={this.props.match.params.slug} />
             <div className="col-lg-8 col-sm-12 mx-auto">
               <CommentList slug={this.props.match.params.slug} />

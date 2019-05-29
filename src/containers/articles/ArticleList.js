@@ -12,8 +12,8 @@ const ArticleList = ({ articles }) => {
     );
   }
   return (
-    <div className="article-list section" data-test="articleList">
-      { articles && articles.slice(5).map((article) => {
+    <div className="article-list section card-columns" data-test="articleList">
+      { articles && articles.slice(0,10).map((article) => {
         const imgRegex = /<img[^>]+src="(http:\/\/[^">]+)"/g;
         const src = imgRegex.exec(article.body);
         let imgSrc = 'https://res.cloudinary.com/dv85uhrw5/image/upload/v1556052045/pocvovruu6lhhic2fhq1.jpg';

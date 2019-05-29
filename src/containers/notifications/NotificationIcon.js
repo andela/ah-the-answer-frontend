@@ -53,9 +53,9 @@ class NotificationIcon extends Component {
       if (NotificationsCount < 1 || this.state.isSubscribed === false) {
         return (
           <div>
-            <a className="button-badge">
+            <button type="button" className="button-badge">
               <i className="fa fa-bell notnotif text-dark" />
-            </a>
+            </button>
           </div>
         );
       }
@@ -63,10 +63,10 @@ class NotificationIcon extends Component {
 
       return (
         <div onClick={this.handleOnclick}>
-          <a className="button-badge">
+          <button type="button" className="button-badge">
             <i className="fa fa-bell text-dark" />
             <span style={style} className="badge alert">{NotificationsCount}</span>
-          </a>
+          </button>
         </div>
       );
     }
