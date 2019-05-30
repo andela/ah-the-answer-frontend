@@ -7,7 +7,7 @@ import { EditArticle } from '../../../containers/articles/EditArticle';
 const testUser = {
   username: 'testuser',
   token: 'testtoken',
-}
+};
 
 localStorage.setItem('user', JSON.stringify(testUser));
 
@@ -75,7 +75,7 @@ describe('Update Component', () => {
     expect(wrapper.instance().props.updateArticle).toBeCalled()
   });
   it(' should onEditorStateChange function', () => {
-    wrapper
+    wrapper.instance()
       .onEditorStateChange(editorValue);
 
     expect(wrapper.state('body'))
@@ -141,9 +141,9 @@ describe('Update Component', () => {
     const btn = wrapper.find('#delete');
     btn.simulate('click');
     expect(props.deleteArticle).toBeCalled();
-  })
+  });
   it('handles changes', () => {
-    const input = wrapper.find('input').first();
+    const input = wrapper.find('input').last();
     const intialState =  wrapper.instance().state;
     input.simulate('change', { target: {value: 'some value'}});
     const state  = wrapper.instance().state;
