@@ -142,19 +142,10 @@ class ArticleDetails extends Component {
               </div>
             </div>
           </div>
-          <div className="container-fluid text-center">
-            <hr />
-            <img
-              src="https://res.cloudinary.com/dv85uhrw5/image/upload/v1556052045/pocvovruu6lhhic2fhq1.jpg"
-              alt=""
-              className="img-fluid rounded"
-            />
-            <hr />
-          </div>
           <div className="container-fluid container-width">
-            <div className="row">
-              <div className="lead" id="articleId">{(article.body.replace(/(<([^>]+)>)/ig, ''))}</div>
-            </div>
+            <hr />
+            {/*<div className="lead article-body" id="articleId">{parse(article.body)}</div>*/}
+            <div className="lead article-body" id="articleId">{(article.body.replace(/(<([^>]+)>)/ig, ''))}</div>
             <div className="row">
               <hr />
               <ul>

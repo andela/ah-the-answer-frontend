@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getComments } from '../../store/actions/commentActions';
 import CommentDetail from './CommentDetail';
+import CommentLikes from './CommentLikes';
 
 class CommentList extends Component {
   componentDidMount() {
@@ -15,6 +16,7 @@ class CommentList extends Component {
       comments.map(item => (
         <div>
           <CommentDetail slug={this.props.slug} item={item} key={item.id} />
+          <CommentLikes commentID={item.id} />
         </div>
       ))
     ) : (

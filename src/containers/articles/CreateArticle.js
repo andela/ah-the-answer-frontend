@@ -5,8 +5,10 @@ import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { createArticle } from '../../store/actions/articleActions';
 import authStatus from '../../helpers/authStatus';
+import authHeader from '../../helpers/authHeader';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 const KeyCodes = {
@@ -17,6 +19,22 @@ const KeyCodes = {
 const delimiters = [KeyCodes.enter, KeyCodes.enter];
 
 export class CreateArticle extends Component {
+  static uploadImageCallBack(file) {
+    const config = {
+      headers: authHeader(),
+    };
+
+    try {
+      const url = 'https://cors-anywhere.herokuapp.com/https://api.cloudinary.com/v1_1/dv85uhrw5/image/upload';
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'cczvn3h1');
+      return axios.post(url, formData, { config });
+    } catch (err) {
+      return err;
+    }
+  }
+
   state = {
     title: '',
     description: '',
@@ -197,7 +215,7 @@ export class CreateArticle extends Component {
               trigger: '#',
             }}
             toolbar={{
-              options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'link', 'embedded', 'image', 'remove', 'colorPicker', 'history'],
+              options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'link', 'image', 'remove', 'colorPicker', 'history'],
               inline: {
                 options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace', 'superscript', 'subscript'],
               },
@@ -205,11 +223,18 @@ export class CreateArticle extends Component {
                 options: [8, 9, 10, 11, 12, 14, 16, 18, 24],
               },
               image: {
-                uploadCallback: this.uploadImageCallBack,
+                uploadCallback: CreateArticle.uploadImageCallBack,
+                className: 'detail-image',
+                alignmentEnabled: false,
                 previewImage: true,
+                inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
                 alt: {
                   present: true,
                   mandatory: true,
+                },
+                defaultSize: {
+                  height: '100%',
+                  width: '95%',
                 },
               },
             }}
@@ -235,11 +260,12 @@ export class CreateArticle extends Component {
 CreateArticle.propTypes = {
   errors: PropTypes.shape({}),
   message: PropTypes.shape({}),
-  createArticle: PropTypes.func.isRequired,
+  createArticle: PropTypes.func,
 };
 CreateArticle.defaultProps = {
   errors: {},
   message: {},
+  createArticle: () => {},
 };
 
 const mapStateToProps = state => ({

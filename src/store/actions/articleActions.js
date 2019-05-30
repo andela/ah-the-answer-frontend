@@ -5,11 +5,6 @@ const configUrls = {
   root: 'https://ah-the-answer-backend-staging.herokuapp.com/api/articles/',
 };
 
-// const configUrls = {
-//   root: 'http://127.0.0.1:8000/api/articles/',
-// };
-
-
 const config = {
   headers: authHeader(),
 };
@@ -28,9 +23,9 @@ export const createArticle = (article) => {
   };
 };
 
-export const getArticles = () => {
+export const getArticles = (articleOffset) => {
   return (dispatch) => {
-    return axios.get(`${configUrls.root}?limit=15`)
+    return axios.get(`${configUrls.root}?limit=10&offset=${articleOffset}`)
       .then((response) => {
         if (response) {
           dispatch({

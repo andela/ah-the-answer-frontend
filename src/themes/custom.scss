@@ -88,10 +88,19 @@ label {
 .article-like-icons{
   font-size: 1.4rem;
   -webkit-transition: font-size 2s, color 2s;
-  transition: font-size 2s, color 2s;
+  transition: font-size 2s, color 0.5s;
 }
 .article-like-icons:hover {
   font-size: 2rem;
+}
+
+.comment-like-icons {
+  @extend .article-like-icons;
+  font-size: 1rem;
+}
+
+.comment-like-icons:hover {
+  font-size: 1rem;
 }
 
 // Notifications
@@ -120,6 +129,11 @@ label {
 }
 .alert {
   color:black;
+}
+
+.Notification {
+  margin-top: 3rem;
+  color: green;
 }
 
 // Article footer
@@ -167,6 +181,13 @@ label {
   font-size: 2rem;
 }
 
+// ARTICLE BODY IMAGES
+.article-body img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 .highlight {
   color: red;
 }
@@ -191,6 +212,9 @@ label {
 
 .social-share:hover {
   opacity: 0.8;
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 .button-disabled {
@@ -218,4 +242,26 @@ label {
 .trash-icon,
 .edit-icon {
   cursor: pointer;
+}
+
+.page {
+  &-item {
+    &.disabled {
+      .page-link {
+        background: $gray-200;
+      }
+    }
+  }
+
+  &-link {
+    &:hover {
+      background: $primary;
+      color: #ffffff;
+      transition: $btn-transition;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
 }

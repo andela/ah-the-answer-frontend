@@ -84,7 +84,6 @@ describe('Liking article component', () => {
     wrapper.update();
     wrapper.instance().likeArticle(-1);
 
-    console.log(wrapper.instance());
     expect( wrapper.instance().setState).toBeTruthy();
   });
 
