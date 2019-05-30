@@ -33,11 +33,9 @@ export default class Highlighting extends Component {
         comment: highlightComment,
       },
     };
-
     axios.post(`${highlightUrl}/api/articles/${this.props.slug}/highlight/`, data, { headers: authHeader() })
       .then((res) => {
         if (res.status === 201) {
-          document.getElementById('highlightMessage').style.display = 'none';
           const h = {
             start: res.data.highlight.start,
             stop: res.data.highlight.end,
@@ -46,6 +44,7 @@ export default class Highlighting extends Component {
             username: res.data.highlight.user.username,
           };
           renderer(h);
+          document.getElementById('highlightMessage').style.display = 'none';
         }
       });
   };
@@ -54,7 +53,7 @@ export default class Highlighting extends Component {
     const { highlightComment } = this.state;
     if (authStatus() !== false) {
       document.onmouseup = () => {
-        let text = (document.getSelection());
+        let text = document.getSelection();
         const start = text.baseOffset;
         const stop = text.extentOffset;
         text = text.toString();
@@ -74,13 +73,13 @@ export default class Highlighting extends Component {
           </div>
           <div className="form-group">
             <input
+              id="highlightInput"
               className="form-control"
               placeholder="comment(optional)"
               name="highlightComment"
               type="text"
               value={highlightComment}
               onChange={this.onChange}
-              onFocus={this.onFocus}
             />
           </div>
           <div className="form-row">

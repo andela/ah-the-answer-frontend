@@ -4,7 +4,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
-import axios from "axios";
+import axios from 'axios';
 import isOwner from '../../helpers/isOwner';
 import {
   getArticle, checkReviewed, getRating, putRating, postRating,
@@ -39,10 +39,6 @@ class ArticleDetails extends Component {
       this.fetchHighlights(slug);
     }, 3000);
   }
-
-  updateState= () => {
-    this.componentDidMount();
-  };
 
   fetchHighlights = (slug) => {
     axios.get(`${highlightUrl}/api/articles/${slug}/highlight/`, { headers: authHeader() })
