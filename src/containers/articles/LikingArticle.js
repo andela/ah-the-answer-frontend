@@ -58,7 +58,9 @@ export class LikingArticle extends Component {
             this.setState({ loggedIn: false });
           }
         },
-      );
+      ).catch(() => {
+        this.setState({ loggedIn: false });
+      });
   };
   render() {
     const { dislikeStyle, likeStyle, loggedIn } = this.state;

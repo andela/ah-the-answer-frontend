@@ -7,7 +7,7 @@ import { EditArticle } from '../../../containers/articles/EditArticle';
 const testUser = {
   username: 'testuser',
   token: 'testtoken',
-}
+};
 
 localStorage.setItem('user', JSON.stringify(testUser));
 
@@ -47,6 +47,7 @@ describe('Update Component', () => {
   const wrapper = shallow(<EditArticle {...props}/>);
   it('should render Update article component', () => {
     const spy = jest.spyOn(wrapper.instance(), 'handleSubmit');
+    document.getElementById =  jest.fn();
     wrapper.setState({
       body: editorValue,
       title: 'Test article',
@@ -68,14 +69,13 @@ describe('Update Component', () => {
             }
         },
         preventDefault: jest.fn()
-    })
-
+    });
+    expect(document.getElementById).toBeCalled();
     expect(spy).toBeCalled()
     expect(wrapper.instance().props.updateArticle).toBeCalled()
   });
   it(' should onEditorStateChange function', () => {
-    wrapper
-      .instance()
+    wrapper.instance()
       .onEditorStateChange(editorValue);
 
     expect(wrapper.state('body'))
@@ -137,4 +137,16 @@ describe('Update Component', () => {
       { id: 'i', text: { id: '2', text: 'three' } }
     ]);
   });
+  it('handles  clicks', () => {
+    const btn = wrapper.find('#delete');
+    btn.simulate('click');
+    expect(props.deleteArticle).toBeCalled();
+  });
+  it('handles changes', () => {
+    const input = wrapper.find('input').last();
+    const intialState =  wrapper.instance().state;
+    input.simulate('change', { target: {value: 'some value'}});
+    const state  = wrapper.instance().state;
+    expect(state).not.toEqual(intialState);
+  })
 });

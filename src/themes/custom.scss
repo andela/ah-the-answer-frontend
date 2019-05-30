@@ -188,6 +188,21 @@ label {
   margin-right: auto;
   width: 50%;
 }
+.highlight {
+  color: red;
+}
+.highlight-center {
+  top:50%;
+  position: absolute;
+  right: 40%;
+  width: 20%;
+  background-color: $white;
+  display: none;
+  border-radius: 2px;
+}
+.highlight-tooltip {
+  color: $teal;
+}
 // SOCIAL SHARE
 .social-share {
   cursor: pointer;

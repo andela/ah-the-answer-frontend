@@ -4,8 +4,11 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
+import axios from 'axios';
 import isOwner from '../../helpers/isOwner';
-import { getArticle, checkReviewed, getRating, putRating, postRating } from '../../store/actions/articleActions';
+import {
+  getArticle, checkReviewed, getRating, putRating, postRating,
+} from '../../store/actions/articleActions';
 import authUser from '../../helpers/authUser';
 import Edit from '../../components/Edit';
 import RatingDisplay from './RatingDisplay';
@@ -15,29 +18,85 @@ import CommentList from '../comments/CommentList';
 import ArticleFooter from './ArticleFooter';
 import authStatus from '../../helpers/authStatus';
 import LikingArticle from './LikingArticle';
+import Highlight from './Highlighting';
+import authHeader from '../../helpers/authHeader';
+
+const highlightUrl = process.env.REACT_APP_API;
+
 
 class ArticleDetails extends Component {
+  state = {
+    highlights: [],
+  };
+
   componentDidMount() {
     const userData = authUser();
     const { slug } = this.props.match.params;
     this.props.getArticle(slug);
     this.props.getRating(slug);
     this.props.checkReviewed(userData.username, slug);
+    setTimeout(() => {
+      this.fetchHighlights(slug);
+    }, 3000);
   }
 
-  updateState= () => {
-    this.componentDidMount();
+  fetchHighlights = (slug) => {
+    axios.get(`${highlightUrl}/api/articles/${slug}/highlight/`, { headers: authHeader() })
+      .then((res) => {
+        if (res.status === 200) {
+          this.setState({ highlights: res.data.highlights });
+          const { highlights } = this.state;
+          highlights.map((h, index) => this.renderer({
+            start: h.start,
+            stop: h.end,
+            comment: h.comment,
+            index,
+            username: h.user.username,
+          }));
+        }
+      });
   };
+
+  // render the highlights ontop of the article
+  renderer = (highlight) => {
+    String.prototype.insert = function (start, stop, comment, index, username) {
+      if (start !== stop && start < stop) {
+        return `${this.substring(0, start)}
+                <span 
+                  data-tooltip-theme="base"
+                  key="${index}"
+                  data-tooltip="${comment} by @${username}" 
+                  class="highlight-tooltip"
+                 >
+                ${this.substring(start, stop)}
+                </span>${this.substring(stop)}`;
+      }
+      return `${this.substring(0, stop)}
+              <span
+               data-tooltip-theme="base"
+               key="${index}"
+               data-tooltip="${comment} by @${username}" 
+               class="highlight-tooltip"
+               >
+               ${this.substring(stop, start)}
+              </span>${this.substring(start)}`;
+    };
+    document.getElementById('articleId').innerHTML = document.getElementById('articleId').innerHTML.insert(highlight.start, highlight.stop, highlight.comment, highlight.index, highlight.username);
+  };
+
 
   render() {
     const userData = authUser();
-    const { article, author, message, rating, userReview, isReviewed, ratingValue } = this.props;
+    const {
+      article, author, message, rating, userReview, isReviewed, ratingValue,
+    } = this.props;
     if (message && message === 'The article requested does not exist') {
       this.props.history.push('/');
     }
     if (article && article.body) {
       return (
         <div className="container article-details">
+          <Highlight slug={article.slug} renderer={this.renderer} />
           <div className="row float-right mt-4">
             {isOwner(author.username) ? <Edit slug={article.slug} /> : null}
           </div>
@@ -81,7 +140,8 @@ class ArticleDetails extends Component {
           </div>
           <div className="container-fluid container-width">
             <hr />
-            <div className="lead article-body">{parse(article.body)}</div>
+            {/*<div className="lead article-body" id="articleId">{parse(article.body)}</div>*/}
+            <div className="lead article-body" id="articleId">{(article.body.replace(/(<([^>]+)>)/ig, ''))}</div>
             <div className="row">
               <hr />
               <ul>
